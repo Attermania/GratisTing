@@ -15,12 +15,31 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBAction func navigateToMapButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    var items: [Item] = [] {
+        didSet {
+            
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         itemTableView.dataSource = self
         itemTableView.delegate = self
 
+        initDummyData()
         // Do any additional setup after loading the view.
+    }
+    
+    
+    func initDummyData() {
+        let jon = User(firstName: "Jon", lastName: "Snow", email: "Jon@snow.dk", phoneNumber: 12345)
+        let chair = Item(title: "Ægget", description: "Slidt men flot", imageURL: "", createdAt: NSDate(), owner: jon)
+        let sword = Item(title: "Heartbreaker", description: "Perfekt stand", imageURL: "", createdAt: NSDate(), owner: jon)
+        let pony = Item(title: "Pony", description: "Flot hest", imageURL: "", createdAt: NSDate(), owner: jon)
+        items.append(chair)
+        items.append(sword)
+        items.append(pony)
     }
 
     override func didReceiveMemoryWarning() {
@@ -33,28 +52,24 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return items.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        cell.textLabel?.text = "Ting"
+        let cell = tableView.dequeueReusableCellWithIdentifier("itemcell", forIndexPath: indexPath)
+        cell.textLabel?.text = items[indexPath.row].title
+        
         return cell
+
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        performSegueWithIdentifier("showItemSegue", sender: self)
     }
     
-    
-    
 
-    
-
-    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        let destVC = segue.destinationViewController as! ItemViewController
+        destVC.item = items[(itemTableView.indexPathForSelectedRow?.row)!]
     }
     
 }

@@ -9,10 +9,17 @@
 import UIKit
 
 class ItemViewController: UIViewController {
+    
+    var item: Item?
 
+    @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var descriptionTextView: UITextView!
+    @IBOutlet weak var userLabel: UILabel!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        setupView()
         // Do any additional setup after loading the view.
     }
 
@@ -21,6 +28,13 @@ class ItemViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func setupView() {
+        titleLabel.text = item?.title
+        descriptionTextView.text = item?.description
+        let firstName = item?.owner?.firstName
+        let lastName = item?.owner?.lastName
+        userLabel.text = firstName! +  (" ") + lastName!
+    }
 
     /*
     // MARK: - Navigation
