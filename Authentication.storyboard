@@ -18,17 +18,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G2R-Rj-HsL">
-                                <rect key="frame" x="293" y="242" width="34" height="30"/>
-                                <state key="normal" title="Back"/>
+                                <rect key="frame" x="266" y="242" width="89" height="30"/>
+                                <state key="normal" title="Opret bruger"/>
                                 <connections>
-                                    <action selector="BackButton:" destination="j24-Y2-fvL" eventType="touchUpInside" id="0zv-tR-Pgr"/>
+                                    <segue destination="1mY-Xp-5xW" kind="show" id="iS2-gB-UOE"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <navigationItem key="navigationItem" title="Authentication" id="XVS-H3-038">
-                        <barButtonItem key="backBarButtonItem" title="Back to main" id="Mdu-Kl-CsI"/>
+                        <barButtonItem key="backBarButtonItem" id="Mdu-Kl-CsI"/>
                         <barButtonItem key="leftBarButtonItem" image="back" id="uqp-I1-yDx">
                             <connections>
                                 <action selector="backButtonNavigation:" destination="j24-Y2-fvL" id="40J-tW-vTr"/>
@@ -39,6 +39,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Hd-Nc-ZKR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1175" y="392"/>
+        </scene>
+        <!--Register View Controller-->
+        <scene sceneID="exW-jX-t7W">
+            <objects>
+                <viewController storyboardIdentifier="Register" id="1mY-Xp-5xW" customClass="RegisterViewController" customModule="GratisTing" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="xOP-2i-oCR"/>
+                        <viewControllerLayoutGuide type="bottom" id="79g-WF-PpU"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="j7C-ae-App">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="zO9-Lv-HiB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1861" y="392"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="acQ-Ii-Gca">

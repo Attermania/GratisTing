@@ -9,7 +9,7 @@
 import UIKit
 
 class LoginViewController: UIViewController {
-
+    
     @IBAction func backButtonNavigation(sender: AnyObject) {
 
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -27,14 +27,7 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    @IBAction func BackButton(sender: AnyObject) {
-        print("bla")
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewControllerWithIdentifier("Main") as! UINavigationController
-        //self.navigationController?.popViewControllerAnimated(true)
-        self.presentViewController(controller, animated: true, completion: nil)
-    }
+
 
     /*
     // MARK: - Navigation
