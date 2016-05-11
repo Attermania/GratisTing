@@ -19,6 +19,9 @@
 		F975B1A31CE22ACF00D29403 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F975B1A21CE22ACF00D29403 /* Main.storyboard */; };
 		F975B1AB1CE333C100D29403 /* ItemListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B1AA1CE333C100D29403 /* ItemListViewController.swift */; };
 		F975B1AD1CE335B600D29403 /* ItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B1AC1CE335B600D29403 /* ItemViewController.swift */; };
+		F975B1AF1CE34C5400D29403 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B1AE1CE34C5400D29403 /* Item.swift */; };
+		F975B1B11CE34E9000D29403 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B1B01CE34E9000D29403 /* User.swift */; };
+		F975B1B31CE355B300D29403 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B1B21CE355B300D29403 /* Category.swift */; };
 		F9BD02EC1CE316E70057309B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD02EB1CE316E70057309B /* MainViewController.swift */; };
 		F9BD02EF1CE32CE30057309B /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9BD02EE1CE32CE30057309B /* Map.storyboard */; };
 		F9BD02F11CE32CF20057309B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD02F01CE32CF20057309B /* MapViewController.swift */; };
@@ -40,6 +43,9 @@
 		F975B1A21CE22ACF00D29403 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F975B1AA1CE333C100D29403 /* ItemListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListViewController.swift; sourceTree = "<group>"; };
 		F975B1AC1CE335B600D29403 /* ItemViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemViewController.swift; sourceTree = "<group>"; };
+		F975B1AE1CE34C5400D29403 /* Item.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
+		F975B1B01CE34E9000D29403 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F975B1B21CE355B300D29403 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		F9BD02EB1CE316E70057309B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F9BD02EE1CE32CE30057309B /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		F9BD02F01CE32CF20057309B /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -164,6 +170,9 @@
 		F975B1A51CE22B2E00D29403 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				F975B1AE1CE34C5400D29403 /* Item.swift */,
+				F975B1B01CE34E9000D29403 /* User.swift */,
+				F975B1B21CE355B300D29403 /* Category.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -254,13 +263,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9BD02F31CE343660057309B /* CreateViewController.swift in Sources */,
+				F975B1AF1CE34C5400D29403 /* Item.swift in Sources */,
 				F975B1AD1CE335B600D29403 /* ItemViewController.swift in Sources */,
 				F975B1921CE2254900D29403 /* LoginViewController.swift in Sources */,
 				F975B17C1CE2214F00D29403 /* AppDelegate.swift in Sources */,
 				F975B1961CE2294900D29403 /* RegisterViewController.swift in Sources */,
 				F9BD02F11CE32CF20057309B /* MapViewController.swift in Sources */,
 				F9BD02EC1CE316E70057309B /* MainViewController.swift in Sources */,
+				F975B1B11CE34E9000D29403 /* User.swift in Sources */,
 				F975B1AB1CE333C100D29403 /* ItemListViewController.swift in Sources */,
+				F975B1B31CE355B300D29403 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
