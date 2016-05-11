@@ -1,27 +1,18 @@
 //
-//  MapViewController.swift
+//  ItemViewController.swift
 //  GratisTing
 //
-//  Created by Steffen on 11/05/16.
+//  Created by Thomas Attermann on 11/05/2016.
 //  Copyright © 2016 SJT. All rights reserved.
 //
 
 import UIKit
 
-class MapViewController: UIViewController {
+class ItemViewController: UIViewController {
 
-    
-    @IBAction func listViewButton(sender: AnyObject) {
-        let storyboard = UIStoryboard(name: "Browse", bundle: nil)
-        let controller = storyboard.instantiateViewControllerWithIdentifier("BrowseNavigator") as! UINavigationController
-        self.presentViewController(controller, animated: true, completion: nil)
-    }
-    
-    @IBAction func backButton(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
     override func viewDidLoad() {
         super.viewDidLoad()
+
         // Do any additional setup after loading the view.
     }
 
