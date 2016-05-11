@@ -17,6 +17,7 @@
 		F975B19E1CE22A6B00D29403 /* Create.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F975B19D1CE22A6B00D29403 /* Create.storyboard */; };
 		F975B1A01CE22A7600D29403 /* Browse.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F975B19F1CE22A7600D29403 /* Browse.storyboard */; };
 		F975B1A31CE22ACF00D29403 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F975B1A21CE22ACF00D29403 /* Main.storyboard */; };
+		F9BD02EC1CE316E70057309B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD02EB1CE316E70057309B /* MainViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,7 @@
 		F975B19D1CE22A6B00D29403 /* Create.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Create.storyboard; sourceTree = "<group>"; };
 		F975B19F1CE22A7600D29403 /* Browse.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Browse.storyboard; sourceTree = "<group>"; };
 		F975B1A21CE22ACF00D29403 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		F9BD02EB1CE316E70057309B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				F975B1A21CE22ACF00D29403 /* Main.storyboard */,
+				F9BD02EB1CE316E70057309B /* MainViewController.swift */,
 			);
 			name = Main;
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 				F975B1921CE2254900D29403 /* LoginViewController.swift in Sources */,
 				F975B17C1CE2214F00D29403 /* AppDelegate.swift in Sources */,
 				F975B1961CE2294900D29403 /* RegisterViewController.swift in Sources */,
+				F9BD02EC1CE316E70057309B /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,6 +374,7 @@
 				F975B18C1CE2214F00D29403 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

@@ -10,6 +10,13 @@ import UIKit
 
 class LoginViewController: UIViewController {
 
+    @IBAction func backButtonNavigation(sender: AnyObject) {
+
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewControllerWithIdentifier("Main") as! UINavigationController
+        self.presentViewController(controller, animated: true, completion: nil)
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -23,9 +30,9 @@ class LoginViewController: UIViewController {
     
     @IBAction func BackButton(sender: AnyObject) {
         print("bla")
-        var storyboard = UIStoryboard(name: "Main", bundle: nil)
-        var controller = storyboard.instantiateViewControllerWithIdentifier("InitialController") as! ViewController
-        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let controller = storyboard.instantiateViewControllerWithIdentifier("Main") as! UINavigationController
+        //self.navigationController?.popViewControllerAnimated(true)
         self.presentViewController(controller, animated: true, completion: nil)
     }
 
