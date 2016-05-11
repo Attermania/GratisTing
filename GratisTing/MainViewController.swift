@@ -10,12 +10,16 @@ import UIKit
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
+    @IBAction func createItem(sender: AnyObject) {
+        let storyboard = UIStoryboard(name: "Create", bundle: nil)
+        let controller = storyboard.instantiateViewControllerWithIdentifier("Create") as! UINavigationController
+        self.presentViewController(controller, animated: true, completion: nil)
+    }
     @IBOutlet weak var categoriesTableView: UITableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         categoriesTableView.delegate = self
         categoriesTableView.dataSource = self
-
         // Do any additional setup after loading the view.
     }
 
@@ -35,7 +39,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return 15
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
