@@ -31,11 +31,11 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         // Do any additional setup after loading the view.
     }
     
-    
+    // Function for initializing dummy data
     func initDummyData() {
         let jon = User(firstName: "Jon", lastName: "Snow", email: "Jon@snow.dk", phoneNumber: 12345)
         let chair = Item(title: "Ægget", description: "Slidt men flot", imageURL: "", createdAt: NSDate(), owner: jon)
-        let sword = Item(title: "Heartbreaker", description: "Perfekt stand", imageURL: "", createdAt: NSDate(), owner: jon)
+        let sword = Item(title: "Heartbreaker", description: "Perfekt stand og meget flot sværd. Det er bare rigtig godt.", imageURL: "", createdAt: NSDate(), owner: jon)
         let pony = Item(title: "Pony", description: "Flot hest", imageURL: "", createdAt: NSDate(), owner: jon)
         items.append(chair)
         items.append(sword)
@@ -56,8 +56,10 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("itemcell", forIndexPath: indexPath)
-        cell.textLabel?.text = items[indexPath.row].title
+        let cell = tableView.dequeueReusableCellWithIdentifier("itemcell", forIndexPath: indexPath) as! GratisTingCell
+        //cell.textLabel?.text = items[indexPath.row].title
+        cell.titleLabel.text = items[indexPath.row].title
+        cell.descriptionLabel.text = items[indexPath.row].description
         
         return cell
 

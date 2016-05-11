@@ -28,6 +28,7 @@ class ItemViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // Setup content in labels, imageview etc.
     func setupView() {
         titleLabel.text = item?.title
         descriptionTextView.text = item?.description
