@@ -1,23 +1,20 @@
 //
-//  LoginViewController.swift
+//  MapViewController.swift
 //  GratisTing
 //
-//  Created by Thomas Attermann on 10/05/2016.
+//  Created by Steffen on 11/05/16.
 //  Copyright © 2016 SJT. All rights reserved.
 //
 
 import UIKit
 
-class LoginViewController: UIViewController {
-    
-    @IBAction func backButtonNavigation(sender: AnyObject) {
+class MapViewController: UIViewController {
 
+    @IBAction func backButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
-        
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // Do any additional setup after loading the view.
     }
 
@@ -25,7 +22,7 @@ class LoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
 
     /*
     // MARK: - Navigation

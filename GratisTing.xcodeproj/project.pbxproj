@@ -18,6 +18,8 @@
 		F975B1A01CE22A7600D29403 /* Browse.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F975B19F1CE22A7600D29403 /* Browse.storyboard */; };
 		F975B1A31CE22ACF00D29403 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F975B1A21CE22ACF00D29403 /* Main.storyboard */; };
 		F9BD02EC1CE316E70057309B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD02EB1CE316E70057309B /* MainViewController.swift */; };
+		F9BD02EF1CE32CE30057309B /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9BD02EE1CE32CE30057309B /* Map.storyboard */; };
+		F9BD02F11CE32CF20057309B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD02F01CE32CF20057309B /* MapViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		F975B19F1CE22A7600D29403 /* Browse.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Browse.storyboard; sourceTree = "<group>"; };
 		F975B1A21CE22ACF00D29403 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		F9BD02EB1CE316E70057309B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		F9BD02EE1CE32CE30057309B /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
+		F9BD02F01CE32CF20057309B /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +106,7 @@
 			children = (
 				F975B19A1CE22A5400D29403 /* Show */,
 				F975B1991CE22A2F00D29403 /* Create */,
+				F9BD02ED1CE32CC80057309B /* Map */,
 				F975B1981CE22A2600D29403 /* Browse */,
 			);
 			name = Items;
@@ -152,6 +157,15 @@
 			children = (
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		F9BD02ED1CE32CC80057309B /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				F9BD02EE1CE32CE30057309B /* Map.storyboard */,
+				F9BD02F01CE32CF20057309B /* MapViewController.swift */,
+			);
+			name = Map;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -215,6 +229,7 @@
 				F975B1A31CE22ACF00D29403 /* Main.storyboard in Resources */,
 				F975B1A01CE22A7600D29403 /* Browse.storyboard in Resources */,
 				F975B19E1CE22A6B00D29403 /* Create.storyboard in Resources */,
+				F9BD02EF1CE32CE30057309B /* Map.storyboard in Resources */,
 				F975B1901CE224D900D29403 /* Authentication.storyboard in Resources */,
 				F975B1861CE2214F00D29403 /* LaunchScreen.storyboard in Resources */,
 				F975B1831CE2214F00D29403 /* Assets.xcassets in Resources */,
@@ -232,6 +247,7 @@
 				F975B1921CE2254900D29403 /* LoginViewController.swift in Sources */,
 				F975B17C1CE2214F00D29403 /* AppDelegate.swift in Sources */,
 				F975B1961CE2294900D29403 /* RegisterViewController.swift in Sources */,
+				F9BD02F11CE32CF20057309B /* MapViewController.swift in Sources */,
 				F9BD02EC1CE316E70057309B /* MainViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
