@@ -7,10 +7,12 @@
 //
 
 import UIKit
+import MapKit
 
 class MapViewController: UIViewController {
 
     
+    @IBOutlet weak var itemMap: MKMapView!
     @IBAction func listViewButton(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Browse", bundle: nil)
         let controller = storyboard.instantiateViewControllerWithIdentifier("BrowseNavigator") as! UINavigationController
@@ -22,6 +24,7 @@ class MapViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        MKPint
         // Do any additional setup after loading the view.
     }
 

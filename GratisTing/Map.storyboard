@@ -17,21 +17,38 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ElO-yt-dl2">
-                                <rect key="frame" x="157" y="312" width="30" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ElO-yt-dl2">
+                                <rect key="frame" x="560" y="560" width="30" height="30"/>
                                 <state key="normal" title="List"/>
                                 <connections>
                                     <action selector="listViewButton:" destination="lUR-RT-RxV" eventType="touchUpInside" id="Jzr-5u-3WN"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Map goes here" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bhG-bN-Msu">
-                                <rect key="frame" x="20" y="141" width="114" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LSH-gm-zvC">
+                                <rect key="frame" x="0.0" y="64" width="600" height="486"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="Lu1-pX-Mj2"/>
+                            <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="MzS-8m-mqh"/>
+                            <constraint firstAttribute="trailing" secondItem="ElO-yt-dl2" secondAttribute="trailing" constant="10" id="QOs-2q-QbE"/>
+                            <constraint firstItem="LSH-gm-zvC" firstAttribute="leading" secondItem="eaL-68-HgG" secondAttribute="leading" id="XOl-fv-Qal"/>
+                            <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="dBI-DU-sHc"/>
+                            <constraint firstAttribute="trailing" secondItem="LSH-gm-zvC" secondAttribute="trailing" id="dvZ-l0-rie"/>
+                            <constraint firstItem="ElO-yt-dl2" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="f07-vu-44x"/>
+                            <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="ElO-yt-dl2" secondAttribute="bottom" constant="10" id="lQF-0R-vuf"/>
+                            <constraint firstItem="LSH-gm-zvC" firstAttribute="top" secondItem="WQh-ZY-PcT" secondAttribute="bottom" id="rIO-X9-7vI"/>
+                            <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="xfb-jw-RRs"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="Lu1-pX-Mj2"/>
+                                <exclude reference="MzS-8m-mqh"/>
+                                <exclude reference="dBI-DU-sHc"/>
+                                <exclude reference="xfb-jw-RRs"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="b1G-gn-arP">
                         <barButtonItem key="leftBarButtonItem" image="back" id="Ewd-hB-0YD">
@@ -40,6 +57,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="itemMap" destination="LSH-gm-zvC" id="bb4-Ap-D96"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4ef-Ae-snF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
