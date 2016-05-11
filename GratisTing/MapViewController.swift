@@ -24,7 +24,6 @@ class MapViewController: UIViewController {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        MKPint
         // Do any additional setup after loading the view.
     }
 
