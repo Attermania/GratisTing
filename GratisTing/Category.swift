@@ -11,6 +11,7 @@ import Foundation
 class Category {
     
     var title: String = ""
+    var imageURL: String = ""
     
     init(title: String) {
         self.title = title

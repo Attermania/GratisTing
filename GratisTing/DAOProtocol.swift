@@ -12,4 +12,6 @@ protocol DAOProtocol {
     
     func getAllItems() -> [Item]
     
+    func getAllCategories() -> [Category]
+    
 }
