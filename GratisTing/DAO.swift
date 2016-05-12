@@ -21,9 +21,9 @@ class DAO: DAOProtocol {
         let jon = User(firstName: "Jon", lastName: "Snow", email: "Jon@snow.dk", phoneNumber: 12345)
         let ben = User(firstName: "Ben", lastName: "Affleck", email: "ben@snow.dk", phoneNumber: 34567)
 
-        let chair = Item(title: "Ægget", description: "Slidt men flot", imageURL: "", createdAt: NSDate(), owner: jon)
-        let sword = Item(title: "Hearteater", description: "Perfekt stand og meget flot sværd. Det er bare rigtig godt.", imageURL: "", createdAt: NSDate(), owner: jon)
-        let pony = Item(title: "Pony", description: "Flot hest", imageURL: "", createdAt: NSDate(), owner: ben)
+        let chair = Item(title: "Ægget", description: "Slidt men flot", imageURL: "", createdAt: NSDate(), owner: jon, latitude: 55.71, longitude: 12.51)
+        let sword = Item(title: "Hearteater", description: "Perfekt stand og meget flot sværd. Det er bare rigtig godt.", imageURL: "", createdAt: NSDate(), owner: jon, latitude: 55.7, longitude: 12.5)
+        let pony = Item(title: "Pony", description: "Flot hest", imageURL: "", createdAt: NSDate(), owner: ben, latitude: 55.72, longitude: 12.52)
         items.append(chair)
         items.append(sword)
         items.append(pony)
