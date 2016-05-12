@@ -17,7 +17,9 @@ class User {
     var phoneNumber: Int?
     var items:[Item] = []
     
-    // Constructor without id
+    /*
+     Constructor without id parameter. Used when creating User object in the app. Id will be assigned in DB.
+     */
     init(firstName : String, lastName: String, email: String, phoneNumber: Int) {
         self.firstName = firstName
         self.lastName = lastName
@@ -25,7 +27,9 @@ class User {
         self.phoneNumber = phoneNumber
     }
     
-    // Constructor with id
+    /**
+     Constructor with id attribute. Used when parsing JSON to User object.
+     */
     init(id: String, firstName : String, lastName: String, email: String, phoneNumber: Int) {
         self.id = id
         self.firstName = firstName
