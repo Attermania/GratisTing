@@ -54,6 +54,7 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         //cell.textLabel?.text = items[indexPath.row].title
         cell.titleLabel.text = items[indexPath.row].title
         cell.descriptionLabel.text = items[indexPath.row].description
+        cell.distanceLabel.text = "1.5 Km"
         
         return cell
 
