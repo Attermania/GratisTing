@@ -23,6 +23,8 @@
 		F975B1B11CE34E9000D29403 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B1B01CE34E9000D29403 /* User.swift */; };
 		F975B1B31CE355B300D29403 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B1B21CE355B300D29403 /* Category.swift */; };
 		F975B1B61CE36D7A00D29403 /* GratisTingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B1B51CE36D7A00D29403 /* GratisTingCell.swift */; };
+		F975B1E11CE480A400D29403 /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B1E01CE480A400D29403 /* DAO.swift */; };
+		F975B1E41CE4811E00D29403 /* DAOProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B1E31CE4811E00D29403 /* DAOProtocol.swift */; };
 		F9BD02EC1CE316E70057309B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD02EB1CE316E70057309B /* MainViewController.swift */; };
 		F9BD02EF1CE32CE30057309B /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9BD02EE1CE32CE30057309B /* Map.storyboard */; };
 		F9BD02F11CE32CF20057309B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD02F01CE32CF20057309B /* MapViewController.swift */; };
@@ -49,6 +51,8 @@
 		F975B1B01CE34E9000D29403 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F975B1B21CE355B300D29403 /* Category.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
 		F975B1B51CE36D7A00D29403 /* GratisTingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratisTingCell.swift; sourceTree = "<group>"; };
+		F975B1E01CE480A400D29403 /* DAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
+		F975B1E31CE4811E00D29403 /* DAOProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAOProtocol.swift; sourceTree = "<group>"; };
 		F9BD02EB1CE316E70057309B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		F9BD02EE1CE32CE30057309B /* Map.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		F9BD02F01CE32CF20057309B /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
@@ -89,9 +93,9 @@
 			isa = PBXGroup;
 			children = (
 				F975B17B1CE2214F00D29403 /* AppDelegate.swift */,
+				F975B1E21CE480E100D29403 /* DAO */,
 				F975B1A51CE22B2E00D29403 /* Models */,
-				F975B1941CE2281700D29403 /* Views */,
-				F975B1A41CE22B0A00D29403 /* Controllers */,
+				F975B1941CE2281700D29403 /* Controllers */,
 				F975B1821CE2214F00D29403 /* Assets.xcassets */,
 				F975B1871CE2214F00D29403 /* Info.plist */,
 			);
@@ -108,7 +112,7 @@
 			name = Authentication;
 			sourceTree = "<group>";
 		};
-		F975B1941CE2281700D29403 /* Views */ = {
+		F975B1941CE2281700D29403 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
 				F975B1B41CE36D4200D29403 /* Misc */,
@@ -117,7 +121,7 @@
 				F975B1971CE229DE00D29403 /* Items */,
 				F975B1931CE2279900D29403 /* Authentication */,
 			);
-			name = Views;
+			name = Controllers;
 			sourceTree = "<group>";
 		};
 		F975B1971CE229DE00D29403 /* Items */ = {
@@ -167,13 +171,6 @@
 			name = Main;
 			sourceTree = "<group>";
 		};
-		F975B1A41CE22B0A00D29403 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Controllers;
-			sourceTree = "<group>";
-		};
 		F975B1A51CE22B2E00D29403 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +187,15 @@
 				F975B1B51CE36D7A00D29403 /* GratisTingCell.swift */,
 			);
 			name = Misc;
+			sourceTree = "<group>";
+		};
+		F975B1E21CE480E100D29403 /* DAO */ = {
+			isa = PBXGroup;
+			children = (
+				F975B1E01CE480A400D29403 /* DAO.swift */,
+				F975B1E31CE4811E00D29403 /* DAOProtocol.swift */,
+			);
+			name = DAO;
 			sourceTree = "<group>";
 		};
 		F9BD02ED1CE32CC80057309B /* Map */ = {
@@ -288,6 +294,8 @@
 				F9BD02EC1CE316E70057309B /* MainViewController.swift in Sources */,
 				F975B1B11CE34E9000D29403 /* User.swift in Sources */,
 				F975B1AB1CE333C100D29403 /* ItemListViewController.swift in Sources */,
+				F975B1E11CE480A400D29403 /* DAO.swift in Sources */,
+				F975B1E41CE4811E00D29403 /* DAOProtocol.swift in Sources */,
 				F975B1B31CE355B300D29403 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

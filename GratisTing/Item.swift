@@ -10,6 +10,7 @@ import Foundation
 
 class Item {
     
+    var id: String = ""
     var title: String = ""
     var description: String = ""
     var imageURL: String = ""

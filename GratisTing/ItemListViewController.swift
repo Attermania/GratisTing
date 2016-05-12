@@ -12,6 +12,8 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
 
     @IBOutlet weak var itemTableView: UITableView!
     
+    let dao = DAO()
+    
     @IBAction func navigateToMapButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -24,22 +26,14 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Initialize dummy data and fill item array.
+        dao.initDummyData()
+        items = dao.getAllItems()
+        
         itemTableView.dataSource = self
         itemTableView.delegate = self
 
-        initDummyData()
-        // Do any additional setup after loading the view.
-    }
-    
-    // Function for initializing dummy data
-    func initDummyData() {
-        let jon = User(firstName: "Jon", lastName: "Snow", email: "Jon@snow.dk", phoneNumber: 12345)
-        let chair = Item(title: "Ægget", description: "Slidt men flot", imageURL: "", createdAt: NSDate(), owner: jon)
-        let sword = Item(title: "Heartbreaker", description: "Perfekt stand og meget flot sværd. Det er bare rigtig godt.", imageURL: "", createdAt: NSDate(), owner: jon)
-        let pony = Item(title: "Pony", description: "Flot hest", imageURL: "", createdAt: NSDate(), owner: jon)
-        items.append(chair)
-        items.append(sword)
-        items.append(pony)
     }
 
     override func didReceiveMemoryWarning() {
