@@ -10,6 +10,12 @@ import Foundation
 
 class DAO: DAOProtocol {
     
+    static let instance = DAO()
+    
+    private init() {
+        
+    }
+    
     var items:[Item] = []
     var categories: [Category] = []
     
@@ -25,6 +31,7 @@ class DAO: DAOProtocol {
     func initDummyData() {
         
         //Categories
+        let all = Category(title: "Alle")
         let animals = Category(title: "Animals")
         let weapons = Category(title: "Weapons")
         let furniture = Category(title: "Møbler")
@@ -41,6 +48,7 @@ class DAO: DAOProtocol {
         categories.append(animals)
         categories.append(weapons)
         categories.append(furniture)
+        categories.append(all)
         
         items.append(chair)
         items.append(sword)

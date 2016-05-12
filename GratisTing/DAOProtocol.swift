@@ -14,4 +14,6 @@ protocol DAOProtocol {
     
     func getAllCategories() -> [Category]
     
+    func initDummyData() -> Void
+    
 }

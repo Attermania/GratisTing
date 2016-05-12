@@ -12,7 +12,7 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
 
     @IBOutlet weak var itemTableView: UITableView!
     
-    let dao = DAO()
+    let dao = AppDelegate.dao
     
     @IBAction func navigateToMapButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -27,8 +27,6 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Initialize dummy data and fill item array.
-        dao.initDummyData()
         items = dao.getAllItems()
         
         itemTableView.dataSource = self

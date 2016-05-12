@@ -9,6 +9,14 @@
 import UIKit
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    let dao = AppDelegate.dao
+    
+    var categories: [Category] = [] {
+        didSet {
+            
+        }
+    }
 
     @IBAction func createItem(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Create", bundle: nil)
@@ -16,8 +24,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.presentViewController(controller, animated: true, completion: nil)
     }
     @IBOutlet weak var categoriesTableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        dao.initDummyData()
+        categories = dao.getAllCategories()
+        
         categoriesTableView.delegate = self
         categoriesTableView.dataSource = self
         // Do any additional setup after loading the view.
@@ -39,12 +51,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 15
+        return categories.count
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = "Kategorier"
+        cell.textLabel?.text = categories[indexPath.row].title
         return cell
     }
     
