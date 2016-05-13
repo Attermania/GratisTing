@@ -27,6 +27,16 @@ class DAO: DAOProtocol {
         return categories
     }
     
+    // Define radius + category logic
+    func getItemsByCategory(category: Category, latitude: Double, longitide: Double) -> [Item] {
+        return items
+    }
+    
+    // Define radius logic
+    func getItemsByRadius(latitude: Double, longitude: Double) -> [Item] {
+        return items
+    }
+    
     // Function for initializing dummy data
     func initDummyData() {
         
