@@ -1,7 +1,106 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="6211" systemVersion="14A298i" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6204"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
-    <scenes/>
+    <scenes>
+        <!--title-->
+        <scene sceneID="ULL-av-pkL">
+            <objects>
+                <viewController storyboardIdentifier="Show" automaticallyAdjustsScrollViewInsets="NO" id="sTX-Gh-Pm2" customClass="ShowViewController" customModule="GratisTing" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fa6-m4-pkU"/>
+                        <viewControllerLayoutGuide type="bottom" id="1yM-VU-MwT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="XZn-YU-CBx">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="iAj-29-MYi">
+                                <rect key="frame" x="10" y="74" width="580" height="180"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="macbook" highlighted="YES" translatesAutoresizingMaskIntoConstraints="NO" id="erH-O5-1YG">
+                                        <rect key="frame" x="0.0" y="0.0" width="580" height="180"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="erH-O5-1YG" firstAttribute="width" secondItem="iAj-29-MYi" secondAttribute="width" id="2Ma-C1-9KQ"/>
+                                    <constraint firstItem="erH-O5-1YG" firstAttribute="centerX" secondItem="iAj-29-MYi" secondAttribute="centerX" id="RdD-0y-IM0"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="AxF-UV-rJY">
+                                <rect key="frame" x="10" y="264" width="580" height="120"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="73b-VP-RsE">
+                                        <rect key="frame" x="0.0" y="0.0" width="580" height="21"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="21" id="xtV-Hg-UY4"/>
+                                        </constraints>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JVP-1d-nqq">
+                                        <rect key="frame" x="0.0" y="21" width="580" height="99"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                    </textView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="73b-VP-RsE" secondAttribute="trailing" id="fMg-iZ-9jB"/>
+                                    <constraint firstItem="73b-VP-RsE" firstAttribute="leading" secondItem="AxF-UV-rJY" secondAttribute="leading" id="ljS-4r-YEu"/>
+                                    <constraint firstAttribute="trailing" secondItem="JVP-1d-nqq" secondAttribute="trailing" id="opi-ls-LOn"/>
+                                    <constraint firstItem="JVP-1d-nqq" firstAttribute="leading" secondItem="AxF-UV-rJY" secondAttribute="leading" id="vxY-S7-0ed"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="AxF-UV-rJY" secondAttribute="trailing" constant="10" id="Cf7-vw-Lep"/>
+                            <constraint firstItem="AxF-UV-rJY" firstAttribute="leading" secondItem="XZn-YU-CBx" secondAttribute="leading" constant="10" id="IOQ-nw-wHX"/>
+                            <constraint firstItem="iAj-29-MYi" firstAttribute="height" secondItem="XZn-YU-CBx" secondAttribute="height" multiplier="0.3" id="Kbe-WI-C3F"/>
+                            <constraint firstAttribute="trailing" secondItem="iAj-29-MYi" secondAttribute="trailing" constant="10" id="WUD-Xc-Ugg"/>
+                            <constraint firstItem="AxF-UV-rJY" firstAttribute="height" secondItem="XZn-YU-CBx" secondAttribute="height" multiplier="0.2" id="ZSV-TB-swU"/>
+                            <constraint firstItem="iAj-29-MYi" firstAttribute="leading" secondItem="XZn-YU-CBx" secondAttribute="leading" constant="10" id="aBe-HZ-PkS"/>
+                            <constraint firstItem="iAj-29-MYi" firstAttribute="top" secondItem="fa6-m4-pkU" secondAttribute="bottom" constant="10" id="ndV-ft-bfW"/>
+                            <constraint firstItem="AxF-UV-rJY" firstAttribute="top" secondItem="iAj-29-MYi" secondAttribute="bottom" constant="10" id="wGI-KP-QPC"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="title" id="pAb-ga-QgG"/>
+                    <connections>
+                        <outlet property="itemDescriptionText" destination="JVP-1d-nqq" id="0m2-Gj-Its"/>
+                        <outlet property="itemImage" destination="erH-O5-1YG" id="b2u-qP-PVK"/>
+                        <outlet property="itemTitleLabel" destination="73b-VP-RsE" id="Vsj-yr-tv6"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="cZr-Ag-Y3p" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1324" y="518"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="eQ1-Xl-Ofb">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="iYC-he-nBm" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="Pcj-Qr-0tK">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="sTX-Gh-Pm2" kind="relationship" relationship="rootViewController" id="FW5-al-Vpt"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PHP-J9-aIR" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="512" y="518"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="macbook" width="1920" height="1280"/>
+    </resources>
 </document>

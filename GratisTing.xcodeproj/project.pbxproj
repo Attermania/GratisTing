@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		392F388C52E0459B035372C0 /* Pods_GratisTing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E605BCC98611F66EA577D6FF /* Pods_GratisTing.framework */; };
 		F975B17C1CE2214F00D29403 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B17B1CE2214F00D29403 /* AppDelegate.swift */; };
 		F975B1831CE2214F00D29403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F975B1821CE2214F00D29403 /* Assets.xcassets */; };
 		F975B1861CE2214F00D29403 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F975B1841CE2214F00D29403 /* LaunchScreen.storyboard */; };
@@ -30,9 +31,14 @@
 		F9BD02F11CE32CF20057309B /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD02F01CE32CF20057309B /* MapViewController.swift */; };
 		F9BD02F31CE343660057309B /* CreateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD02F21CE343660057309B /* CreateViewController.swift */; };
 		F9BD02F51CE35F120057309B /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F9BD02F41CE35F120057309B /* MapKit.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		F9E5DDE51CE60C14005A2FB4 /* ShowViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9E5DDE41CE60C14005A2FB4 /* ShowViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		09C362B687934E594391C86D /* Pods-GratisTing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratisTing.release.xcconfig"; path = "Pods/Target Support Files/Pods-GratisTing/Pods-GratisTing.release.xcconfig"; sourceTree = "<group>"; };
+		E605BCC98611F66EA577D6FF /* Pods_GratisTing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GratisTing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F0EAA90818B2E93437FFD350 /* Pods-GratisTing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratisTing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GratisTing/Pods-GratisTing.debug.xcconfig"; sourceTree = "<group>"; };
+		F923F4EF1CE4B84D00320057 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F975B1781CE2214F00D29403 /* GratisTing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratisTing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F975B17B1CE2214F00D29403 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F975B1821CE2214F00D29403 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -58,6 +64,7 @@
 		F9BD02F01CE32CF20057309B /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		F9BD02F21CE343660057309B /* CreateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateViewController.swift; sourceTree = "<group>"; };
 		F9BD02F41CE35F120057309B /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
+		F9E5DDE41CE60C14005A2FB4 /* ShowViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,18 +73,39 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9BD02F51CE35F120057309B /* MapKit.framework in Frameworks */,
+				392F388C52E0459B035372C0 /* Pods_GratisTing.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		46318DEC30DA613A94AF2B2B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				F0EAA90818B2E93437FFD350 /* Pods-GratisTing.debug.xcconfig */,
+				09C362B687934E594391C86D /* Pods-GratisTing.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		6656D17EA6E602931199697C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E605BCC98611F66EA577D6FF /* Pods_GratisTing.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F975B16F1CE2214F00D29403 = {
 			isa = PBXGroup;
 			children = (
+				F923F4EF1CE4B84D00320057 /* CoreLocation.framework */,
 				F9BD02F41CE35F120057309B /* MapKit.framework */,
 				F975B17A1CE2214F00D29403 /* GratisTing */,
 				F975B1791CE2214F00D29403 /* Products */,
+				46318DEC30DA613A94AF2B2B /* Pods */,
+				6656D17EA6E602931199697C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -158,6 +186,7 @@
 			isa = PBXGroup;
 			children = (
 				F975B19B1CE22A6100D29403 /* Show.storyboard */,
+				F9E5DDE41CE60C14005A2FB4 /* ShowViewController.swift */,
 			);
 			name = Show;
 			sourceTree = "<group>";
@@ -214,9 +243,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = F975B18A1CE2214F00D29403 /* Build configuration list for PBXNativeTarget "GratisTing" */;
 			buildPhases = (
+				F61AF11DD0A499588A3021A8 /* 📦 Check Pods Manifest.lock */,
 				F975B1741CE2214F00D29403 /* Sources */,
 				F975B1751CE2214F00D29403 /* Frameworks */,
 				F975B1761CE2214F00D29403 /* Resources */,
+				16EDCE435D3AFD980BD086AC /* 📦 Embed Pods Frameworks */,
+				A3D86565FB2D6F6B25C049FD /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -278,6 +310,54 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		16EDCE435D3AFD980BD086AC /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GratisTing/Pods-GratisTing-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		A3D86565FB2D6F6B25C049FD /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-GratisTing/Pods-GratisTing-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F61AF11DD0A499588A3021A8 /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		F975B1741CE2214F00D29403 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -288,6 +368,7 @@
 				F975B1AD1CE335B600D29403 /* ItemViewController.swift in Sources */,
 				F975B1921CE2254900D29403 /* LoginViewController.swift in Sources */,
 				F975B17C1CE2214F00D29403 /* AppDelegate.swift in Sources */,
+				F9E5DDE51CE60C14005A2FB4 /* ShowViewController.swift in Sources */,
 				F975B1961CE2294900D29403 /* RegisterViewController.swift in Sources */,
 				F9BD02F11CE32CF20057309B /* MapViewController.swift in Sources */,
 				F975B1B61CE36D7A00D29403 /* GratisTingCell.swift in Sources */,
@@ -399,6 +480,7 @@
 		};
 		F975B18B1CE2214F00D29403 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F0EAA90818B2E93437FFD350 /* Pods-GratisTing.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GratisTing/Info.plist;
@@ -410,6 +492,7 @@
 		};
 		F975B18C1CE2214F00D29403 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 09C362B687934E594391C86D /* Pods-GratisTing.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = GratisTing/Info.plist;
