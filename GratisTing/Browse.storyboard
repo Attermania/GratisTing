@@ -26,7 +26,7 @@
                                         <rect key="frame" x="0.0" y="92" width="560" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6E7-k3-U2V" id="5Py-Fv-xEg">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="87"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="87.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LZa-3s-kH8">
@@ -56,7 +56,7 @@
                                             <outlet property="descriptionLabel" destination="Kpd-re-XV5" id="sqp-R9-l0P"/>
                                             <outlet property="distanceLabel" destination="O7V-K1-wtG" id="7R0-Zg-oRI"/>
                                             <outlet property="titleLabel" destination="G7s-fk-Q4t" id="iSH-Ap-j6l"/>
-                                            <segue destination="uOp-zU-6f7" kind="show" identifier="showItemSegue" id="n1M-Ly-Op8"/>
+                                            <segue destination="fPy-ih-FaC" kind="show" identifier="showItem" id="i0N-WK-isV"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -85,60 +85,13 @@
             </objects>
             <point key="canvasLocation" x="1353" y="332"/>
         </scene>
-        <!--Show-->
+        <!--ShowItem-->
         <scene sceneID="gg2-tA-2qz">
             <objects>
-                <viewControllerPlaceholder storyboardName="Show" referencedIdentifier="Show" id="fPy-ih-FaC" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Show" referencedIdentifier="ShowItem" id="fPy-ih-FaC" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="izn-Lh-U3v" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1914.5" y="-79"/>
-        </scene>
-        <!--Item View Controller-->
-        <scene sceneID="Wx1-PY-uP4">
-            <objects>
-                <viewController id="uOp-zU-6f7" customClass="ItemViewController" customModule="GratisTing" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="HpT-wJ-EWd"/>
-                        <viewControllerLayoutGuide type="bottom" id="68P-Mg-Jwu"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="CF1-O0-gow">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="m6f-Do-vt1">
-                                <rect key="frame" x="20" y="80" width="240" height="128"/>
-                            </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5lV-4g-HAv">
-                                <rect key="frame" x="20" y="216" width="240" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="iGY-Pz-zLY">
-                                <rect key="frame" x="20" y="245" width="240" height="128"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZVA-Vw-YvY">
-                                <rect key="frame" x="20" y="381" width="256" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                    <connections>
-                        <outlet property="descriptionTextView" destination="iGY-Pz-zLY" id="HL0-lh-Nu9"/>
-                        <outlet property="titleLabel" destination="5lV-4g-HAv" id="jgU-RJ-AOM"/>
-                        <outlet property="userLabel" destination="ZVA-Vw-YvY" id="Bjc-jZ-7pq"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="ggP-35-Dbg" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2054" y="332"/>
+            <point key="canvasLocation" x="1869.5" y="332"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LnO-0c-1lG">

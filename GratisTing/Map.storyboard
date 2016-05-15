@@ -86,13 +86,13 @@
             </objects>
             <point key="canvasLocation" x="1295" y="407"/>
         </scene>
-        <!--Show-->
+        <!--ShowItem-->
         <scene sceneID="iE2-Q5-rGu">
             <objects>
-                <viewControllerPlaceholder storyboardName="Show" referencedIdentifier="Show" id="LVO-Sz-naG" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Show" referencedIdentifier="ShowItem" id="LVO-Sz-naG" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fMa-oi-9bB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1332.5" y="808"/>
+            <point key="canvasLocation" x="1790.5" y="407"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="96T-k1-icE">
