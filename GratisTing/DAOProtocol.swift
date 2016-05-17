@@ -10,8 +10,6 @@ import Foundation
 
 protocol DAOProtocol {
     
-    func getAllItems() -> [Item]
-    
     func getAllCategories() -> [Category]
     
     func getItemsByCategory(category: Category?, latitude: Double, longitide: Double) -> [Item]
