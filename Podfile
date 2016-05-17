@@ -11,6 +11,8 @@ use_frameworks!
 
 pod 'Alamofire', '~> 3.4'
 pod 'FBAnnotationClusteringSwift'
+pod 'Alamofire-Synchronous', '~> 3.0'
+pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 
 
 end

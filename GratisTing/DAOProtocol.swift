@@ -14,10 +14,6 @@ protocol DAOProtocol {
     
     func getAllCategories() -> [Category]
     
-    func getItemsByCategory(category: Category, latitude: Double, longitide: Double) -> [Item]
-    
-    func getItemsByRadius(latitude: Double, longitude: Double) -> [Item]
-    
-    func initDummyData() -> Void
+    func getItemsByCategory(category: Category?, latitude: Double, longitide: Double) -> [Item]
     
 }

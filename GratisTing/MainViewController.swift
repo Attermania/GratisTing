@@ -27,7 +27,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dao.initDummyData()
         categories = dao.getAllCategories()
         
         categoriesTableView.delegate = self

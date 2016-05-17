@@ -52,11 +52,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         super.viewDidLoad()
         itemMap.delegate = self
+        
         askUserForLocation()
-        let items = dao.getAllItems()
-        print("items count: \(items.count)")
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        let items = dao.getItemsByCategory(nil, latitude: 1.5, longitide: 1.6)
+        
         addItemsToMap(items)
-        // Do any additional setup after loading the view.
     }
     
     func askUserForLocation() {
