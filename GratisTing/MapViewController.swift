@@ -17,6 +17,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let clusteringManager = FBClusteringManager()
     let locationManager = CLLocationManager()
     var relocation = false
+    var firstLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
+    var lastLocation: CLLocation = CLLocation(latitude: 0, longitude: 0)
     
     @IBOutlet weak var itemMap: MKMapView!
     @IBAction func listViewButton(sender: AnyObject) {
@@ -66,7 +68,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.locationManager.requestAlwaysAuthorization()
         
         if CLLocationManager.locationServicesEnabled() {
-            print("okay")
+            //print("okay")
             locationManager.delegate = self
             locationManager.desiredAccuracy = kCLLocationAccuracyBest
             itemMap.showsUserLocation = true
@@ -151,6 +153,16 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         NSOperationQueue().addOperationWithBlock({
+            // Get coordinates from center of map
+            let centerMap = self.itemMap.centerCoordinate
+            // Create location from centermap coords.
+            let currentLocation = CLLocation(latitude: centerMap.latitude, longitude: centerMap.longitude)
+            
+            // calculate distance between
+            let distance = currentLocation.distanceFromLocation(self.lastLocation)/1609.344
+            print(distance)
+            // Update last location to current location (to be compared later)
+            self.lastLocation = currentLocation
             let mapBoundsWidth = Double(self.itemMap.bounds.size.width)
             let mapRectWidth:Double = self.itemMap.visibleMapRect.size.width
             let scale:Double = mapBoundsWidth / mapRectWidth
@@ -195,7 +207,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showItem" {
             let showItemViewController = segue.destinationViewController as! ShowViewController
-            showItemViewController.item = dao.getAllItems().first
         }
     }
     
