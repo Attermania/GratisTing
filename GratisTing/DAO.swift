@@ -58,7 +58,8 @@ class DAO: DAOProtocol {
         
         let coords: [[Double]] = [[55.71, 12.51], [55.72, 12.52], [55.73, 12.53], [55.70, 12.52], [55.76, 12.53], [55.74, 12.52]]
         
-        let user = User(firstName: "Jon", lastName: "Snow", email: "Jon@snow.dk", phoneNumber: 12345)
+        let address = Address(address: "Lygten 57", cityName: "Copgenhagen", postalCode: 2400, latitude: 55.51, longitude: 12.71)
+        let user = User(id: "1", email: "jonsnow@example.com", password: "secret", name: "Jon", address: address)
         let category = Category(id: "abc", title: "Elektronik")
         
         for (index,data):(String, JSON) in json["data"] {
