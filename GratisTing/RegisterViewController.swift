@@ -7,17 +7,26 @@
 //
 
 import UIKit
-import SearchTextField
 import Alamofire
 import SwiftyJSON
 
 class RegisterViewController: UIViewController {
 
-    @IBOutlet weak var addressTextfield: SearchTextField!
+    @IBAction func createUserPressed(sender: AnyObject) {
+        let selectedAddress = addressTextfield.address
+        
+        if selectedAddress == nil || addressTextfield.text == nil || addressTextfield.text == "" {
+            print("nil")
+            return
+        }
+        
+        // create user
+        
+    }
+    @IBOutlet weak var addressTextfield: AddressSearchTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         configureCustomSearchTextField()
         
         // Do any additional setup after loading the view.
@@ -77,13 +86,20 @@ class RegisterViewController: UIViewController {
                 let jsonData = JSON(data: response.data!)
                 
                 if jsonData.isEmpty {
-                    self.addressTextfield.placeholder = "Ingen resultater fundet for, \(self.addressTextfield.text!)"
-                    self.addressTextfield.text = ""
-                    completion([])
+                    // TODO: haandle empty results
+                    completion([SearchTextFieldItem(title: "hello")])
                 }
                 for (_, subJson) in jsonData {
-                    if let address = subJson["adressebetegnelse"].string {
-                        results.append(SearchTextFieldItem(title: address))
+                    if let formattedAddress = subJson["adressebetegnelse"].string {
+                        
+                        let city = subJson["adgangsadresse"]["postnummer"]["navn"].string!
+                        let postalCode = Int(subJson["adgangsadresse"]["postnummer"]["nr"].string!)!
+                        let latitude = subJson["adgangsadresse"]["adgangspunkt"]["koordinater"][1].double!
+                        let longitude = subJson["adgangsadresse"]["adgangspunkt"]["koordinater"][0].double!
+                        
+                        let userAddress = Address(address: formattedAddress, cityName: city, postalCode: postalCode, latitude: latitude, longitude: longitude)
+                        
+                        results.append(SearchTextFieldItem(title: formattedAddress, address: userAddress))
                     }
                 }
                 
