@@ -27,9 +27,10 @@ class DAO: DAOProtocol {
         
         var categories: [Category] = []
         
-        for (_,data):(String, JSON) in json["data"] {
-            let id          = data["_id"].string!
-            let title       = data["title"].string!
+        for (_,data):(String, JSON) in json {
+            print(data)
+            let id          = String(data["id"].int!)
+            let title       = data["name"].string!
             let image = "http://schneeblog.com/wp-content/uploads/2013/08/blank.jpg"
             
             let category = Category(id: id,title: title)
