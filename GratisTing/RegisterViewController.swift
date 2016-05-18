@@ -11,19 +11,24 @@ import Alamofire
 import SwiftyJSON
 
 class RegisterViewController: UIViewController {
+    
+    let dao = AppDelegate.dao
+    
+    @IBOutlet weak var addressTextfield: AddressSearchTextField!
+    @IBOutlet weak var nameTextfield: UITextField!
+    @IBOutlet weak var emailTextfield: UITextField!
+    @IBOutlet weak var passwordTextfield: UITextField!
 
     @IBAction func createUserPressed(sender: AnyObject) {
         let selectedAddress = addressTextfield.address
-        
         if selectedAddress == nil || addressTextfield.text == nil || addressTextfield.text == "" {
             print("nil")
             return
         }
-        
-        // create user
+        let user = User(email: emailTextfield.text!, password: passwordTextfield.text!, name: nameTextfield.text!, address: selectedAddress!)
+        dao.createUser(user)
         
     }
-    @IBOutlet weak var addressTextfield: AddressSearchTextField!
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -10,6 +10,10 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    @IBAction func returnedFromRegistration(sender: UIStoryboardSegue) {
+        
+    }
+    
     @IBAction func backButtonNavigation(sender: AnyObject) {
 
         self.dismissViewControllerAnimated(true, completion: nil)
