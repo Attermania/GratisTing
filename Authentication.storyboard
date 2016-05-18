@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -51,8 +51,71 @@
                     <view key="view" contentMode="scaleToFill" id="j7C-ae-App">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Adresse" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="zMx-qZ-3Vt" customClass="SearchTextField" customModule="SearchTextField">
+                                <rect key="frame" x="10" y="194" width="580" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="3H6-Qb-MAB">
+                                <rect key="frame" x="10" y="114" width="580" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wbp-9I-7I9">
+                                <rect key="frame" x="10" y="154" width="580" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="koG-VR-lr6">
+                                <rect key="frame" x="175" y="234" width="250" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="FdS-Oj-lcQ"/>
+                                    <constraint firstAttribute="width" constant="250" id="KIV-xc-Idy"/>
+                                </constraints>
+                                <state key="normal" title="Register"/>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Navn" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WMl-hz-hB3">
+                                <rect key="frame" x="10" y="74" width="580" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                        </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="zMx-qZ-3Vt" secondAttribute="trailing" constant="10" id="AhD-4L-01D"/>
+                            <constraint firstItem="koG-VR-lr6" firstAttribute="centerX" secondItem="j7C-ae-App" secondAttribute="centerX" id="Hzq-xu-Zic"/>
+                            <constraint firstItem="WMl-hz-hB3" firstAttribute="top" secondItem="xOP-2i-oCR" secondAttribute="bottom" constant="10" id="J4l-tq-7fS"/>
+                            <constraint firstItem="koG-VR-lr6" firstAttribute="top" secondItem="zMx-qZ-3Vt" secondAttribute="bottom" constant="10" id="Jgq-sn-es3"/>
+                            <constraint firstAttribute="trailing" secondItem="WMl-hz-hB3" secondAttribute="trailing" constant="10" id="KLB-01-xyB"/>
+                            <constraint firstItem="wbp-9I-7I9" firstAttribute="top" secondItem="3H6-Qb-MAB" secondAttribute="bottom" constant="10" id="SrG-XM-0Sb"/>
+                            <constraint firstItem="WMl-hz-hB3" firstAttribute="leading" secondItem="j7C-ae-App" secondAttribute="leading" constant="10" id="WBI-lO-eBp"/>
+                            <constraint firstItem="3H6-Qb-MAB" firstAttribute="top" secondItem="WMl-hz-hB3" secondAttribute="bottom" constant="10" id="Wkv-wq-ELp"/>
+                            <constraint firstItem="koG-VR-lr6" firstAttribute="top" secondItem="zMx-qZ-3Vt" secondAttribute="bottom" constant="155" id="XvJ-se-cWq"/>
+                            <constraint firstItem="3H6-Qb-MAB" firstAttribute="leading" secondItem="j7C-ae-App" secondAttribute="leading" constant="10" id="Y5w-Ti-WoT"/>
+                            <constraint firstAttribute="trailing" secondItem="wbp-9I-7I9" secondAttribute="trailing" constant="10" id="dJE-kz-vcA"/>
+                            <constraint firstItem="zMx-qZ-3Vt" firstAttribute="top" secondItem="xOP-2i-oCR" secondAttribute="bottom" constant="10" id="da3-14-ngq"/>
+                            <constraint firstItem="zMx-qZ-3Vt" firstAttribute="leading" secondItem="j7C-ae-App" secondAttribute="leading" constant="10" id="dhq-gI-Lz3"/>
+                            <constraint firstAttribute="trailing" secondItem="3H6-Qb-MAB" secondAttribute="trailing" constant="10" id="fd9-6l-ZbE"/>
+                            <constraint firstItem="3H6-Qb-MAB" firstAttribute="top" secondItem="xOP-2i-oCR" secondAttribute="bottom" constant="10" id="hMd-cL-8ES"/>
+                            <constraint firstItem="zMx-qZ-3Vt" firstAttribute="top" secondItem="wbp-9I-7I9" secondAttribute="bottom" constant="10" id="hlq-vH-gxG"/>
+                            <constraint firstItem="wbp-9I-7I9" firstAttribute="top" secondItem="3H6-Qb-MAB" secondAttribute="bottom" constant="69" id="j7I-1h-8hd"/>
+                            <constraint firstItem="zMx-qZ-3Vt" firstAttribute="top" secondItem="3H6-Qb-MAB" secondAttribute="bottom" constant="10" id="kRm-xf-HVK"/>
+                            <constraint firstItem="wbp-9I-7I9" firstAttribute="leading" secondItem="j7C-ae-App" secondAttribute="leading" constant="10" id="pla-PA-DnC"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="hMd-cL-8ES"/>
+                                <exclude reference="j7I-1h-8hd"/>
+                                <exclude reference="da3-14-ngq"/>
+                                <exclude reference="kRm-xf-HVK"/>
+                                <exclude reference="XvJ-se-cWq"/>
+                            </mask>
+                        </variation>
                     </view>
+                    <connections>
+                        <outlet property="addressTextfield" destination="zMx-qZ-3Vt" id="bcL-Jc-gKk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zO9-Lv-HiB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

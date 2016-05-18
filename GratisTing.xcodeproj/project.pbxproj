@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		392F388C52E0459B035372C0 /* Pods_GratisTing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E605BCC98611F66EA577D6FF /* Pods_GratisTing.framework */; };
+		F91250C81CEC6BED00FFFE75 /* SearchFieldItemExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91250C71CEC6BED00FFFE75 /* SearchFieldItemExtension.swift */; };
+		F91250CA1CEC6D9B00FFFE75 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91250C91CEC6D9B00FFFE75 /* Address.swift */; };
 		F975B17C1CE2214F00D29403 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B17B1CE2214F00D29403 /* AppDelegate.swift */; };
 		F975B1831CE2214F00D29403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F975B1821CE2214F00D29403 /* Assets.xcassets */; };
 		F975B1861CE2214F00D29403 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F975B1841CE2214F00D29403 /* LaunchScreen.storyboard */; };
@@ -37,6 +39,8 @@
 		09C362B687934E594391C86D /* Pods-GratisTing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratisTing.release.xcconfig"; path = "Pods/Target Support Files/Pods-GratisTing/Pods-GratisTing.release.xcconfig"; sourceTree = "<group>"; };
 		E605BCC98611F66EA577D6FF /* Pods_GratisTing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GratisTing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0EAA90818B2E93437FFD350 /* Pods-GratisTing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratisTing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GratisTing/Pods-GratisTing.debug.xcconfig"; sourceTree = "<group>"; };
+		F91250C71CEC6BED00FFFE75 /* SearchFieldItemExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchFieldItemExtension.swift; sourceTree = "<group>"; };
+		F91250C91CEC6D9B00FFFE75 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		F923F4EF1CE4B84D00320057 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F975B1781CE2214F00D29403 /* GratisTing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratisTing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F975B17B1CE2214F00D29403 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -134,6 +138,7 @@
 				F975B18F1CE224D900D29403 /* Authentication.storyboard */,
 				F975B1911CE2254900D29403 /* LoginViewController.swift */,
 				F975B1951CE2294900D29403 /* RegisterViewController.swift */,
+				F91250C71CEC6BED00FFFE75 /* SearchFieldItemExtension.swift */,
 			);
 			name = Authentication;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 				F975B1AE1CE34C5400D29403 /* Item.swift */,
 				F975B1B01CE34E9000D29403 /* User.swift */,
 				F975B1B21CE355B300D29403 /* Category.swift */,
+				F91250C91CEC6D9B00FFFE75 /* Address.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -372,7 +378,9 @@
 				F975B1B11CE34E9000D29403 /* User.swift in Sources */,
 				F975B1AB1CE333C100D29403 /* ItemListViewController.swift in Sources */,
 				F975B1E11CE480A400D29403 /* DAO.swift in Sources */,
+				F91250C81CEC6BED00FFFE75 /* SearchFieldItemExtension.swift in Sources */,
 				F975B1E41CE4811E00D29403 /* DAOProtocol.swift in Sources */,
+				F91250CA1CEC6D9B00FFFE75 /* Address.swift in Sources */,
 				F975B1B31CE355B300D29403 /* Category.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

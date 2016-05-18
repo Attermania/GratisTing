@@ -3,12 +3,14 @@ PODS:
   - Alamofire-Synchronous (3.0.0):
     - Alamofire (~> 3.0)
   - FBAnnotationClusteringSwift (1.0.1)
+  - SearchTextField (0.1.0)
   - SwiftyJSON (2.3.2)
 
 DEPENDENCIES:
   - Alamofire (~> 3.4)
   - Alamofire-Synchronous (~> 3.0)
   - FBAnnotationClusteringSwift
+  - SearchTextField
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
 EXTERNAL SOURCES:
@@ -24,8 +26,9 @@ SPEC CHECKSUMS:
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
   Alamofire-Synchronous: dc5dccc284e03c3b760e09c655dfe6fa292364b6
   FBAnnotationClusteringSwift: a1f4c07f5472b13acd69de04c61e68e2d7daaad3
+  SearchTextField: 3f5aecd8b33879dcaba496e5ffc7a00b9df2eb65
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: b54fdd0b96e5dcc14c678521bf230c98f7eaef53
+PODFILE CHECKSUM: 0b5401ff76e7f085c5d4b04bab46e22efafd1178
 
-COCOAPODS: 1.0.0
+COCOAPODS: 1.0.0.beta.5
