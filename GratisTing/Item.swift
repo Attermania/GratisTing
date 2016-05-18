@@ -19,6 +19,7 @@ class Item {
     var latitude: Double = 0
     var longitude: Double = 0
     var category: Category?
+    var address: Address?
     
     /*
      Constructor without id parameter. Used when creating Item object in the app. Id will be assigned in DB.

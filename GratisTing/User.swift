@@ -16,6 +16,7 @@ class User {
     var email: String = ""
     var phoneNumber: Int?
     var items:[Item] = []
+    var address: Address?
     
     /*
      Constructor without id parameter. Used when creating User object in the app. Id will be assigned in DB.
