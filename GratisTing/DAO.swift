@@ -76,4 +76,39 @@ class DAO: DAOProtocol {
         return items
     }
     
+    // Function for persisting a user
+    func createUser(user: User) {
+        
+        let parameters = [
+            "email": user.email,
+            "password": user.password,
+            "name": user.name,
+            "address": [
+                "address": user.address.address,
+                "cityName": user.address.cityName,
+                "postalCode": user.address.postalCode,
+                "latitude": user.address.latitude,
+                "longitude": user.address.longitude
+            ]
+        ]
+        
+        Alamofire.request(.POST, "http://localhost:3000/api/v1/users", parameters: parameters as! [String : AnyObject], encoding: .JSON).responseJSON { (response) in
+            switch response.result {
+                
+            case .Success:
+                print("success")
+                let jsonData = JSON(data: response.data!)
+                print(jsonData)
+                if jsonData.isEmpty {
+                    print("empty")
+                }
+                for (_, subJson) in jsonData {
+                    print(subJson)                }
+                
+            case .Failure(let error):
+                print(error)
+            }
+        }
+    }
 }
+

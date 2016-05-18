@@ -14,4 +14,6 @@ protocol DAOProtocol {
     
     func getItemsByCategory(category: Category?, latitude: Double, longitide: Double) -> [Item]
     
+    func createUser(user: User)
+    
 }

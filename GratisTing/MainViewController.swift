@@ -27,8 +27,9 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        categories = dao.getAllCategories()
-        
+        //categories = dao.getAllCategories()
+//        dao.createUser(User(email: "minemail", password: "kode", name: "Jan", address: Address(address: "Street", cityName: "City", postalCode: 2400, latitude: 12.51, longitude: 12.52)))
+//        print("after create user")
         categoriesTableView.delegate = self
         categoriesTableView.dataSource = self
         // Do any additional setup after loading the view.
