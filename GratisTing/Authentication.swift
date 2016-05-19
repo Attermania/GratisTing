@@ -16,6 +16,8 @@ class Authentication {
     
     var jwt: String?
     
+    var token = NSUserDefaults.standardUserDefaults()
+    
     // Authentication of user credentials
     func authenticate(email: String, password: String, completion: (error: NSError?, jwt: String?) -> () ) {
         
@@ -43,8 +45,16 @@ class Authentication {
                 print(error)
             }
         }
-
-        
     }
     
+    func setToken(token: String) {
+        self.token.setObject(token, forKey: "token")
+    }
+    
+    func getToken() -> String{
+        if token.objectForKey("token") != nil {
+            return token.objectForKey("token")! as! String
+        }
+        return ""
+    }
 }

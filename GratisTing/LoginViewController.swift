@@ -10,6 +10,24 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    let auth = AppDelegate.authentication
+    
+    @IBOutlet weak var emailTextfield: UITextField!
+    @IBOutlet weak var passwordTextfield: UITextField!
+    
+    // Define authentication logic
+    @IBAction func loginButton(sender: AnyObject) {
+        auth.authenticate(emailTextfield.text!, password: passwordTextfield.text!) { (error, jwt) in
+            if jwt != nil {
+                self.auth.setToken(jwt!)
+            }
+            if (error != nil) {
+                print(error?.localizedDescription)
+            }
+        }
+    }
+    
+    // Define logic when returned from Registration.
     @IBAction func returnedFromRegistration(sender: UIStoryboardSegue) {
         
     }

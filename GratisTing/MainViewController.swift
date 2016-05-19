@@ -20,15 +20,26 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     @IBAction func createItem(sender: AnyObject) {
-        let storyboard = UIStoryboard(name: "Create", bundle: nil)
-        let controller = storyboard.instantiateViewControllerWithIdentifier("Create") as! UINavigationController
-        self.presentViewController(controller, animated: true, completion: nil)
+        // Check if token is set - present create view controler
+        if auth.getToken() != "" {
+            let storyboard = UIStoryboard(name: "Create", bundle: nil)
+            let controller = storyboard.instantiateViewControllerWithIdentifier("Create") as! UINavigationController
+            self.presentViewController(controller, animated: true, completion: nil)
+        } else {
+            // If token is not set - show alert instructring user to create error.
+            let alertController = UIAlertController(title: "Bruger påkrævet", message: "Du skal være logget ind for at oprette en gratis ting.", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(defaultAction)
+            presentViewController(alertController, animated: true, completion: nil)
+        }
     }
+    
     @IBOutlet weak var categoriesTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        //auth.token.setObject(nil, forKey: "token")
+        //print(auth.getToken())
 //        auth.authenticate("man@example.com", password: "secret") { (error, jwt) in
 //            if (error != nil) {
 //                print(error?.localizedDescription)
