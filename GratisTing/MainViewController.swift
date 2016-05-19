@@ -11,6 +11,7 @@ import UIKit
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let dao = AppDelegate.dao
+    let auth = AppDelegate.authentication
     
     var categories: [Category] = [] {
         didSet {
@@ -27,6 +28,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        auth.authenticate("kn1@lol.com", password: "123") { (error, jwt) in
+            if (error != nil) {
+                print(error?.localizedDescription)
+            }
+            print(jwt!)
+        }
+        
         //categories = dao.getAllCategories()
 //        dao.createUser(User(email: "minemail", password: "kode", name: "Jan", address: Address(address: "Street", cityName: "City", postalCode: 2400, latitude: 12.51, longitude: 12.52)))
 //        print("after create user")
