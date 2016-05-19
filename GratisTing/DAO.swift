@@ -118,40 +118,45 @@ class DAO: DAOProtocol {
      */
     func createItem(item: Item) {
         
-        let headers = [
-            "Authorization": String(auth.jwt!),
-            "Content-Type": "application/json"
-        ]
-        
-        let parameters = [
-            "title": item.title,
-            "description": item.description,
-            "imageURL": item.imageURL,
-            "owner": (item.owner?.id)!,
-            "address": [
-                "address": item.address!.address,
-                "cityName": item.address!.cityName,
-                "postalCode": item.address!.postalCode,
-                "latitude": item.address!.latitude,
-                "longitude": item.address!.longitude
-            ],
-            "category": (item.category!.id)!
-        ]
-                
-        Alamofire.request(.POST, "http://localhost:3000/api/v1/items", parameters: (parameters as! [String : AnyObject]), encoding: .JSON, headers: headers).responseJSON { (response) in
-            switch response.result {
-                
-            case .Success:
-                print("success")
-                let jsonData = JSON(data: response.data!)
-                print(jsonData)
-                if jsonData.isEmpty {
-                    print("empty")
+        if auth.getToken() != "" {
+            
+            let headers = [
+                "Authorization": String(auth.getToken()),
+                "Content-Type": "application/json"
+            ]
+            
+            let parameters = [
+                "title": item.title,
+                "description": item.description,
+                "imageURL": item.imageURL,
+                "owner": (item.owner?.id)!,
+                "address": [
+                    "address": item.address!.address,
+                    "cityName": item.address!.cityName,
+                    "postalCode": item.address!.postalCode,
+                    "latitude": item.address!.latitude,
+                    "longitude": item.address!.longitude
+                ],
+                "categoryId": (item.category!.id)!
+            ]
+            
+            Alamofire.request(.POST, "http://localhost:3000/api/v1/items", parameters: (parameters as! [String : AnyObject]), encoding: .JSON, headers: headers).responseJSON { (response) in
+                switch response.result {
+                    
+                case .Success:
+                    print("success")
+                    let jsonData = JSON(data: response.data!)
+                    print(jsonData)
+                    if jsonData.isEmpty {
+                        print("empty")
+                    }
+                case .Failure(let error):
+                    print(error)
                 }
-            case .Failure(let error):
-                print(error)
             }
+
         }
+        
     }
 }
 
