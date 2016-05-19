@@ -16,4 +16,6 @@ protocol DAOProtocol {
     
     func createUser(user: User)
     
+    func createItem(item: Item)
+    
 }

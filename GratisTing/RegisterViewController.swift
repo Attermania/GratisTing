@@ -25,6 +25,7 @@ class RegisterViewController: UIViewController {
             print("nil")
             return
         }
+        // Add validation -------- !!!
         let user = User(email: emailTextfield.text!, password: passwordTextfield.text!, name: nameTextfield.text!, address: selectedAddress!)
         dao.createUser(user)
         

@@ -29,15 +29,25 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        auth.authenticate("kn1@lol.com", password: "123") { (error, jwt) in
-            if (error != nil) {
-                print(error?.localizedDescription)
-            }
-            print(jwt!)
-        }
+//        auth.authenticate("man@example.com", password: "secret") { (error, jwt) in
+//            if (error != nil) {
+//                print(error?.localizedDescription)
+//            }
+//            print(jwt)
+//            let user = User(email: "bla", password: "kode", name: "Bo", address: Address(address: "Street", cityName: "City", postalCode: 2400, latitude: 12.51, longitude: 12.52))
+//            let cate = Category(id: "1", title: "Køkken")
+//            
+//            let item = Item(title: "Bold", description: "Ejet af Scmeichel", imageURL: "", owner: user, address: Address(address: "Street", cityName: "City", postalCode: 2400, latitude: 12.51, longitude: 12.52), category: cate)
+//            print(item)
+//            self.dao.createItem(item)
+//        }
         
         //categories = dao.getAllCategories()
-//        dao.createUser(User(email: "minemail", password: "kode", name: "Jan", address: Address(address: "Street", cityName: "City", postalCode: 2400, latitude: 12.51, longitude: 12.52)))
+        
+     
+        
+        
+        //dao.createUser(User(email: "blamail@col.dk", password: "kodeeee", name: "Bodil", address: Address(address: "Street", cityName: "City", postalCode: 2400, latitude: 12.51, longitude: 12.52)))
 //        print("after create user")
         categoriesTableView.delegate = self
         categoriesTableView.dataSource = self

@@ -29,14 +29,16 @@ class Authentication {
                 
             case .Success:
                 var jsonData = JSON(data: response.data!)
-                
-                if let token = jsonData["token"].string {
+                if let status = jsonData["success"].bool {
+                    let token = jsonData["token"].string
                     self.jwt = token
                     completion(error: nil, jwt: token)
+                } else {
+                    let testError = NSError(domain: "Invalid credentials", code: 400, userInfo: [:])
+                    
+                    completion(error: testError, jwt: "")
                 }
-                let testError = NSError(domain: "Invalid credentials", code: 400, userInfo: [:])
                 
-                completion(error: testError, jwt: nil)
             case .Failure(let error):
                 print(error)
             }

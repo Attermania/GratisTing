@@ -24,14 +24,12 @@ class Item {
     /*
      Constructor without id parameter. Used when creating Item object in the app. Id will be assigned in DB.
      */
-    init (title: String, description: String, imageURL: String, createdAt: NSDate, owner: User, latitude: Double, longitude: Double, category: Category) {
+    init (title: String, description: String, imageURL: String, owner: User, address: Address, category: Category) {
         self.title = title
         self.description = description
         self.imageURL = imageURL
-        self.createdAt = createdAt
         self.owner = owner
-        self.latitude = latitude
-        self.longitude = longitude
+        self.address = address
         self.category = category
     }
     
