@@ -17,15 +17,55 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G2R-Rj-HsL">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G2R-Rj-HsL">
                                 <rect key="frame" x="266" y="242" width="89" height="30"/>
                                 <state key="normal" title="Opret bruger"/>
                                 <connections>
                                     <segue destination="1mY-Xp-5xW" kind="show" id="iS2-gB-UOE"/>
                                 </connections>
                             </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Indtast email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dHM-f2-rb6">
+                                <rect key="frame" x="247.5" y="89" width="104" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="187" id="hgC-Vw-Ixp"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="hgC-Vw-Ixp"/>
+                                    </mask>
+                                </variation>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Indtast kodeord" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="pNc-WE-WVJ">
+                                <rect key="frame" x="238" y="127" width="123" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lj8-ew-le2">
+                                <rect key="frame" x="275" y="165" width="51" height="30"/>
+                                <state key="normal" title="Log ind"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Lj8-ew-le2" firstAttribute="top" secondItem="pNc-WE-WVJ" secondAttribute="bottom" constant="8" symbolic="YES" id="KuT-sR-K5D"/>
+                            <constraint firstItem="dHM-f2-rb6" firstAttribute="centerX" secondItem="ndI-Xe-7Fz" secondAttribute="centerX" id="f2M-ra-2ZV"/>
+                            <constraint firstItem="dHM-f2-rb6" firstAttribute="trailing" secondItem="pNc-WE-WVJ" secondAttribute="trailing" id="jfN-rY-OMh"/>
+                            <constraint firstItem="pNc-WE-WVJ" firstAttribute="top" secondItem="dHM-f2-rb6" secondAttribute="bottom" constant="8" symbolic="YES" id="laP-oF-Qvh"/>
+                            <constraint firstItem="dHM-f2-rb6" firstAttribute="leading" secondItem="pNc-WE-WVJ" secondAttribute="leading" id="nI5-zl-tq9"/>
+                            <constraint firstItem="G2R-Rj-HsL" firstAttribute="top" secondItem="Lj8-ew-le2" secondAttribute="bottom" constant="47" id="tir-Q4-O9i"/>
+                            <constraint firstItem="pNc-WE-WVJ" firstAttribute="centerX" secondItem="ndI-Xe-7Fz" secondAttribute="centerX" id="u9f-f4-bak"/>
+                            <constraint firstItem="G2R-Rj-HsL" firstAttribute="leading" secondItem="ndI-Xe-7Fz" secondAttribute="leading" constant="266" id="x1D-bP-gIA"/>
+                            <constraint firstItem="dHM-f2-rb6" firstAttribute="top" secondItem="9tj-Y5-QqR" secondAttribute="bottom" constant="25" id="xSt-lX-4Zo"/>
+                            <constraint firstItem="Lj8-ew-le2" firstAttribute="centerX" secondItem="ndI-Xe-7Fz" secondAttribute="centerX" id="xcy-tQ-PIq"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="jfN-rY-OMh"/>
+                                <exclude reference="nI5-zl-tq9"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" title="Authentication" id="XVS-H3-038">
                         <barButtonItem key="backBarButtonItem" id="Mdu-Kl-CsI"/>
