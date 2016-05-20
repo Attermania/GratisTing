@@ -8,8 +8,9 @@
 
 import UIKit
 
-class CreateViewController: UIViewController {
+class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate {
     
+    // MARK: - Dependencies
     let dao = AppDelegate.dao
     let auth = AppDelegate.authentication
     
@@ -17,19 +18,27 @@ class CreateViewController: UIViewController {
     //let auth = AppDelegate.authentication
 
 
+    // MARK: - Components
     @IBOutlet weak var titleTextfield: UITextField!
     @IBOutlet weak var descriptionTextfield: UITextField!
+    @IBOutlet weak var categoryTextField: UITextField!
+    var categoryPicker: UIPickerView!
     
+    // MARK: - Actions
     @IBAction func createItemButton(sender: AnyObject) {
-        
-        print(auth.user?.name)
-        
-        let cate = Category(id: "573c7e982831ba44719236bb", title: "Sko")
-        
-        let title = titleTextfield.text!
+
+        let title       = titleTextfield.text!
         let description = descriptionTextfield.text!
+        let category    = categories[categoryPicker.selectedRowInComponent(0)]
         
-        let item = Item(title: title, description: description, imageURL: "", owner: auth.user!, address: auth.user!.address, category: cate)
+        let item = Item(
+            title: title,
+            description: description,
+            imageURL: "",
+            owner: auth.user!,
+            address: auth.user!.address,
+            category: category
+        )
         
         self.dao.createItem(item, token: auth.getToken()!)
     }
@@ -37,28 +46,46 @@ class CreateViewController: UIViewController {
     @IBAction func backButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
+    
+    // MARK: - Instance variables
+    var categories: [Category] = []
+    
+    
+    // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
+        // Setup category picker
+        categoryPicker = UIPickerView()
+        categoryPicker.delegate = self
+        
+        // Setup category text field
+        categoryTextField.delegate = self
+        categoryTextField.inputView = categoryPicker
+        categoryTextField.tintColor = UIColor.clearColor()
+        
+        // Load categories
+        categories = dao.getAllCategories()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
+        return 1
     }
     
-
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return categories.count
     }
-    */
-
+    
+    func pickerView(pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        return NSAttributedString(string: categories[row].title)
+    }
+    
+    func pickerView(pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        categoryTextField.text = categories[row].title
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        return false
+    }
+    
 }
