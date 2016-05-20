@@ -59,7 +59,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     override func viewDidAppear(animated: Bool) {
-        let items = dao.getItemsByCategory(nil, latitude: 1.5, longitide: 1.6)
+        let items = dao.getItemsByCategory(nil, latitude: 1.5, longitude: 1.6)
         
         addItemsToMap(items)
     }

@@ -2,7 +2,10 @@ PODS:
   - Alamofire (3.4.0)
   - Alamofire-Synchronous (3.0.0):
     - Alamofire (~> 3.0)
+  - CryptoSwift (0.4.1)
   - FBAnnotationClusteringSwift (1.0.1)
+  - JSONWebToken (1.5.0):
+    - CryptoSwift (~> 0.4.0)
   - SearchTextField (0.1.0)
   - SwiftyJSON (2.3.2)
 
@@ -10,6 +13,7 @@ DEPENDENCIES:
   - Alamofire (~> 3.4)
   - Alamofire-Synchronous (~> 3.0)
   - FBAnnotationClusteringSwift
+  - JSONWebToken
   - SearchTextField
   - SwiftyJSON (from `https://github.com/SwiftyJSON/SwiftyJSON.git`)
 
@@ -25,10 +29,12 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   Alamofire: c19a627cefd6a95f840401c49ab1f124e07f54ee
   Alamofire-Synchronous: dc5dccc284e03c3b760e09c655dfe6fa292364b6
+  CryptoSwift: 25b5aff3f260967391f8fff2e9abe4254d2c6fd5
   FBAnnotationClusteringSwift: a1f4c07f5472b13acd69de04c61e68e2d7daaad3
+  JSONWebToken: 6c8968ace6b60b2e6156a7bbe5019fd9b5ff9b5a
   SearchTextField: 3f5aecd8b33879dcaba496e5ffc7a00b9df2eb65
   SwiftyJSON: 04ccea08915aa0109039157c7974cf0298da292a
 
-PODFILE CHECKSUM: 0b5401ff76e7f085c5d4b04bab46e22efafd1178
+PODFILE CHECKSUM: ed256b5aaee10fc8cd21e1a8bf086f77547b09cf
 
 COCOAPODS: 1.0.0

@@ -9,15 +9,22 @@
 import Foundation
 import Alamofire
 import SwiftyJSON
+import JWT
 
 class Authentication {
     
     static let instance = Authentication()
+    let dao = AppDelegate.dao
     
-    var jwt: String?
-    
-    var token = NSUserDefaults.standardUserDefaults()
     var user: User?
+    
+    private init() {
+        if let userId = decodeTokenToUserId() {
+            dao.getUser(userId) { (error, user) in
+                self.user = user
+            }
+        }
+    }
     
     // Authentication of user credentials
     func authenticate(email: String, password: String, completion: (error: NSError?, jwt: String?) -> () ) {
@@ -34,7 +41,8 @@ class Authentication {
                 var jsonData = JSON(data: response.data!)
                 if let token = jsonData["data"]["token"].string {
                     // Token
-                    self.jwt = token
+                    self.setToken(token)
+                    print("Set token" + token)
                     
                     // User
                     let id = jsonData["data"]["user"]["_id"].string!
@@ -68,14 +76,28 @@ class Authentication {
         }
     }
     
-    func setToken(token: String) {
-        self.token.setObject(token, forKey: "token")
+    // Method for decoding token to resolve user ID
+    func decodeTokenToUserId() -> String? {
+        // Trim to only include token
+        let stringToDecode = getToken()!.substringWithRange(Range<String.Index>(start: getToken()!.startIndex.advancedBy(4), end: getToken()!.endIndex.advancedBy(0)))
+        
+        do {
+            let payload = try JWT.decode(stringToDecode, algorithm: .HS256("secret"))
+            let json = JSON(payload)
+            
+            return json["_id"].string!
+        } catch {
+            print("Failed to decode JWT: \(error)")
+        }
+        
+        return nil
     }
     
-    func getToken() -> String{
-        if token.objectForKey("token") != nil {
-            return token.objectForKey("token")! as! String
-        }
-        return ""
+    func setToken(token: String) {
+        NSUserDefaults.standardUserDefaults().setObject(token, forKey: "token")
+    }
+    
+    func getToken() -> String? {
+        return NSUserDefaults.standardUserDefaults().objectForKey("token") as? String
     }
 }

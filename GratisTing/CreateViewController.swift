@@ -12,6 +12,10 @@ class CreateViewController: UIViewController {
     
     let dao = AppDelegate.dao
     let auth = AppDelegate.authentication
+    
+    // NYT
+    //let auth = AppDelegate.authentication
+
 
     @IBOutlet weak var titleTextfield: UITextField!
     @IBOutlet weak var descriptionTextfield: UITextField!
@@ -27,10 +31,7 @@ class CreateViewController: UIViewController {
         
         let item = Item(title: title, description: description, imageURL: "", owner: auth.user!, address: auth.user!.address, category: cate)
         
-        self.dao.createItem(item)
-        print("Create")
-
-
+        self.dao.createItem(item, token: auth.getToken()!)
     }
     
     @IBAction func backButton(sender: AnyObject) {

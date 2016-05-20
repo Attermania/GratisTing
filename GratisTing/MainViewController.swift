@@ -8,10 +8,11 @@
 
 import UIKit
 
+
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let dao = AppDelegate.dao
-    let auth = AppDelegate.authentication
+    var auth: Authentication!
     
     var categories: [Category] = [] {
         didSet {
@@ -20,41 +21,29 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     @IBAction func createItem(sender: AnyObject) {
-        // Check if token is set - present create view controler
+        // Check if token is set - present create view controler        
         if auth.getToken() != "" {
             let storyboard = UIStoryboard(name: "Create", bundle: nil)
             let controller = storyboard.instantiateViewControllerWithIdentifier("Create") as! UINavigationController
             self.presentViewController(controller, animated: true, completion: nil)
-        } else {
-            // If token is not set - show alert instructring user to create error.
-            let alertController = UIAlertController(title: "Bruger påkrævet", message: "Du skal være logget ind for at oprette en gratis ting.", preferredStyle: .Alert)
-            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-            alertController.addAction(defaultAction)
-            presentViewController(alertController, animated: true, completion: nil)
+            
+            return
         }
+        
+        // If token is not set - show alert instructring user to create error.
+        let alertController = UIAlertController(title: "Bruger påkrævet", message: "Du skal være logget ind for at oprette en gratis ting.", preferredStyle: .Alert)
+        let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+        alertController.addAction(defaultAction)
+        presentViewController(alertController, animated: true, completion: nil)
     }
     
     @IBOutlet weak var categoriesTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        // We need to set Authentication here because the authentication service is not set in AppDelegate when this class is instantiated
+        auth = AppDelegate.authentication
         
-        //auth.token.setObject(nil, forKey: "token")
-        //print(auth.getToken())
-        auth.authenticate("man@example.com", password: "secret") { (error, jwt) in
-            if (error != nil) {
-                print(error?.localizedDescription)
-            }
-            print(jwt)
-        }
-        
-        //categories = dao.getAllCategories()
-        
-     
-        
-        
-        //dao.createUser(User(email: "blamail@col.dk", password: "kodeeee", name: "Bodil", address: Address(address: "Street", cityName: "City", postalCode: 2400, latitude: 12.51, longitude: 12.52)))
-//        print("after create user")
         categoriesTableView.delegate = self
         categoriesTableView.dataSource = self
         // Do any additional setup after loading the view.

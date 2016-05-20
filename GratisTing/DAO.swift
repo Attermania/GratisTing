@@ -14,9 +14,7 @@ import SwiftyJSON
 class DAO: DAOProtocol {
     
     static let instance = DAO()
-    let auth = AppDelegate.authentication
 
-    
     func getAllCategories() -> [Category] {
         let response = Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/categories").responseJSON()
         let jsonString = response.result.value
@@ -44,7 +42,7 @@ class DAO: DAOProtocol {
         return categories
     }
     
-    func getItemsByCategory(category: Category?, latitude: Double, longitide: Double) -> [Item] {
+    func getItemsByCategory(category: Category?, latitude: Double, longitude: Double) -> [Item] {
         let response = Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/items").responseJSON()
         let jsonString = response.result.value
         
@@ -104,49 +102,73 @@ class DAO: DAOProtocol {
     /**
      Method for creating item. (User authentication required to call).
      */
-    func createItem(item: Item) {
+    func createItem(item: Item, token: String) {
         
-        if auth.getToken() != "" {
-            
-            let headers = [
-                "Authorization": String(auth.getToken()),
-                "Content-Type": "application/json"
-            ]
-            
-            let parameters = [
-                "title": item.title,
-                "description": item.description,
-                "imageURL": item.imageURL,
-                "owner": (item.owner?.id)!,
-                "address": [
-                    "address": item.address!.address,
-                    "cityName": item.address!.cityName,
-                    "postalCode": item.address!.postalCode,
-                    "coordinates": [
-                        item.address!.longitude,
-                        item.address!.latitude
-                    ]
-                ],
-                "categoryId": (item.category!.id)!
-            ]
-            
-            Alamofire.request(.POST, "http://gratisting.dev:3000/api/v1/items", parameters: (parameters as! [String : AnyObject]), encoding: .JSON, headers: headers).responseJSON { (response) in
-                switch response.result {
-                    
-                case .Success:
-                    print("success")
-                    let jsonData = JSON(data: response.data!)
-                    print(jsonData)
-                    if jsonData.isEmpty {
-                        print("empty")
-                    }
-                case .Failure(let error):
-                    print(error)
+        let headers = [
+            "Authorization": token,
+            "Content-Type": "application/json"
+        ]
+        
+        let parameters = [
+            "title": item.title,
+            "description": item.description,
+            "imageURL": item.imageURL,
+            "owner": (item.owner?.id)!,
+            "address": [
+                "address": item.address!.address,
+                "cityName": item.address!.cityName,
+                "postalCode": item.address!.postalCode,
+                "coordinates": [
+                    item.address!.longitude,
+                    item.address!.latitude
+                ]
+            ],
+            "categoryId": (item.category!.id)!
+        ]
+        
+        Alamofire.request(.POST, "http://localhost:3000/api/v1/items", parameters: (parameters as! [String : AnyObject]), encoding: .JSON, headers: headers).responseJSON { (response) in
+            switch response.result {
+                
+            case .Success:
+                print("success")
+                let jsonData = JSON(data: response.data!)
+                print(jsonData)
+                if jsonData.isEmpty {
+                    print("empty")
                 }
+            case .Failure(let error):
+                print(error)
             }
-
+        }
+    }
+    
+    func getUser(userId: String, completion: (error: NSError?, user: User?) -> ()) {
+        
+        Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/users/" + userId).responseJSON { (response) in
+            let jsonString = response.result.value
+            
+            let jsonData = JSON(jsonString!)
+            //print(jsonData)
+            
+            // User
+            let email = jsonData["data"]["email"].string!
+            let name = jsonData["data"]["name"].string
+            
+            // Address
+            let address = jsonData["data"]["address"]["address"].string
+            let cityName = jsonData["data"]["address"]["cityName"].string
+            let postalCode = jsonData["data"]["address"]["postalCode"].int
+            let long = jsonData["data"]["address"]["coordinates"][0].double!
+            let lat = jsonData["data"]["address"]["coordinates"][1].double!
+            let completeAddress = Address(address: address!, cityName: cityName!, postalCode: postalCode!, latitude: lat, longitude: long)
+            
+            let user = User(id: userId, email: email, name: name!, address: completeAddress)
+            
+            completion(error: nil, user: user)
         }
         
     }
+    
+    
 }
 

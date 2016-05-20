@@ -14,6 +14,8 @@ pod 'FBAnnotationClusteringSwift'
 pod 'Alamofire-Synchronous', '~> 3.0'
 pod 'SwiftyJSON', :git => 'https://github.com/SwiftyJSON/SwiftyJSON.git'
 pod 'SearchTextField'
+pod 'JSONWebToken'
+
 
 
 end

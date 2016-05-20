@@ -13,11 +13,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-    static let dao: DAOProtocol = DAO.instance
-    static let authentication = Authentication.instance
+    static var dao: DAOProtocol!
+    static var authentication: Authentication!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        AppDelegate.dao = DAO.instance
+        AppDelegate.authentication = Authentication.instance
+        
+        
+        
         return true
     }
 
