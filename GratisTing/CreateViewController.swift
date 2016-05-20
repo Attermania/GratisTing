@@ -11,23 +11,21 @@ import UIKit
 class CreateViewController: UIViewController {
     
     let dao = AppDelegate.dao
+    let auth = AppDelegate.authentication
 
     @IBOutlet weak var titleTextfield: UITextField!
     @IBOutlet weak var descriptionTextfield: UITextField!
     
     @IBAction func createItemButton(sender: AnyObject) {
         
+        print(auth.user?.name)
         
-        
-        let user = User(email: "man@example.com", password: "secret", name: "Ellen", address: Address(address: "Street", cityName: "City", postalCode: 2400, latitude: 12.51, longitude: 12.52))
         let cate = Category(id: "573c7e982831ba44719236bb", title: "Sko")
-        let address = Address(address: "Street", cityName: "City", postalCode: 2400, latitude: 12.51, longitude: 12.52)
         
         let title = titleTextfield.text!
         let description = descriptionTextfield.text!
         
-        let item = Item(title: title, description: description, imageURL: "", owner: user, address: address, category: cate)
-        print(item)
+        let item = Item(title: title, description: description, imageURL: "", owner: auth.user!, address: auth.user!.address, category: cate)
         
         self.dao.createItem(item)
         print("Create")

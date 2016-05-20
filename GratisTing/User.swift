@@ -31,10 +31,9 @@ class User {
     /**
      Constructor with id attribute. Used when parsing JSON to User object.
      */
-    init(id: String, email: String, password: String, name: String, address: Address) {
+    init(id: String, email: String, name: String, address: Address) {
         self.id = id
         self.email = email
-        self.password = password
         self.name = name
         self.address = address
     }

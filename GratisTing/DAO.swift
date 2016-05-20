@@ -60,21 +60,7 @@ class DAO: DAOProtocol {
         
         let coords: [[Double]] = [[55.71, 12.51], [55.72, 12.52], [55.73, 12.53], [55.70, 12.52], [55.76, 12.53], [55.74, 12.52]]
         
-        let address = Address(address: "Lygten 57", cityName: "Copgenhagen", postalCode: 2400, latitude: 55.51, longitude: 12.71)
-        let user = User(id: "1", email: "jonsnow@example.com", password: "secret", name: "Jon", address: address)
-        let category = Category(id: "abc", title: "Elektronik")
-        
-        for (index,data):(String, JSON) in json["data"] {
-            let id          = data["_id"].string!
-            let title       = data["title"].string!
-            let description = data["description"].string!
-            
-            
-            let item = Item(id: id, title: title, description: description, imageURL: "", createdAt: NSDate(), owner: user, latitude: coords[Int(index)!][0], longitude: coords[Int(index)!][1], category: category)
-            
-            items.append(item)
-        }
-        
+                
         return items
     }
     
@@ -89,8 +75,10 @@ class DAO: DAOProtocol {
                 "address": user.address.address,
                 "cityName": user.address.cityName,
                 "postalCode": user.address.postalCode,
-                "latitude": user.address.latitude,
-                "longitude": user.address.longitude
+                "coordinates": [
+                    user.address.longitude,
+                    user.address.latitude
+                ]
             ]
         ]
         
@@ -134,8 +122,10 @@ class DAO: DAOProtocol {
                     "address": item.address!.address,
                     "cityName": item.address!.cityName,
                     "postalCode": item.address!.postalCode,
-                    "latitude": item.address!.latitude,
-                    "longitude": item.address!.longitude
+                    "coordinates": [
+                        item.address!.longitude,
+                        item.address!.latitude
+                    ]
                 ],
                 "categoryId": (item.category!.id)!
             ]

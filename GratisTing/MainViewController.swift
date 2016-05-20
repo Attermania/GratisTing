@@ -38,20 +38,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         //auth.token.setObject(nil, forKey: "token")
         //print(auth.getToken())
-//        auth.authenticate("man@example.com", password: "secret") { (error, jwt) in
-//            if (error != nil) {
-//                print(error?.localizedDescription)
-//            }
-//            print(jwt)
-//            let user = User(email: "bla", password: "kode", name: "Bo", address: Address(address: "Street", cityName: "City", postalCode: 2400, latitude: 12.51, longitude: 12.52))
-//            let cate = Category(id: "1", title: "Køkken")
-//            
-//            let item = Item(title: "Bold", description: "Ejet af Scmeichel", imageURL: "", owner: user, address: Address(address: "Street", cityName: "City", postalCode: 2400, latitude: 12.51, longitude: 12.52), category: cate)
-//            print(item)
-//            self.dao.createItem(item)
-//        }
+        auth.authenticate("man@example.com", password: "secret") { (error, jwt) in
+            if (error != nil) {
+                print(error?.localizedDescription)
+            }
+            print(jwt)
+        }
         
         //categories = dao.getAllCategories()
         
