@@ -14,34 +14,113 @@ import SwiftyJSON
 class DAO: DAOProtocol {
     
     static let instance = DAO()
+    
+    func getAllCategories(completion: [Category] -> Void) {
+        
+        Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/categories").responseJSON { (response) in
+            
+            var categories: [Category] = []
+            
+            switch response.result {
+                
+            case .Success:
+                print("success")
+                let jsonData = JSON(data: response.data!)
+                if jsonData.isEmpty {
+                    print("empty response")
+                }
+                for (_, subJson) in jsonData["data"] {
+                    print(subJson)
+                    let id = subJson["_id"].string!
+                    let title = subJson["title"].string!
+                    let image = subJson["image"].string!
+                    
+                    let category = Category(id: id, title: title, imageURL: image)
+                    
+                    categories.append(category)
+                }
+                
+                completion(categories)
+                
+            case .Failure(let error):
+                print(error)
+            }
 
-    func getAllCategories() -> [Category] {
-        let response = Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/categories").responseJSON()
-        let jsonString = response.result.value
-        
-        if jsonString == nil {
-            return []
         }
         
-        let json = JSON(jsonString!)
-        
-        var categories: [Category] = []
-        
-        for (_,data):(String, JSON) in json["data"] {
-            let id          = String(data["_id"].string!)
-            let title       = data["title"].string!
-            let image = "http://schneeblog.com/wp-content/uploads/2013/08/blank.jpg"
-            
-            let category = Category(id: id,title: title)
-            category.imageURL = image
-            
-            categories.append(category)
-        }
-        
-        return categories
     }
     
-    func getItemsByCategory(category: Category?, latitude: Double, longitude: Double) -> [Item] {
+    func getItemsFromLocation(categoryId: String?, latitude: Double, longitude: Double, radius: Int, completion: [Item] -> Void) {
+        
+        var parameters: [String : AnyObject] = [
+            "lat": latitude,
+            "long": longitude,
+            "radius": radius
+        ]
+        
+        if categoryId != nil {
+            parameters["categoryId"] = categoryId
+        }
+        
+        Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/items", parameters: parameters, encoding: .URL).responseJSON { (response) in
+            
+            var items: [Item] = []
+            
+            switch response.result {
+                
+            case .Success:
+                let jsonData = JSON(data: response.data!)
+
+                for (_, subJson) in jsonData["data"] {
+                    
+                    let id = subJson["obj"]["_id"].string!
+                    let title = subJson["obj"]["title"].string!
+                    let description = subJson["obj"]["description"].string!
+                    let userId = subJson["obj"]["owner"].string!
+                    let catId = subJson["obj"]["category"].string!
+                    let lat = subJson["obj"]["address"]["coordinates"][1].double!
+                    let long = subJson["obj"]["address"]["coordinates"][0].double!
+                    
+                    let user = User(
+                        id: userId,
+                        email: "jsdad",
+                        name: "ole",
+                        address: Address(
+                            address: "lygten 7",
+                            cityName: "kbh",
+                            postalCode: 2670,
+                            latitude: 42,
+                            longitude: 213.2
+                        )
+                    )
+                    
+                    let cat = Category(id: catId, title: "", imageURL: "")
+                    let item = Item(
+                        id: id,
+                        title: title,
+                        description: description,
+                        imageURL: "http://google.dk/logo.png",
+                        createdAt: NSDate(),
+                        owner: user,
+                        latitude: lat,
+                        longitude: long,
+                        category: cat
+                    )
+                    
+                    items.append(item)
+                }
+                
+                completion(items)
+                
+            case .Failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+
+    func getItems(category: Category?, latitude: Double, longitide: Double) -> [Item] {
+
         let response = Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/items").responseJSON()
         let jsonString = response.result.value
         
@@ -57,7 +136,21 @@ class DAO: DAOProtocol {
         
         let coords: [[Double]] = [[55.71, 12.51], [55.72, 12.52], [55.73, 12.53], [55.70, 12.52], [55.76, 12.53], [55.74, 12.52]]
         
-                
+        let address = Address(address: "Lygten 57", cityName: "Copgenhagen", postalCode: 2400, latitude: 55.51, longitude: 12.71)
+        let user = User(id: "1", email: "jonsnow@example.com", name: "Jon", address: address)
+        let category = Category(id: "abc", title: "Elektronik", imageURL: "http://placehold.it/350x150")
+        
+        for (index,data):(String, JSON) in json["data"] {
+            let id          = data["_id"].string!
+            let title       = data["title"].string!
+            let description = data["description"].string!
+            
+            
+            let item = Item(id: id, title: title, description: description, imageURL: "", createdAt: NSDate(), owner: user, latitude: coords[Int(index)!][0], longitude: coords[Int(index)!][1], category: category)
+            
+            items.append(item)
+        }
+        
         return items
     }
     
@@ -90,7 +183,8 @@ class DAO: DAOProtocol {
                     print("empty")
                 }
                 for (_, subJson) in jsonData {
-                    print(subJson)                }
+                    print(subJson)
+                }
                 
             case .Failure(let error):
                 print(error)
@@ -129,12 +223,7 @@ class DAO: DAOProtocol {
             switch response.result {
                 
             case .Success:
-                print("success")
                 let jsonData = JSON(data: response.data!)
-                print(jsonData)
-                if jsonData.isEmpty {
-                    print("empty")
-                }
             case .Failure(let error):
                 print(error)
             }
@@ -147,7 +236,6 @@ class DAO: DAOProtocol {
             let jsonString = response.result.value
             
             let jsonData = JSON(jsonString!)
-            //print(jsonData)
             
             // User
             let email = jsonData["data"]["email"].string!

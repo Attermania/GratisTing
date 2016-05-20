@@ -10,9 +10,11 @@ import Foundation
 
 protocol DAOProtocol {
     
-    func getAllCategories() -> [Category]
+    func getAllCategories(completion: [Category] -> Void)
     
-    func getItemsByCategory(category: Category?, latitude: Double, longitude: Double) -> [Item]
+    func getItems(category: Category?, latitude: Double, longitide: Double) -> [Item]
+    
+    func getItemsFromLocation(categoryId: String?, latitude: Double, longitude: Double, radius: Int, completion: [Item] -> Void)
     
     func createUser(user: User)
     

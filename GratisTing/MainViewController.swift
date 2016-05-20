@@ -11,12 +11,12 @@ import UIKit
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
-    let dao = AppDelegate.dao
+    var dao: DAOProtocol!
     var auth: Authentication!
     
     var categories: [Category] = [] {
         didSet {
-            
+            categoriesTableView.reloadData()
         }
     }
 
@@ -41,11 +41,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // We need to set Authentication here because the authentication service is not set in AppDelegate when this class is instantiated
+        // We need to set Authentication and DAO here because they are not set in AppDelegate when this class is instantiated
         auth = AppDelegate.authentication
-        
+        dao  = AppDelegate.dao
+
         categoriesTableView.delegate = self
         categoriesTableView.dataSource = self
+
+        loadCategories()
         // Do any additional setup after loading the view.
     }
 
@@ -54,6 +57,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         let controller = storyboard.instantiateViewControllerWithIdentifier("Login") as! UINavigationController
         self.presentViewController(controller, animated: true, completion: nil)
         
+    }
+    
+    func loadCategories() {
+        dao.getAllCategories { (categories: [Category]) in
+            self.categories = categories
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -75,9 +84,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let storyboard = UIStoryboard(name: "Map", bundle: nil)
-        let controller = storyboard.instantiateViewControllerWithIdentifier("Map") as! UINavigationController
-        self.presentViewController(controller, animated: true, completion: nil)
+        performSegueWithIdentifier("goToMap", sender: self)
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "goToMap" {
+            let mapVC = segue.destinationViewController as! MapViewController
+            mapVC.category = self.categories[(categoriesTableView.indexPathForSelectedRow?.row)!]
+        }
     }
     
 

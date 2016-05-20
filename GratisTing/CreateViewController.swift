@@ -26,8 +26,8 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     // MARK: - Actions
     @IBAction func createItemButton(sender: AnyObject) {
-
-        let title       = titleTextfield.text!
+        
+        let title = titleTextfield.text!
         let description = descriptionTextfield.text!
         let category    = categories[categoryPicker.selectedRowInComponent(0)]
         
@@ -65,7 +65,9 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         categoryTextField.tintColor = UIColor.clearColor()
         
         // Load categories
-        categories = dao.getAllCategories()
+        dao.getAllCategories({ (categories: [Category]) in
+            self.categories = categories
+        })
     }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

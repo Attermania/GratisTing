@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -8,7 +8,7 @@
         <!--Map View Controller-->
         <scene sceneID="pFf-UA-5w5">
             <objects>
-                <viewController id="lUR-RT-RxV" customClass="MapViewController" customModule="GratisTing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Map" id="lUR-RT-RxV" customClass="MapViewController" customModule="GratisTing" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="WQh-ZY-PcT"/>
                         <viewControllerLayoutGuide type="bottom" id="o6T-en-TC4"/>
@@ -71,11 +71,7 @@
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="b1G-gn-arP">
-                        <barButtonItem key="leftBarButtonItem" image="back" id="Ewd-hB-0YD">
-                            <connections>
-                                <action selector="backButton:" destination="lUR-RT-RxV" id="bxu-Kl-BEb"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="backBarButtonItem" title="back" id="Wl0-Fd-B9I"/>
                     </navigationItem>
                     <connections>
                         <outlet property="itemMap" destination="LSH-gm-zvC" id="bb4-Ap-D96"/>
@@ -97,7 +93,7 @@
         <!--Navigation Controller-->
         <scene sceneID="96T-k1-icE">
             <objects>
-                <navigationController storyboardIdentifier="Map" automaticallyAdjustsScrollViewInsets="NO" id="djB-uw-ZbW" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="djB-uw-ZbW" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Xnp-Cx-qZK">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -113,7 +109,4 @@
             <point key="canvasLocation" x="483" y="407"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="back" width="21" height="21"/>
-    </resources>
 </document>

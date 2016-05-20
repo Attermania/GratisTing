@@ -20,6 +20,14 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var firstLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     var lastLocation: CLLocation = CLLocation(latitude: 0, longitude: 0)
     
+    var items = [Item]() {
+        didSet {
+            addItemsToMap(items)
+        }
+    }
+    
+    var category: Category?
+    
     @IBOutlet weak var itemMap: MKMapView!
     @IBAction func listViewButton(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Browse", bundle: nil)
@@ -27,73 +35,38 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.presentViewController(controller, animated: true, completion: nil)
     }
     @IBAction func getCurrentPosition(sender: AnyObject) {
-
-        Alamofire.request(.GET, "https://httpbin.org/get", parameters: ["foo": "bar"])
-            .validate()
-            .responseJSON { response in
-                print(response.request)  // original URL request
-                print(response.response) // URL response
-                print(response.data)     // server data
-                print(response.result)   // result of response serialization
-                
-                if let JSON = response.result.value {
-                    print("JSON: \(JSON)")
-                }
-        }
-        relocation = true
+        
     }
     
     @IBAction func clickButton(sender: AnyObject) {
-//        print(self.itemMap.annotationsInMapRect(itemMap.visibleMapRect).count)
-    }
-    
-    @IBAction func backButton(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         itemMap.delegate = self
+        locationManager.delegate = self
         
-        askUserForLocation()
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        let items = dao.getItemsByCategory(nil, latitude: 1.5, longitude: 1.6)
-        
-        addItemsToMap(items)
-    }
-    
-    func askUserForLocation() {
         self.locationManager.requestAlwaysAuthorization()
-        
-        if CLLocationManager.locationServicesEnabled() {
-            //print("okay")
-            locationManager.delegate = self
-            locationManager.desiredAccuracy = kCLLocationAccuracyBest
-            itemMap.showsUserLocation = true
-            relocation = true
-            locationManager.startUpdatingLocation()
-        }
     }
     
     func addItemsToMap(items: [Item]) {
+        var annotations: [MKPointAnnotation] = []
+        
+        // Create annotations from items
         for item in items {
-            
             let itemCoordinate = CLLocationCoordinate2DMake(item.latitude, item.longitude)
-            
-//            let pin = FBAnnotation()
-//            pin.coordinate = itemCoordinate
-//            pin.title = item.title
-//            clusteringManager.addAnnotations([pin])
 
             let itemAnnotation = MKPointAnnotation()
             itemAnnotation.title = item.title
             itemAnnotation.subtitle = item.description
             itemAnnotation.coordinate = itemCoordinate
 
-            clusteringManager.addAnnotations([itemAnnotation])
+            annotations.append(itemAnnotation)
         }
+        
+        // Add annotations to clustering manager
+        clusteringManager.setAnnotations(annotations)
     }
 
 
@@ -129,40 +102,25 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             pinView?.tintColor = UIColor.greenColor()
             return pinView
         }
-        
-//        let itemImageView = UIImageView(frame: CGRectMake(0, 0, 80, 80))
-//        if (annotation is MKUserLocation) {
-//            return nil
-//        }
-//        
-//        let reuseId = "itemPin"
-//        var itemPinView = mapView.dequeueReusableAnnotationViewWithIdentifier(reuseId)
-//        if itemPinView != nil {
-//            itemPinView?.annotation = annotation
-//            
-//        } else {
-//            itemPinView = MKAnnotationView(annotation: annotation, reuseIdentifier: reuseId)
-//            itemPinView?.image = UIImage(named: "pin")
-//            itemPinView?.canShowCallout = true
-//            itemImageView.image = UIImage(named: "piano")
-//            itemImageView.contentMode = .ScaleAspectFill
-//            itemPinView?.leftCalloutAccessoryView = itemImageView
-//        }
-//        return itemPinView
     }
     
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         NSOperationQueue().addOperationWithBlock({
+            
             // Get coordinates from center of map
             let centerMap = self.itemMap.centerCoordinate
             // Create location from centermap coords.
             let currentLocation = CLLocation(latitude: centerMap.latitude, longitude: centerMap.longitude)
+            // Get the items - TODO: Find the radius visible on the map
+            self.dao.getItemsFromLocation(
+                self.category?.id,
+                latitude: currentLocation.coordinate.latitude,
+                longitude: currentLocation.coordinate.longitude,
+                radius: 1000,
+                completion: { (items: [Item]) in
+                    self.items = items
+            })
             
-            // calculate distance between
-            let distance = currentLocation.distanceFromLocation(self.lastLocation)/1609.344
-            print(distance)
-            // Update last location to current location (to be compared later)
-            self.lastLocation = currentLocation
             let mapBoundsWidth = Double(self.itemMap.bounds.size.width)
             let mapRectWidth:Double = self.itemMap.visibleMapRect.size.width
             let scale:Double = mapBoundsWidth / mapRectWidth
@@ -172,9 +130,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-        let itemLocation = view.annotation?.coordinate
-        let region = MKCoordinateRegion(center: itemLocation!, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
-        self.itemMap.setRegion(region, animated: true)
+        
+        if view is FBAnnotationClusterView {
+            let itemLocation = view.annotation?.coordinate
+            let region = MKCoordinateRegion(center: itemLocation!, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
+            self.itemMap.setRegion(region, animated: true)
+        }
         if view.gestureRecognizers == nil {
             let tapGestrue = UITapGestureRecognizer(target: self, action: #selector(MapViewController.showItem(_:)))
             tapGestrue.numberOfTapsRequired = 1
@@ -185,13 +146,26 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-        let userLocation = manager.location?.coordinate
-        let region = MKCoordinateRegion(center: userLocation!, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
-        if relocation {
-            self.itemMap.setRegion(region, animated: true)
-            relocation = false
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+        var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 55.7, longitude: 12.5), span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
+        
+        if status == .AuthorizedAlways {
+            // Set accuracy
+            locationManager.desiredAccuracy = kCLLocationAccuracyBest
+            
+            // Show the user on the map
+            itemMap.showsUserLocation = true
+            
+            // Automatically update users location on the map
+            locationManager.startUpdatingLocation()
+            
+            // Try to get the coordinates for the users location
+            if let userLocation = locationManager.location?.coordinate {
+                region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
+            }
         }
+        
+        self.itemMap.setRegion(region, animated: true)
     }
     
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {

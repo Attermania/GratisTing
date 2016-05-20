@@ -20,8 +20,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         AppDelegate.dao = DAO.instance
         AppDelegate.authentication = Authentication.instance
         
-        
-        
         return true
     }
 
