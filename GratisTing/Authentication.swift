@@ -27,7 +27,7 @@ class Authentication {
             "password": password
         ]
         
-        Alamofire.request(.POST, "http://localhost:3000/api/v1/authenticate", parameters: parameters, encoding: .JSON).responseJSON { (response) in
+        Alamofire.request(.POST, "http://gratisting.dev:3000/api/v1/authenticate", parameters: parameters, encoding: .JSON).responseJSON { (response) in
             switch response.result {
                 
             case .Success:

@@ -18,7 +18,7 @@ class DAO: DAOProtocol {
 
     
     func getAllCategories() -> [Category] {
-        let response = Alamofire.request(.GET, "http://localhost:3000/api/v1/categories").responseJSON()
+        let response = Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/categories").responseJSON()
         let jsonString = response.result.value
         
         if jsonString == nil {
@@ -45,7 +45,7 @@ class DAO: DAOProtocol {
     }
     
     func getItemsByCategory(category: Category?, latitude: Double, longitide: Double) -> [Item] {
-        let response = Alamofire.request(.GET, "http://localhost:3000/api/v1/items").responseJSON()
+        let response = Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/items").responseJSON()
         let jsonString = response.result.value
         
         // If nothing is returned, return an empty array
@@ -82,7 +82,7 @@ class DAO: DAOProtocol {
             ]
         ]
         
-        Alamofire.request(.POST, "http://localhost:3000/api/v1/users", parameters: (parameters as! [String : AnyObject]), encoding: .JSON).responseJSON { (response) in
+        Alamofire.request(.POST, "http://gratisting.dev:3000/api/v1/users", parameters: (parameters as! [String : AnyObject]), encoding: .JSON).responseJSON { (response) in
             switch response.result {
                 
             case .Success:
@@ -130,7 +130,7 @@ class DAO: DAOProtocol {
                 "categoryId": (item.category!.id)!
             ]
             
-            Alamofire.request(.POST, "http://localhost:3000/api/v1/items", parameters: (parameters as! [String : AnyObject]), encoding: .JSON, headers: headers).responseJSON { (response) in
+            Alamofire.request(.POST, "http://gratisting.dev:3000/api/v1/items", parameters: (parameters as! [String : AnyObject]), encoding: .JSON, headers: headers).responseJSON { (response) in
                 switch response.result {
                     
                 case .Success:
