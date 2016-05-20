@@ -22,7 +22,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
     @IBAction func createItem(sender: AnyObject) {
         // Check if token is set - present create view controler        
-        if auth.getToken() != "" {
+        if auth.getToken() != nil {
             let storyboard = UIStoryboard(name: "Create", bundle: nil)
             let controller = storyboard.instantiateViewControllerWithIdentifier("Create") as! UINavigationController
             self.presentViewController(controller, animated: true, completion: nil)

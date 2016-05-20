@@ -78,16 +78,18 @@ class Authentication {
     
     // Method for decoding token to resolve user ID
     func decodeTokenToUserId() -> String? {
-        // Trim to only include token
-        let stringToDecode = getToken()!.substringWithRange(Range<String.Index>(start: getToken()!.startIndex.advancedBy(4), end: getToken()!.endIndex.advancedBy(0)))
+        if let token = getToken() {
         
-        do {
-            let payload = try JWT.decode(stringToDecode, algorithm: .HS256("secret"))
-            let json = JSON(payload)
+            let stringToDecode = token.substringWithRange(Range<String.Index>(start: getToken()!.startIndex.advancedBy(4), end: getToken()!.endIndex.advancedBy(0)))
             
-            return json["_id"].string!
-        } catch {
-            print("Failed to decode JWT: \(error)")
+            do {
+                let payload = try JWT.decode(stringToDecode, algorithm: .HS256("secret"))
+                let json = JSON(payload)
+                
+                return json["_id"].string!
+            } catch {
+                print("Failed to decode JWT: \(error)")
+            }
         }
         
         return nil
