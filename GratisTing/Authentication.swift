@@ -76,6 +76,14 @@ class Authentication {
         }
     }
     
+    /**
+    Method for logging a user out. Set User object and NSUserdefault token as nil.
+    */
+    func logout() {
+        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "token")
+        self.user = nil
+    }
+    
     // Method for decoding token to resolve user ID
     func decodeTokenToUserId() -> String? {
         if let token = getToken() {

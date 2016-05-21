@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--User View Controller-->
+        <scene sceneID="u8L-vo-pmf">
+            <objects>
+                <viewController id="CI2-JR-un5" customClass="UserViewController" customModule="GratisTing" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="LQo-4k-2lW"/>
+                        <viewControllerLayoutGuide type="bottom" id="312-FF-lv7"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="8lR-Ls-fC7">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCj-Wa-JHL">
+                                <rect key="frame" x="93" y="182" width="47" height="30"/>
+                                <state key="normal" title="Log ud"/>
+                                <connections>
+                                    <action selector="logoutButton:" destination="CI2-JR-un5" eventType="touchUpInside" id="Vf2-5K-6YQ"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTX-fv-uIS">
+                                <rect key="frame" x="95" y="91" width="208" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="ryW-of-Lt1">
+                        <barButtonItem key="leftBarButtonItem" image="back" id="Qbe-kz-V5c">
+                            <connections>
+                                <action selector="navigateBackButton:" destination="CI2-JR-un5" id="mjG-ER-smD"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="userNameLabel" destination="wTX-fv-uIS" id="epX-YY-Ejx"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="mxF-pC-ihA" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1265" y="324"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="Vrf-d3-skX">
+            <objects>
+                <navigationController storyboardIdentifier="User" automaticallyAdjustsScrollViewInsets="NO" id="yew-RZ-RUu" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RAU-5b-tg5">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="CI2-JR-un5" kind="relationship" relationship="rootViewController" id="Eo6-KD-fz7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OD4-EN-dXc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="453" y="324"/>
+        </scene>
+    </scenes>
+    <resources>
+        <image name="back" width="21" height="21"/>
+    </resources>
+</document>

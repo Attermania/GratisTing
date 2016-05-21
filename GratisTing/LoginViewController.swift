@@ -20,6 +20,11 @@ class LoginViewController: UIViewController {
         auth.authenticate(emailTextfield.text!, password: passwordTextfield.text!) { (error, jwt) in
             if jwt != nil {
                 self.auth.setToken(jwt!)
+                let mainVC = self.presentingViewController?.childViewControllers[0] as! MainViewController
+                self.dismissViewControllerAnimated(true, completion: {
+                    mainVC.returnedWithAction("LoggedIn")
+                })
+
             }
             if (error != nil) {
                 print(error?.localizedDescription)
@@ -49,14 +54,8 @@ class LoginViewController: UIViewController {
     }
 
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
 
 }

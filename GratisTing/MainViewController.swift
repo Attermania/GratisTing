@@ -19,7 +19,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             categoriesTableView.reloadData()
         }
     }
-
+    
     @IBAction func createItem(sender: AnyObject) {
         // Check if token is set - present create view controler        
         if auth.getToken() != nil {
@@ -39,6 +39,24 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     @IBOutlet weak var categoriesTableView: UITableView!
     
+    /**
+     Method that should be called when returning from another viewController that has information.
+    */
+    func returnedWithAction(action: String) {
+        if action == "LoggedIn" {
+            let alertController = UIAlertController(title: "Velkommen", message: "Du er nu logget ind", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(defaultAction)
+            presentViewController(alertController, animated: true, completion: nil)
+        } else if action == "LoggedOut" {
+            let alertController = UIAlertController(title: "På gensyn", message: "Du er nu logget ud", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(defaultAction)
+            presentViewController(alertController, animated: true, completion: nil)
+        }
+        
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // We need to set Authentication and DAO here because they are not set in AppDelegate when this class is instantiated
@@ -53,8 +71,14 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
 
     @IBAction func goToLogin(sender: AnyObject) {
-        let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
-        let controller = storyboard.instantiateViewControllerWithIdentifier("Login") as! UINavigationController
+        if auth.user == nil {
+            let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
+            let controller = storyboard.instantiateViewControllerWithIdentifier("Login") as! UINavigationController
+            self.presentViewController(controller, animated: true, completion: nil)
+            return
+        }
+        let storyboard = UIStoryboard(name: "User", bundle: nil)
+        let controller = storyboard.instantiateViewControllerWithIdentifier("User") as! UINavigationController
         self.presentViewController(controller, animated: true, completion: nil)
         
     }
@@ -88,7 +112,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
         if segue.identifier == "goToMap" {
             let mapVC = segue.destinationViewController as! MapViewController
             mapVC.category = self.categories[(categoriesTableView.indexPathForSelectedRow?.row)!]
@@ -96,14 +119,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
 
-    /*
-    // MARK: - Navigation
 
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
+    
 
 }
