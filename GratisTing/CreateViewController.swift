@@ -115,7 +115,7 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
-        if let pickedImage = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             itemImageView.image = pickedImage
             itemImageView.hidden = false
         }
