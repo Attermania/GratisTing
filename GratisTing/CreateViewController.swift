@@ -41,6 +41,11 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         )
         
         self.dao.createItem(item, token: auth.getToken()!)
+        
+        let mainVC = self.presentingViewController?.childViewControllers[0] as! MainViewController
+        self.dismissViewControllerAnimated(true, completion: {
+            mainVC.returnedWithAction("ItemCreated", object: item)
+        })
     }
     
     @IBAction func backButton(sender: AnyObject) {

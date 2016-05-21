@@ -25,7 +25,7 @@ class UserViewController: UIViewController {
         auth.logout()
         let mainVC = self.presentingViewController?.childViewControllers[0] as! MainViewController
         self.dismissViewControllerAnimated(true, completion: {
-            mainVC.returnedWithAction("LoggedOut")
+            mainVC.returnedWithAction("LoggedOut", object: nil)
         })
     }
     

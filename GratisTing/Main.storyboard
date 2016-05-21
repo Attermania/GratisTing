@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XA2-gF-7bD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="XA2-gF-7bD">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -58,6 +58,7 @@
                     <connections>
                         <outlet property="categoriesTableView" destination="t70-Y4-P4v" id="HCa-TI-O96"/>
                         <segue destination="Nvh-MR-aOM" kind="show" identifier="goToMap" id="iPg-iI-7gb"/>
+                        <segue destination="OnM-gb-Kn8" kind="show" identifier="goToItem" id="2Nu-dm-bdq"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rOg-Cm-VX1" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -71,6 +72,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VYU-eg-r3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1976" y="392"/>
+        </scene>
+        <!--ShowItem-->
+        <scene sceneID="vrh-Ue-Kc8">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Show" referencedIdentifier="ShowItem" id="OnM-gb-Kn8" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="YXH-rX-UT6" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1976" y="482"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="gmH-qS-NUg">

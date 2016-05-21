@@ -21,6 +21,7 @@ class ShowViewController: UIViewController {
     @IBOutlet weak var itemImage: UIImageView!
     
     override func viewDidLoad() {
+        self.title = item?.title
         super.viewDidLoad()
         print("view did load")
         self.title = item?.title

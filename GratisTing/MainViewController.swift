@@ -14,6 +14,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     var dao: DAOProtocol!
     var auth: Authentication!
     
+    var itemToPassOn: Item?
+    
     var categories: [Category] = [] {
         didSet {
             categoriesTableView.reloadData()
@@ -42,17 +44,24 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     /**
      Method that should be called when returning from another viewController that has information.
     */
-    func returnedWithAction(action: String) {
-        if action == "LoggedIn" {
+    func returnedWithAction(action: String, object: AnyObject?) {
+        switch action {
+        case "LoggedIn":
             let alertController = UIAlertController(title: "Velkommen", message: "Du er nu logget ind", preferredStyle: .Alert)
             let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(defaultAction)
             presentViewController(alertController, animated: true, completion: nil)
-        } else if action == "LoggedOut" {
+        case "LoggedOut":
             let alertController = UIAlertController(title: "På gensyn", message: "Du er nu logget ud", preferredStyle: .Alert)
             let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
             alertController.addAction(defaultAction)
             presentViewController(alertController, animated: true, completion: nil)
+        case "ItemCreated":
+            let item = object as! Item
+            itemToPassOn = item
+            performSegueWithIdentifier("goToItem", sender: self)
+        default:
+            return
         }
         
     }
@@ -115,6 +124,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         if segue.identifier == "goToMap" {
             let mapVC = segue.destinationViewController as! MapViewController
             mapVC.category = self.categories[(categoriesTableView.indexPathForSelectedRow?.row)!]
+        } else if segue.identifier == "goToItem" {
+            let showItemVC = segue.destinationViewController as! ShowViewController
+            showItemVC.item = itemToPassOn
+            itemToPassOn = nil
         }
     }
     

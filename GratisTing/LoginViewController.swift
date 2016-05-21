@@ -24,7 +24,7 @@ class LoginViewController: UIViewController {
                 self.auth.setToken(jwt!)
                 let mainVC = self.presentingViewController?.childViewControllers[0] as! MainViewController
                 self.dismissViewControllerAnimated(true, completion: {
-                    mainVC.returnedWithAction("LoggedIn")
+                    mainVC.returnedWithAction("LoggedIn", object: nil)
                 })
 
             }
