@@ -20,16 +20,22 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var items: [Item] = [] {
         didSet {
-            
+            itemTableView.reloadData()
         }
     }
+    
+    var category: Category?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         itemTableView.dataSource = self
         itemTableView.delegate = self
+        
+        dao.getItems(category) { (items: [Item]) in
+            self.items = items
+        }
 
     }
 

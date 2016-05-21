@@ -118,40 +118,104 @@ class DAO: DAOProtocol {
         }
     }
     
+    
 
-    func getItems(category: Category?, latitude: Double, longitide: Double) -> [Item] {
-
-        let response = Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/items").responseJSON()
-        let jsonString = response.result.value
-        
-        // If nothing is returned, return an empty array
-        if(jsonString == nil) {
-            return []
-        }
-        
-        // Jsonify
-        let json = JSON(jsonString!)
+    func getItems(category: Category?, completion: [Item] -> Void) {
         
         var items: [Item] = []
-        
-        let coords: [[Double]] = [[55.71, 12.51], [55.72, 12.52], [55.73, 12.53], [55.70, 12.52], [55.76, 12.53], [55.74, 12.52]]
-        
-        let address = Address(address: "Lygten 57", cityName: "Copgenhagen", postalCode: 2400, latitude: 55.51, longitude: 12.71)
-        let user = User(id: "1", email: "jonsnow@example.com", name: "Jon", address: address)
-        let category = Category(id: "abc", title: "Elektronik", imageURL: "http://placehold.it/350x150")
-        
-        for (index,data):(String, JSON) in json["data"] {
-            let id          = data["_id"].string!
-            let title       = data["title"].string!
-            let description = data["description"].string!
-            
-            
-            let item = Item(id: id, title: title, description: description, imageURL: "", createdAt: NSDate(), owner: user, latitude: coords[Int(index)!][0], longitude: coords[Int(index)!][1], category: category)
-            
-            items.append(item)
+
+        Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/items").responseJSON { (response) in
+            switch response.result {
+            case .Success:
+                print("success")
+                let jsonData = JSON(data: response.data!)
+                print(jsonData["success"].bool!)
+                if jsonData.isEmpty {
+                    print("empty")
+                }
+                
+                if let subJson = jsonData["success"].bool {
+                    for (_, itemJson) in jsonData["data"] {
+                        
+                        let itemId = itemJson["_id"].string!
+                        let ownerId = itemJson["owner"].string!
+                        let categoryId = itemJson["category"].string!
+                        let formattedAddress = itemJson["address"]["address"].string!
+                        let cityName = itemJson["address"]["cityName"].string!
+                        let postalCode = itemJson["address"]["postalCode"].int!
+                        let lat = itemJson["address"]["coordinates"][1].double!
+                        let long = itemJson["address"]["coordinates"][0].double!
+                        let itemTitle = itemJson["title"].string!
+                        let itemDescription = itemJson["description"].string!
+                        
+                        let user = User(
+                            id: ownerId,
+                            email: "jsdad",
+                            name: "ole",
+                            address: Address(
+                                address: formattedAddress,
+                                cityName: cityName,
+                                postalCode: postalCode,
+                                latitude: lat,
+                                longitude: long
+                            )
+                        )
+                        
+                        let category = Category(id: categoryId, title: "min hest", imageURL: "http://placehold.it/350x150")
+                        
+                        let item = Item(
+                            id: itemId,
+                            title: itemTitle,
+                            description: itemDescription,
+                            imageURL: "http://placehold.it/350x150",
+                            createdAt: NSDate(),
+                            owner: user,
+                            latitude: lat,
+                            longitude: long,
+                            category: category
+                        )
+                        
+                        items.append(item)
+                        
+                    }
+                    
+                    completion(items)
+                }
+                
+            case .Failure(let error):
+                print(error)
+            }
         }
-        
-        return items
+//        let jsonString = response.result.value
+//        
+//        // If nothing is returned, return an empty array
+//        if(jsonString == nil) {
+//            return []
+//        }
+//        
+//        // Jsonify
+//        let json = JSON(jsonString!)
+//        
+//        var items: [Item] = []
+//        
+//        let coords: [[Double]] = [[55.71, 12.51], [55.72, 12.52], [55.73, 12.53], [55.70, 12.52], [55.76, 12.53], [55.74, 12.52]]
+//        
+//        let address = Address(address: "Lygten 57", cityName: "Copgenhagen", postalCode: 2400, latitude: 55.51, longitude: 12.71)
+//        let user = User(id: "1", email: "jonsnow@example.com", name: "Jon", address: address)
+//        let category = Category(id: "abc", title: "Elektronik", imageURL: "http://placehold.it/350x150")
+//        
+//        for (index,data):(String, JSON) in json["data"] {
+//            let id          = data["_id"].string!
+//            let title       = data["title"].string!
+//            let description = data["description"].string!
+//            
+//            
+//            let item = Item(id: id, title: title, description: description, imageURL: "", createdAt: NSDate(), owner: user, latitude: coords[Int(index)!][0], longitude: coords[Int(index)!][1], category: category)
+//            
+//            items.append(item)
+//        }
+//        
+//        return items
     }
     
     // Function for persisting a user

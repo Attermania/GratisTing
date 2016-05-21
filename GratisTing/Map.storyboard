@@ -21,7 +21,7 @@
                                 <rect key="frame" x="560" y="560" width="30" height="30"/>
                                 <state key="normal" title="List"/>
                                 <connections>
-                                    <action selector="listViewButton:" destination="lUR-RT-RxV" eventType="touchUpInside" id="Jzr-5u-3WN"/>
+                                    <segue destination="ptu-nd-BKj" kind="show" identifier="goToListView" id="BHQ-e2-SJB"/>
                                 </connections>
                             </button>
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LSH-gm-zvC">
@@ -70,9 +70,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="b1G-gn-arP">
-                        <barButtonItem key="backBarButtonItem" title="back" id="Wl0-Fd-B9I"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="b1G-gn-arP"/>
                     <connections>
                         <outlet property="itemMap" destination="LSH-gm-zvC" id="bb4-Ap-D96"/>
                         <segue destination="LVO-Sz-naG" kind="show" identifier="showItem" id="LS7-Tz-eWt"/>
@@ -89,6 +87,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fMa-oi-9bB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1790.5" y="407"/>
+        </scene>
+        <!--ItemListView-->
+        <scene sceneID="tmx-qL-nqq">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Browse" referencedIdentifier="ItemListView" id="ptu-nd-BKj" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="OWf-2q-xQ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1790.5" y="462"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="96T-k1-icE">

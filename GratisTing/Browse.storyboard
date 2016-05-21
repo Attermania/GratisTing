@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -9,7 +9,7 @@
         <!--Item List View Controller-->
         <scene sceneID="kuv-OJ-2vV">
             <objects>
-                <viewController id="1F3-1t-MlX" customClass="ItemListViewController" customModule="GratisTing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ItemListView" id="1F3-1t-MlX" customClass="ItemListViewController" customModule="GratisTing" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5kl-rY-zVN"/>
                         <viewControllerLayoutGuide type="bottom" id="mjc-eN-jAT"/>
@@ -26,7 +26,7 @@
                                         <rect key="frame" x="0.0" y="92" width="560" height="88"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6E7-k3-U2V" id="5Py-Fv-xEg">
-                                            <rect key="frame" x="0.0" y="0.0" width="560" height="87.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="560" height="87"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="LZa-3s-kH8">
@@ -70,13 +70,7 @@
                             <constraint firstItem="32Z-Ww-wek" firstAttribute="leading" secondItem="4sU-nN-csp" secondAttribute="leadingMargin" id="vCX-zw-mfs"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="RmD-be-4qH">
-                        <barButtonItem key="leftBarButtonItem" image="back" id="fUY-pY-6Ha">
-                            <connections>
-                                <action selector="navigateToMapButton:" destination="1F3-1t-MlX" id="Fgg-Lf-j1Q"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="RmD-be-4qH"/>
                     <connections>
                         <outlet property="itemTableView" destination="32Z-Ww-wek" id="rlg-Pe-X0I"/>
                     </connections>
@@ -112,7 +106,4 @@
             <point key="canvasLocation" x="541" y="332"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="back" width="21" height="21"/>
-    </resources>
 </document>

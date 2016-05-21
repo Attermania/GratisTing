@@ -12,7 +12,7 @@ protocol DAOProtocol {
     
     func getAllCategories(completion: [Category] -> Void)
     
-    func getItems(category: Category?, latitude: Double, longitide: Double) -> [Item]
+    func getItems(category: Category?, completion: [Item] -> Void)
     
     func getItemsFromLocation(categoryId: String?, latitude: Double, longitude: Double, radius: Int, completion: [Item] -> Void)
     
