@@ -103,6 +103,7 @@ class DAO: DAOProtocol {
                 let catId = subJson["obj"]["category"].string!
                 let lat = subJson["obj"]["address"]["coordinates"][1].double!
                 let long = subJson["obj"]["address"]["coordinates"][0].double!
+                let distance = subJson["dis"].double!
                 
                 // Instantiate fake user - TODO: parse real user
                 let user = User(
@@ -131,7 +132,8 @@ class DAO: DAOProtocol {
                     owner: user,
                     latitude: lat,
                     longitude: long,
-                    category: cat
+                    category: cat,
+                    distance: distance
                 )
                 
                 // Append item to list of items

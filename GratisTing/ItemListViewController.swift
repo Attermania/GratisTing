@@ -58,10 +58,13 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         itemTableView.dataSource = self
         itemTableView.delegate = self
-
+        itemTableView.reloadData()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         fetchItems()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -81,7 +84,7 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.titleLabel.text = items[indexPath.row].title
         cell.descriptionLabel.text = items[indexPath.row].description
         if hasLocation! {
-            cell.distanceLabel.text = "1.5 Km"
+            cell.distanceLabel.text = String(items[indexPath.row].distance)
         }
         
         return cell
@@ -98,5 +101,4 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
             showItemViewController.item = items[(itemTableView.indexPathForSelectedRow?.row)!]
         }
     }
-    
 }

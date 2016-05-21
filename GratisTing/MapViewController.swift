@@ -17,8 +17,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let clusteringManager = FBClusteringManager()
     let locationManager = CLLocationManager()
     var relocation = false
-    var firstLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
-    var lastLocation: CLLocation = CLLocation(latitude: 0, longitude: 0)
+    var lat: Double = 0
+    var long: Double = 0
     
     var item: Item?
     
@@ -107,6 +107,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             return pinView
         }
+    }
+    
+    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
+        lat = (userLocation.location?.coordinate.latitude)!
+        long = (userLocation.location?.coordinate.longitude)!
     }
     
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
@@ -203,8 +208,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             
             if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
                 listViewItemController.hasLocation = true
-                listViewItemController.lat = locationManager.location?.coordinate.latitude
-                listViewItemController.long = locationManager.location?.coordinate.longitude
+                listViewItemController.lat = self.lat
+                listViewItemController.long = self.long
+                print(locationManager.location?.coordinate.latitude)
                 return
             }
 
