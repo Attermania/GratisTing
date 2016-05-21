@@ -63,6 +63,14 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 
     }
     
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        print(textField)
+        if textField == categoryTextField {
+            self.pickerView(self.categoryPicker, didSelectRow: 0, inComponent: 0)
+        }
+        return true
+    }
+    
     @IBAction func backButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
@@ -127,14 +135,8 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    func didMediaFromSource(sourceType: UIImagePickerControllerSourceType) {
-        
-        let mediaTypes = UIImagePickerController.availableMediaTypesForSourceType(sourceType)
-        imagePicker.mediaTypes = mediaTypes!
-        imagePicker.sourceType = sourceType
-        imagePicker.allowsEditing = true
-        presentViewController(imagePicker, animated: true, completion: nil)
-        
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        self.view.endEditing(true)
     }
     
 }
