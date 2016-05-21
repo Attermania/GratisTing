@@ -14,6 +14,8 @@ class RegisterViewController: UIViewController {
     
     let dao = AppDelegate.dao
     
+    var userCreated = false
+    
     @IBOutlet weak var addressTextfield: AddressSearchTextField!
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var emailTextfield: UITextField!
@@ -28,6 +30,9 @@ class RegisterViewController: UIViewController {
         // Add validation -------- !!!
         let user = User(email: emailTextfield.text!, password: passwordTextfield.text!, name: nameTextfield.text!, address: selectedAddress!)
         dao.createUser(user)
+        
+        // Sæt denne til true hvis validering godkender den nye bruger.
+        userCreated = true
         
     }
     
@@ -123,14 +128,12 @@ class RegisterViewController: UIViewController {
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        let destVC = segue.destinationViewController as! LoginViewController
+        destVC.userCreatedInRegistration = userCreated
     }
-    */
+
 
 }
