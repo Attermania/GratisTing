@@ -34,8 +34,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let controller = storyboard.instantiateViewControllerWithIdentifier("BrowseNavigator") as! UINavigationController
         self.presentViewController(controller, animated: true, completion: nil)
     }
+    // TODO: hej
     @IBAction func getCurrentPosition(sender: AnyObject) {
-        
+        if CLLocationManager.authorizationStatus() == .Denied {
+            UIApplication.sharedApplication().openURL(NSURL(string:UIApplicationOpenSettingsURLString)!)
+        }
     }
     
     @IBAction func clickButton(sender: AnyObject) {
@@ -163,6 +166,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             if let userLocation = locationManager.location?.coordinate {
                 region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
             }
+
         }
         
         self.itemMap.setRegion(region, animated: true)
@@ -184,8 +188,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         if segue.identifier == "goToListView" {
             let listViewItemController = segue.destinationViewController as! ItemListViewController
-            print(self.category?.title)
             listViewItemController.category = self.category
+            
+            if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
+                listViewItemController.hasLocation = true
+                listViewItemController.lat = locationManager.location?.coordinate.latitude
+                listViewItemController.long = locationManager.location?.coordinate.longitude
+                return
+            }
+
+            listViewItemController.hasLocation = false
+
         }
     }
     

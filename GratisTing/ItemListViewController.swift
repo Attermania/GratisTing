@@ -9,6 +9,10 @@
 import UIKit
 
 class ItemListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
+    
+    var hasLocation: Bool!
+    var lat: Double?
+    var long: Double?
 
     @IBOutlet weak var itemTableView: UITableView!
     
@@ -26,17 +30,25 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     var category: Category?
     
+    func fetchItems() {
+        // user has allowed to use his/her location
+        if hasLocation! {
+            dao.getItemsFromLocation(category?.id, latitude: lat!, longitude: long!, radius: 1000, completion: { (items: [Item]) in
+                self.items = items
+            })
+            return
+        }
+        // user has not allowed to use his/her location
+        dao.getItems(category) { (items: [Item]) in
+            self.items = items
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         itemTableView.dataSource = self
         itemTableView.delegate = self
-        print("get category \(category?.title)")
-        dao.getItems(category) { (items: [Item]) in
-            self.items = items
-            print(items.first?.category?.title)
-        }
+        fetchItems()
 
     }
 
@@ -58,7 +70,9 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         //cell.textLabel?.text = items[indexPath.row].title
         cell.titleLabel.text = items[indexPath.row].title
         cell.descriptionLabel.text = items[indexPath.row].description
-        cell.distanceLabel.text = "1.5 Km"
+        if hasLocation! {
+            cell.distanceLabel.text = "1.5 Km"
+        }
         
         return cell
 
