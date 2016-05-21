@@ -15,114 +15,135 @@ class DAO: DAOProtocol {
     
     static let instance = DAO()
     
-    func getAllCategories(completion: [Category] -> Void) {
+    // MARK: Get all categories
+    func getAllCategories(completion: (categories: [Category]?, error: NSError?) -> Void) {
         
         Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/categories").responseJSON { (response) in
+
+            // Something went wrong, abort
+            if response.result.isFailure {
+                return
+            }
             
             var categories: [Category] = []
+            let jsonData = JSON(data: response.data!)
             
-            switch response.result {
-                
-            case .Success:
-                print("success")
-                let jsonData = JSON(data: response.data!)
-                if jsonData.isEmpty {
-                    print("empty response")
-                }
-                for (_, subJson) in jsonData["data"] {
-                    print(subJson)
-                    let id = subJson["_id"].string!
-                    let title = subJson["title"].string!
-                    let image = subJson["image"].string!
-                    
-                    let category = Category(id: id, title: title, imageURL: image)
-                    
-                    categories.append(category)
-                }
-                
-                completion(categories)
-                
-            case .Failure(let error):
-                print(error)
+            // API responded with failure
+            if jsonData["success"].bool! == false {
+                let error = NSError(domain: jsonData["error"].string!, code: 0, userInfo: nil)
+                completion(categories: nil, error: error)
+                return
             }
-
+            
+            // Parse json
+            for (_, subJson) in jsonData["data"] {
+                
+                // Get data
+                let id = subJson["_id"].string!
+                let title = subJson["title"].string!
+                let image = subJson["image"].string!
+                
+                // Instantiate category
+                let category = Category(id: id, title: title, imageURL: image)
+                
+                // Append to list of categories
+                categories.append(category)
+                
+            }
+            
+            // Call completion handler
+            completion(categories: categories, error: nil)
+            
         }
         
     }
     
-    func getItemsFromLocation(categoryId: String?, latitude: Double, longitude: Double, radius: Int, completion: [Item] -> Void) {
+    // MARK: Get items from a location
+    func getItemsFromLocation(categoryId: String?, latitude: Double, longitude: Double, radius: Int, completion: (items: [Item]?, error: NSError?) -> Void) {
         
+        // Prepare url query string parameters
         var parameters: [String : AnyObject] = [
             "lat": latitude,
             "long": longitude,
             "radius": radius
         ]
         
+        // If a specfic category is requested add it to the query string parameters
         if categoryId != nil {
             parameters["categoryId"] = categoryId
         }
         
         Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/items", parameters: parameters, encoding: .URL).responseJSON { (response) in
             
-            var items: [Item] = []
-            
-            switch response.result {
-                
-            case .Success:
-                let jsonData = JSON(data: response.data!)
-
-                for (_, subJson) in jsonData["data"] {
-                    
-                    let id = subJson["obj"]["_id"].string!
-                    let title = subJson["obj"]["title"].string!
-                    let description = subJson["obj"]["description"].string!
-                    let userId = subJson["obj"]["owner"].string!
-                    let catId = subJson["obj"]["category"].string!
-                    let lat = subJson["obj"]["address"]["coordinates"][1].double!
-                    let long = subJson["obj"]["address"]["coordinates"][0].double!
-                    
-                    let user = User(
-                        id: userId,
-                        email: "jsdad",
-                        name: "ole",
-                        address: Address(
-                            address: "lygten 7",
-                            cityName: "kbh",
-                            postalCode: 2670,
-                            latitude: 42,
-                            longitude: 213.2
-                        )
-                    )
-                    
-                    let cat = Category(id: catId, title: "", imageURL: "")
-                    let item = Item(
-                        id: id,
-                        title: title,
-                        description: description,
-                        imageURL: "http://google.dk/logo.png",
-                        createdAt: NSDate(),
-                        owner: user,
-                        latitude: lat,
-                        longitude: long,
-                        category: cat
-                    )
-                    
-                    items.append(item)
-                }
-                
-                completion(items)
-                
-            case .Failure(let error):
-                print(error)
+            // Something went wrong, abort
+            if response.result.isFailure {
+                return
             }
+            
+            var items: [Item] = []
+            let jsonData = JSON(data: response.data!)
+            
+            // API responded with failure
+            if jsonData["success"].bool! == false {
+                let error = NSError(domain: jsonData["error"].string!, code: 0, userInfo: nil)
+                completion(items: nil, error: error)
+                return
+            }
+            
+            // Parse json
+            for (_, subJson) in jsonData["data"] {
+                
+                // Get data
+                let id = subJson["obj"]["_id"].string!
+                let title = subJson["obj"]["title"].string!
+                let description = subJson["obj"]["description"].string!
+                let userId = subJson["obj"]["owner"].string!
+                let catId = subJson["obj"]["category"].string!
+                let lat = subJson["obj"]["address"]["coordinates"][1].double!
+                let long = subJson["obj"]["address"]["coordinates"][0].double!
+                
+                // Instantiate fake user - TODO: parse real user
+                let user = User(
+                    id: userId,
+                    email: "jsdad",
+                    name: "ole",
+                    address: Address(
+                        address: "lygten 7",
+                        cityName: "kbh",
+                        postalCode: 2670,
+                        latitude: 42,
+                        longitude: 213.2
+                    )
+                )
+                
+                // Instantiate fake category . TODO: parse real category
+                let cat = Category(id: catId, title: "", imageURL: "")
+                
+                // Instantiate item
+                let item = Item(
+                    id: id,
+                    title: title,
+                    description: description,
+                    imageURL: "http://google.dk/logo.png",
+                    createdAt: NSDate(),
+                    owner: user,
+                    latitude: lat,
+                    longitude: long,
+                    category: cat
+                )
+                
+                // Append item to list of items
+                items.append(item)
+            }
+            
+            // Call the completion handler
+            completion(items: items, error: nil)
+            
         }
     }
     
-    
-
-    func getItems(category: Category?, completion: [Item] -> Void) {
-        
-        var items: [Item] = []
+    // MARK: Get items ordered by creation time
+    func getItems(category: Category?, completion: (items: [Item]?, error: NSError?) -> Void) {
         
         var parameters: [String : AnyObject] = [:]
         
@@ -131,101 +152,73 @@ class DAO: DAOProtocol {
         }
 
         Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/items", parameters: parameters, encoding: .URL).responseJSON { (response) in
-            switch response.result {
-            case .Success:
-                print("success")
-                let jsonData = JSON(data: response.data!)
-                print(jsonData["success"].bool!)
-                if jsonData.isEmpty {
-                    print("empty")
-                }
-                
-                if let subJson = jsonData["success"].bool {
-                    for (_, itemJson) in jsonData["data"] {
-                        
-                        let itemId = itemJson["_id"].string!
-                        let ownerId = itemJson["owner"].string!
-                        let categoryId = itemJson["category"].string!
-                        let formattedAddress = itemJson["address"]["address"].string!
-                        let cityName = itemJson["address"]["cityName"].string!
-                        let postalCode = itemJson["address"]["postalCode"].int!
-                        let lat = itemJson["address"]["coordinates"][1].double!
-                        let long = itemJson["address"]["coordinates"][0].double!
-                        let itemTitle = itemJson["title"].string!
-                        let itemDescription = itemJson["description"].string!
-                        
-                        let user = User(
-                            id: ownerId,
-                            email: "jsdad",
-                            name: "ole",
-                            address: Address(
-                                address: formattedAddress,
-                                cityName: cityName,
-                                postalCode: postalCode,
-                                latitude: lat,
-                                longitude: long
-                            )
-                        )
-                        
-                        let category = Category(id: categoryId, title: "min hest", imageURL: "http://placehold.it/350x150")
-                        
-                        let item = Item(
-                            id: itemId,
-                            title: itemTitle,
-                            description: itemDescription,
-                            imageURL: "http://placehold.it/350x150",
-                            createdAt: NSDate(),
-                            owner: user,
-                            latitude: lat,
-                            longitude: long,
-                            category: category
-                        )
-                        
-                        items.append(item)
-                        
-                    }
-                    
-                    completion(items)
-                }
-                
-            case .Failure(let error):
-                print(error)
+            
+            // Something went wrong, abort
+            if response.result.isFailure {
+                return
             }
+            
+            var items: [Item] = []
+            let jsonData = JSON(data: response.data!)
+            
+            // API responded with failure
+            if jsonData["success"].bool! == false {
+                let error = NSError(domain: jsonData["error"].string!, code: 0, userInfo: nil)
+                completion(items: nil, error: error)
+                return
+            }
+            
+            for (_, itemJson) in jsonData["data"] {
+                
+                let itemId = itemJson["_id"].string!
+                let ownerId = itemJson["owner"].string!
+                let categoryId = itemJson["category"].string!
+                let formattedAddress = itemJson["address"]["address"].string!
+                let cityName = itemJson["address"]["cityName"].string!
+                let postalCode = itemJson["address"]["postalCode"].int!
+                let lat = itemJson["address"]["coordinates"][1].double!
+                let long = itemJson["address"]["coordinates"][0].double!
+                let itemTitle = itemJson["title"].string!
+                let itemDescription = itemJson["description"].string!
+                
+                let user = User(
+                    id: ownerId,
+                    email: "jsdad",
+                    name: "ole",
+                    address: Address(
+                        address: formattedAddress,
+                        cityName: cityName,
+                        postalCode: postalCode,
+                        latitude: lat,
+                        longitude: long
+                    )
+                )
+                
+                let category = Category(id: categoryId, title: "min hest", imageURL: "http://placehold.it/350x150")
+                
+                let item = Item(
+                    id: itemId,
+                    title: itemTitle,
+                    description: itemDescription,
+                    imageURL: "http://placehold.it/350x150",
+                    createdAt: NSDate(),
+                    owner: user,
+                    latitude: lat,
+                    longitude: long,
+                    category: category
+                )
+                
+                items.append(item)
+            }
+            
+            completion(items: items, error: nil)
+
         }
-//        let jsonString = response.result.value
-//        
-//        // If nothing is returned, return an empty array
-//        if(jsonString == nil) {
-//            return []
-//        }
-//        
-//        // Jsonify
-//        let json = JSON(jsonString!)
-//        
-//        var items: [Item] = []
-//        
-//        let coords: [[Double]] = [[55.71, 12.51], [55.72, 12.52], [55.73, 12.53], [55.70, 12.52], [55.76, 12.53], [55.74, 12.52]]
-//        
-//        let address = Address(address: "Lygten 57", cityName: "Copgenhagen", postalCode: 2400, latitude: 55.51, longitude: 12.71)
-//        let user = User(id: "1", email: "jonsnow@example.com", name: "Jon", address: address)
-//        let category = Category(id: "abc", title: "Elektronik", imageURL: "http://placehold.it/350x150")
-//        
-//        for (index,data):(String, JSON) in json["data"] {
-//            let id          = data["_id"].string!
-//            let title       = data["title"].string!
-//            let description = data["description"].string!
-//            
-//            
-//            let item = Item(id: id, title: title, description: description, imageURL: "", createdAt: NSDate(), owner: user, latitude: coords[Int(index)!][0], longitude: coords[Int(index)!][1], category: category)
-//            
-//            items.append(item)
-//        }
-//        
-//        return items
+
     }
     
-    // Function for persisting a user
-    func createUser(user: User) {
+    // MARK: Create user
+    func createUser(user: User, completion: (user: User?, error: NSError?) -> Void) {
         
         let parameters = [
             "email": user.email,
@@ -243,29 +236,42 @@ class DAO: DAOProtocol {
         ]
         
         Alamofire.request(.POST, "http://gratisting.dev:3000/api/v1/users", parameters: (parameters as! [String : AnyObject]), encoding: .JSON).responseJSON { (response) in
-            switch response.result {
-                
-            case .Success:
-                print("success")
-                let jsonData = JSON(data: response.data!)
-                print(jsonData)
-                if jsonData.isEmpty {
-                    print("empty")
-                }
-                for (_, subJson) in jsonData {
-                    print(subJson)
-                }
-                
-            case .Failure(let error):
-                print(error)
+            // Something went wrong, abort
+            if response.result.isFailure {
+                return
             }
+            
+            let jsonData = JSON(data: response.data!)
+            
+            // API responded with failure
+            if jsonData["success"].bool! == false {
+                let error = NSError(domain: jsonData["error"].string!, code: 0, userInfo: nil)
+                completion(user: nil, error: error)
+                return
+            }
+
+            // User
+            let userId = jsonData["data"]["_id"].string!
+            let email = jsonData["data"]["email"].string!
+            let name = jsonData["data"]["name"].string
+            
+            // Address
+            let address = jsonData["data"]["address"]["address"].string
+            let cityName = jsonData["data"]["address"]["cityName"].string
+            let postalCode = jsonData["data"]["address"]["postalCode"].int
+            let long = jsonData["data"]["address"]["coordinates"][0].double!
+            let lat = jsonData["data"]["address"]["coordinates"][1].double!
+            let completeAddress = Address(address: address!, cityName: cityName!, postalCode: postalCode!, latitude: lat, longitude: long)
+            
+            let user = User(id: userId, email: email, name: name!, address: completeAddress)
+            
+            completion(user: user, error: nil)
+
         }
     }
     
-    /**
-     Method for creating item. (User authentication required to call).
-     */
-    func createItem(item: Item, token: String) {
+    // MARK: Create item
+    func createItem(item: Item, token: String, completion: (item: Item?, error: NSError?) -> Void) {
         
         let headers = [
             "Authorization": token,
@@ -290,22 +296,82 @@ class DAO: DAOProtocol {
         ]
         
         Alamofire.request(.POST, "http://localhost:3000/api/v1/items", parameters: (parameters as! [String : AnyObject]), encoding: .JSON, headers: headers).responseJSON { (response) in
-            switch response.result {
-                
-            case .Success:
-                let jsonData = JSON(data: response.data!)
-            case .Failure(let error):
-                print(error)
+            // Something went wrong, abort
+            if response.result.isFailure {
+                return
             }
+            
+            let jsonData = JSON(data: response.data!)
+            
+            // API responded with failure
+            if jsonData["success"].bool! == false {
+                let error = NSError(domain: jsonData["error"].string!, code: 0, userInfo: nil)
+                completion(item: nil, error: error)
+                return
+            }
+            
+            let itemJson = jsonData["data"]
+            let itemId = itemJson["_id"].string!
+            let ownerId = itemJson["owner"].string!
+            let categoryId = itemJson["category"].string!
+            let formattedAddress = itemJson["address"]["address"].string!
+            let cityName = itemJson["address"]["cityName"].string!
+            let postalCode = itemJson["address"]["postalCode"].int!
+            let lat = itemJson["address"]["coordinates"][1].double!
+            let long = itemJson["address"]["coordinates"][0].double!
+            let itemTitle = itemJson["title"].string!
+            let itemDescription = itemJson["description"].string!
+            
+            // Instantiate fake category. TODO: parse real category
+            let category = Category(id: categoryId, title: "", imageURL: "")
+            
+            // Instantiate fake user. TODO: parse real user
+            let user = User(
+                id: ownerId,
+                email: "jsdad",
+                name: "ole",
+                address: Address(
+                    address: formattedAddress,
+                    cityName: cityName,
+                    postalCode: postalCode,
+                    latitude: lat,
+                    longitude: long
+                )
+            )
+            
+            let item = Item(
+                id: itemId,
+                title: itemTitle,
+                description: itemDescription,
+                imageURL: "http://placehold.it/350x150",
+                createdAt: NSDate(),
+                owner: user,
+                latitude: lat,
+                longitude: long,
+                category: category
+            )
+            
+            completion(item: item, error: nil)
         }
     }
     
-    func getUser(userId: String, completion: (error: NSError?, user: User?) -> ()) {
+    func getUser(userId: String, completion: (user: User?, error: NSError?) -> ()) {
         
         Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/users/" + userId).responseJSON { (response) in
-            let jsonString = response.result.value
             
-            let jsonData = JSON(jsonString!)
+            // Something went wrong, abort
+            if response.result.isFailure {
+                return
+            }
+            
+            let jsonData = JSON(data: response.data!)
+            
+            // API responded with failure
+            if jsonData["success"].bool! == false {
+                let error = NSError(domain: jsonData["error"].string!, code: 0, userInfo: nil)
+                completion(user: nil, error: error)
+                return
+            }
             
             // User
             let email = jsonData["data"]["email"].string!
@@ -321,7 +387,7 @@ class DAO: DAOProtocol {
             
             let user = User(id: userId, email: email, name: name!, address: completeAddress)
             
-            completion(error: nil, user: user)
+            completion(user: user, error: nil)
         }
         
     }

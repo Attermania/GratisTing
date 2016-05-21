@@ -120,8 +120,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 latitude: currentLocation.coordinate.latitude,
                 longitude: currentLocation.coordinate.longitude,
                 radius: 1000,
-                completion: { (items: [Item]) in
-                    self.items = items
+                completion: { (items: [Item]?, error: NSError?) in
+                    if let _ = error {
+                        return
+                    }
+                    
+                    self.items = items!
             })
             
             let mapBoundsWidth = Double(self.itemMap.bounds.size.width)

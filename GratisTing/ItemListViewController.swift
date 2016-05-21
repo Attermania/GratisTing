@@ -33,14 +33,24 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     func fetchItems() {
         // user has allowed to use his/her location
         if hasLocation! {
-            dao.getItemsFromLocation(category?.id, latitude: lat!, longitude: long!, radius: 1000, completion: { (items: [Item]) in
-                self.items = items
+            dao.getItemsFromLocation(category?.id, latitude: lat!, longitude: long!, radius: 1000, completion: { (items: [Item]?, error: NSError?) in
+                if let _ = error {
+                    // An error was returned
+                    return
+                }
+                
+                self.items = items!
             })
             return
         }
         // user has not allowed to use his/her location
-        dao.getItems(category) { (items: [Item]) in
-            self.items = items
+        dao.getItems(category) { (items: [Item]?, error: NSError?) in
+            if let _ = error {
+                // An error was returned
+                return
+            }
+            
+            self.items = items!
         }
     }
     
@@ -48,8 +58,8 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         itemTableView.dataSource = self
         itemTableView.delegate = self
-        fetchItems()
 
+        fetchItems()
     }
 
     override func didReceiveMemoryWarning() {

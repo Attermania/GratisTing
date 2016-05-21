@@ -93,8 +93,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func loadCategories() {
-        dao.getAllCategories { (categories: [Category]) in
-            self.categories = categories
+        dao.getAllCategories { (categories: [Category]?, error: NSError?) in
+            if let _ = error {
+                return
+            }
+            
+            self.categories = categories!
         }
     }
     override func didReceiveMemoryWarning() {

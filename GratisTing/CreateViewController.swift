@@ -40,12 +40,23 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             category: category
         )
         
-        self.dao.createItem(item, token: auth.getToken()!)
+        self.dao.createItem(item, token: auth.getToken()!) { (item, error) in
+            if let _ = error {
+                // An error was returned
+                return
+            }
+            
+            let mainVC = self.presentingViewController?.childViewControllers[0] as! MainViewController
+            self.dismissViewControllerAnimated(true, completion: {
+                mainVC.returnedWithAction("ItemCreated", object: item)
+            })
+        }
         
         let mainVC = self.presentingViewController?.childViewControllers[0] as! MainViewController
         self.dismissViewControllerAnimated(true, completion: {
             mainVC.returnedWithAction("ItemCreated", object: item)
         })
+
     }
     
     @IBAction func backButton(sender: AnyObject) {
@@ -70,8 +81,10 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         categoryTextField.tintColor = UIColor.clearColor()
         
         // Load categories
-        dao.getAllCategories({ (categories: [Category]) in
-            self.categories = categories
+        dao.getAllCategories({ (categories: [Category]?, error: NSError?) in
+            if let categories = categories {
+                self.categories = categories
+            }
         })
     }
 

@@ -20,7 +20,11 @@ class Authentication {
     
     private init() {
         if let userId = decodeTokenToUserId() {
-            dao.getUser(userId) { (error, user) in
+            dao.getUser(userId) { (user: User?, error: NSError?) in
+                if let _ = error {
+                    // An error was returned
+                }
+                
                 self.user = user
             }
         }

@@ -29,7 +29,10 @@ class RegisterViewController: UIViewController {
         }
         // Add validation -------- !!!
         let user = User(email: emailTextfield.text!, password: passwordTextfield.text!, name: nameTextfield.text!, address: selectedAddress!)
-        dao.createUser(user)
+        
+        dao.createUser(user) { (user, error) in
+            // TODO: Use this user
+        }
         
         // Sæt denne til true hvis validering godkender den nye bruger.
         userCreated = true
