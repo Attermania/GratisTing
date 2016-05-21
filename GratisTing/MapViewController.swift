@@ -20,6 +20,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var firstLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 0, longitude: 0)
     var lastLocation: CLLocation = CLLocation(latitude: 0, longitude: 0)
     
+    var item: Item?
+    
     var items = [Item]() {
         didSet {
             addItemsToMap(items)
@@ -60,10 +62,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         for item in items {
             let itemCoordinate = CLLocationCoordinate2DMake(item.latitude, item.longitude)
 
-            let itemAnnotation = MKPointAnnotation()
+            let itemAnnotation = GratisTingAnnotation()
             itemAnnotation.title = item.title
             itemAnnotation.subtitle = item.description
             itemAnnotation.coordinate = itemCoordinate
+            itemAnnotation.item = item
 
             annotations.append(itemAnnotation)
         }
@@ -77,9 +80,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
-        print("update user location")
-    }
+    
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
         let itemImageView = UIImageView(frame: CGRectMake(0, 0, 80, 50))
         var reuseId = ""
@@ -103,6 +104,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             pinView?.leftCalloutAccessoryView = itemImageView
             pinView?.canShowCallout = true
             pinView?.tintColor = UIColor.greenColor()
+            
             return pinView
         }
     }
@@ -179,9 +181,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func mapView(mapView: MKMapView, didDeselectAnnotationView view: MKAnnotationView) {
         self.itemMap.deselectAnnotation(view.annotation, animated: false)
         view.gestureRecognizers?.first?.enabled = false
+        
     }
     
     func showItem(sender: UITapGestureRecognizer) {
+        let view = sender.view as! MKAnnotationView
+        let pin = view.annotation as! GratisTingAnnotation
+        item = pin.item
         performSegueWithIdentifier("showItem", sender: self)
         
     }
@@ -189,6 +195,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showItem" {
             let showItemViewController = segue.destinationViewController as! ShowViewController
+            showItemViewController.item = item
         }
         if segue.identifier == "goToListView" {
             let listViewItemController = segue.destinationViewController as! ItemListViewController

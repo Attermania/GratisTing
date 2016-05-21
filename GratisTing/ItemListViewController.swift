@@ -95,6 +95,7 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showItem" {
             let showItemViewController = segue.destinationViewController as! ShowViewController
+            showItemViewController.item = items[(itemTableView.indexPathForSelectedRow?.row)!]
         }
     }
     

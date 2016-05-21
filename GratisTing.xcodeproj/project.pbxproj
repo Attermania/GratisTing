@@ -10,6 +10,7 @@
 		392F388C52E0459B035372C0 /* Pods_GratisTing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E605BCC98611F66EA577D6FF /* Pods_GratisTing.framework */; };
 		F91250CA1CEC6D9B00FFFE75 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91250C91CEC6D9B00FFFE75 /* Address.swift */; };
 		F95E01071CEDD1A8007D0BE3 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95E01061CEDD1A8007D0BE3 /* Authentication.swift */; };
+		F974FCBD1CF0FFEE00433E7A /* GratisTingAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F974FCBC1CF0FFEE00433E7A /* GratisTingAnnotation.swift */; };
 		F975B17C1CE2214F00D29403 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B17B1CE2214F00D29403 /* AppDelegate.swift */; };
 		F975B1831CE2214F00D29403 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F975B1821CE2214F00D29403 /* Assets.xcassets */; };
 		F975B1861CE2214F00D29403 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F975B1841CE2214F00D29403 /* LaunchScreen.storyboard */; };
@@ -45,6 +46,7 @@
 		F91250C91CEC6D9B00FFFE75 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
 		F923F4EF1CE4B84D00320057 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		F95E01061CEDD1A8007D0BE3 /* Authentication.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
+		F974FCBC1CF0FFEE00433E7A /* GratisTingAnnotation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratisTingAnnotation.swift; sourceTree = "<group>"; };
 		F975B1781CE2214F00D29403 /* GratisTing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = GratisTing.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F975B17B1CE2214F00D29403 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		F975B1821CE2214F00D29403 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -252,6 +254,7 @@
 			children = (
 				F9BD02EE1CE32CE30057309B /* Map.storyboard */,
 				F9BD02F01CE32CF20057309B /* MapViewController.swift */,
+				F974FCBC1CF0FFEE00433E7A /* GratisTingAnnotation.swift */,
 			);
 			name = Map;
 			sourceTree = "<group>";
@@ -390,6 +393,7 @@
 				F975B1921CE2254900D29403 /* LoginViewController.swift in Sources */,
 				F975B17C1CE2214F00D29403 /* AppDelegate.swift in Sources */,
 				F9E5DDE51CE60C14005A2FB4 /* ShowViewController.swift in Sources */,
+				F974FCBD1CF0FFEE00433E7A /* GratisTingAnnotation.swift in Sources */,
 				F975B1961CE2294900D29403 /* RegisterViewController.swift in Sources */,
 				F9BD02F11CE32CF20057309B /* MapViewController.swift in Sources */,
 				F975B1B61CE36D7A00D29403 /* GratisTingCell.swift in Sources */,
