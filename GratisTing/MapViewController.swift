@@ -184,6 +184,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
         if segue.identifier == "goToListView" {
             let listViewItemController = segue.destinationViewController as! ItemListViewController
+            print(self.category?.title)
             listViewItemController.category = self.category
         }
     }

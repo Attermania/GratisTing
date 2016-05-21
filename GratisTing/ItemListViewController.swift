@@ -32,9 +32,10 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         
         itemTableView.dataSource = self
         itemTableView.delegate = self
-        
+        print("get category \(category?.title)")
         dao.getItems(category) { (items: [Item]) in
             self.items = items
+            print(items.first?.category?.title)
         }
 
     }

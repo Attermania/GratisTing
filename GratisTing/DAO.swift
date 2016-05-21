@@ -123,8 +123,14 @@ class DAO: DAOProtocol {
     func getItems(category: Category?, completion: [Item] -> Void) {
         
         var items: [Item] = []
+        
+        var parameters: [String : AnyObject] = [:]
+        
+        if category != nil {
+            parameters["categoryId"] = category?.id!
+        }
 
-        Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/items").responseJSON { (response) in
+        Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/items", parameters: parameters, encoding: .URL).responseJSON { (response) in
             switch response.result {
             case .Success:
                 print("success")
@@ -134,7 +140,7 @@ class DAO: DAOProtocol {
                     print("empty")
                 }
                 
-                if let subJson = jsonData["success"].bool {
+                if jsonData["success"].bool != nil {
                     for (_, itemJson) in jsonData["data"] {
                         
                         let itemId = itemJson["_id"].string!
