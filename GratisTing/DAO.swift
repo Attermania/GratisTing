@@ -22,6 +22,7 @@ class DAO: DAOProtocol {
 
             // Something went wrong, abort
             if response.result.isFailure {
+                completion(categories: nil, error: response.result.error)
                 return
             }
             
@@ -77,6 +78,7 @@ class DAO: DAOProtocol {
             
             // Something went wrong, abort
             if response.result.isFailure {
+                completion(items: nil, error: response.result.error)
                 return
             }
             
@@ -155,6 +157,7 @@ class DAO: DAOProtocol {
             
             // Something went wrong, abort
             if response.result.isFailure {
+                completion(items: nil, error: response.result.error)
                 return
             }
             
@@ -238,6 +241,7 @@ class DAO: DAOProtocol {
         Alamofire.request(.POST, "http://gratisting.dev:3000/api/v1/users", parameters: (parameters as! [String : AnyObject]), encoding: .JSON).responseJSON { (response) in
             // Something went wrong, abort
             if response.result.isFailure {
+                completion(user: nil, error: response.result.error)
                 return
             }
             
@@ -295,9 +299,10 @@ class DAO: DAOProtocol {
             "categoryId": (item.category!.id)!
         ]
         
-        Alamofire.request(.POST, "http://localhost:3000/api/v1/items", parameters: (parameters as! [String : AnyObject]), encoding: .JSON, headers: headers).responseJSON { (response) in
+        Alamofire.request(.POST, "http://gratisting.dev:3000/api/v1/items", parameters: (parameters as! [String : AnyObject]), encoding: .JSON, headers: headers).responseJSON { (response) in
             // Something went wrong, abort
             if response.result.isFailure {
+                completion(item: nil, error: response.result.error)
                 return
             }
             
@@ -309,7 +314,6 @@ class DAO: DAOProtocol {
                 completion(item: nil, error: error)
                 return
             }
-            
             let itemJson = jsonData["data"]
             let itemId = itemJson["_id"].string!
             let ownerId = itemJson["owner"].string!
@@ -361,6 +365,7 @@ class DAO: DAOProtocol {
             
             // Something went wrong, abort
             if response.result.isFailure {
+                completion(user: nil, error: response.result.error)
                 return
             }
             

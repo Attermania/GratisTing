@@ -49,7 +49,8 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         )
         
         self.dao.createItem(item, token: auth.getToken()!) { (item, error) in
-            if let _ = error {
+            if let error = error {
+                print(error)
                 // An error was returned
                 return
             }
@@ -59,11 +60,6 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 mainVC.returnedWithAction("ItemCreated", object: item)
             })
         }
-        
-        let mainVC = self.presentingViewController?.childViewControllers[0] as! MainViewController
-        self.dismissViewControllerAnimated(true, completion: {
-            mainVC.returnedWithAction("ItemCreated", object: item)
-        })
 
     }
     
