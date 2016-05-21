@@ -34,20 +34,11 @@
                                     <action selector="getCurrentPosition:" destination="lUR-RT-RxV" eventType="touchUpInside" id="MRv-2M-tkJ"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="O9z-Yn-GaQ">
-                                <rect key="frame" x="436" y="560" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="clickButton:" destination="lUR-RT-RxV" eventType="touchUpInside" id="bwL-ql-yaM"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="iPW-zN-Sdj" secondAttribute="bottom" constant="10" id="7ls-X0-SpC"/>
                             <constraint firstItem="iPW-zN-Sdj" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="DCz-fW-4RM"/>
-                            <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="O9z-Yn-GaQ" secondAttribute="bottom" constant="10" id="INN-61-Kof"/>
-                            <constraint firstItem="O9z-Yn-GaQ" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="J2E-ky-xcz"/>
                             <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="Lu1-pX-Mj2"/>
                             <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="MzS-8m-mqh"/>
                             <constraint firstAttribute="trailing" secondItem="ElO-yt-dl2" secondAttribute="trailing" constant="10" id="QOs-2q-QbE"/>
@@ -57,7 +48,6 @@
                             <constraint firstItem="ElO-yt-dl2" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="f07-vu-44x"/>
                             <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="ElO-yt-dl2" secondAttribute="bottom" constant="10" id="lQF-0R-vuf"/>
                             <constraint firstItem="LSH-gm-zvC" firstAttribute="top" secondItem="WQh-ZY-PcT" secondAttribute="bottom" id="rIO-X9-7vI"/>
-                            <constraint firstItem="iPW-zN-Sdj" firstAttribute="leading" secondItem="O9z-Yn-GaQ" secondAttribute="trailing" constant="10" id="sc5-Br-43t"/>
                             <constraint firstItem="ElO-yt-dl2" firstAttribute="leading" secondItem="iPW-zN-Sdj" secondAttribute="trailing" constant="10" id="vOf-oA-Zne"/>
                             <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="xfb-jw-RRs"/>
                         </constraints>

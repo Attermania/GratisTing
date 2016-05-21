@@ -36,14 +36,17 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         let controller = storyboard.instantiateViewControllerWithIdentifier("BrowseNavigator") as! UINavigationController
         self.presentViewController(controller, animated: true, completion: nil)
     }
-    // TODO: hej
+    // Relocate button action
     @IBAction func getCurrentPosition(sender: AnyObject) {
         if CLLocationManager.authorizationStatus() == .Denied {
             UIApplication.sharedApplication().openURL(NSURL(string:UIApplicationOpenSettingsURLString)!)
+            return
         }
-    }
-    
-    @IBAction func clickButton(sender: AnyObject) {
+        
+        if let userLocation = locationManager.location?.coordinate {
+            let region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
+            self.itemMap.setRegion(region, animated: true)
+        }
         
     }
     
