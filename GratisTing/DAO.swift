@@ -127,7 +127,7 @@ class DAO: DAOProtocol {
         var parameters: [String : AnyObject] = [:]
         
         if category != nil {
-            parameters["categoryId"] = category?.id!
+            parameters["categoryId"] = category?.id
         }
 
         Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/items", parameters: parameters, encoding: .URL).responseJSON { (response) in
@@ -140,7 +140,7 @@ class DAO: DAOProtocol {
                     print("empty")
                 }
                 
-                if jsonData["success"].bool != nil {
+                if let subJson = jsonData["success"].bool {
                     for (_, itemJson) in jsonData["data"] {
                         
                         let itemId = itemJson["_id"].string!
