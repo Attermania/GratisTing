@@ -13,6 +13,7 @@ class LoginViewController: UIViewController {
     let auth = AppDelegate.authentication
     
     var userCreatedInRegistration = false
+    var action: String?
     
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
@@ -24,6 +25,12 @@ class LoginViewController: UIViewController {
                 self.auth.setToken(jwt!)
                 let mainVC = self.presentingViewController?.childViewControllers[0] as! MainViewController
                 self.dismissViewControllerAnimated(true, completion: {
+                    
+                    if self.action == "LoginCreateItem" {
+                        mainVC.returnedWithAction("OpenCreateItem", object: nil)
+                        return
+                    }
+                    
                     mainVC.returnedWithAction("LoggedIn", object: nil)
                 })
 
@@ -40,6 +47,8 @@ class LoginViewController: UIViewController {
     }
     
     @IBAction func backButtonNavigation(sender: AnyObject) {
+        // reset the action when returning
+        action = nil
 
         self.dismissViewControllerAnimated(true, completion: nil)
         

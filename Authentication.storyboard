@@ -8,7 +8,7 @@
         <!--Authentication-->
         <scene sceneID="78e-Bf-8ZB">
             <objects>
-                <viewController id="j24-Y2-fvL" customClass="LoginViewController" customModule="GratisTing" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginView" id="j24-Y2-fvL" customClass="LoginViewController" customModule="GratisTing" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9tj-Y5-QqR"/>
                         <viewControllerLayoutGuide type="bottom" id="gaz-ep-hFH"/>
@@ -25,7 +25,7 @@
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Indtast email" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="dHM-f2-rb6">
-                                <rect key="frame" x="247.5" y="89" width="104" height="30"/>
+                                <rect key="frame" x="248" y="89" width="104" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="187" id="hgC-Vw-Ixp"/>
                                 </constraints>
@@ -123,7 +123,6 @@
                                 <state key="normal" title="Register"/>
                                 <connections>
                                     <action selector="createUserPressed:" destination="1mY-Xp-5xW" eventType="touchUpInside" id="iS4-bb-kYf"/>
-                                    <segue destination="j4Z-iL-0jj" kind="unwind" unwindAction="returnedFromRegistration:" id="LZ0-iB-jGW"/>
                                 </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Navn" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WMl-hz-hB3">
@@ -172,7 +171,6 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zO9-Lv-HiB" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="j4Z-iL-0jj" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1861" y="392"/>
         </scene>

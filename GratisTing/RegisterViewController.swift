@@ -31,12 +31,14 @@ class RegisterViewController: UIViewController {
         let user = User(email: emailTextfield.text!, password: passwordTextfield.text!, name: nameTextfield.text!, address: selectedAddress!)
         
         dao.createUser(user) { (user, error) in
+            if let error = error {
+                print(error)
+            }
             // TODO: Use this user
+            // Sæt denne til true hvis validering godkender den nye bruger.
+            let navigationController = self.parentViewController as! UINavigationController
+            navigationController.popToRootViewControllerAnimated(true)
         }
-        
-        // Sæt denne til true hvis validering godkender den nye bruger.
-        userCreated = true
-        
     }
     
     override func viewDidLoad() {
