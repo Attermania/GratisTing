@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class ItemListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
@@ -18,6 +19,7 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     let dao = AppDelegate.dao
     let auth = AppDelegate.authentication
+    let locationManager = CLLocationManager()
     
     @IBAction func navigateToMapButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -87,7 +89,7 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.titleLabel.text = items[indexPath.row].title
         cell.descriptionLabel.text = items[indexPath.row].description
         if hasLocation! {
-            cell.distanceLabel.text = String(items[indexPath.row].getDistanceInKm(auth.user?.address.latitude, destLatitude: auth.user?.address.longitude))
+            cell.distanceLabel.text = String(items[indexPath.row].getDistanceInKm(long, destLatitude: lat)!)
         }
         
         return cell
