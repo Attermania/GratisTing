@@ -19,6 +19,7 @@ class ShowViewController: UIViewController {
     }
     @IBOutlet weak var itemTitleLabel: UILabel!
     @IBOutlet weak var itemImage: UIImageView!
+    @IBOutlet weak var itemOwnerLabel: UILabel!
     
     override func viewDidLoad() {
 //        self.title = item?.title
@@ -39,6 +40,7 @@ class ShowViewController: UIViewController {
         // Do any additional setup after loading the view.
         itemTitleLabel.text = item?.title
         itemDescriptionText.text = item?.description
+        itemOwnerLabel.text = item?.owner?.name
         item = nil
     }
     

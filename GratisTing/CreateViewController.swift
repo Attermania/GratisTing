@@ -48,7 +48,7 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             category: category
         )
         
-        self.dao.createItem(item, token: auth.getToken()!) { (item, error) in
+        self.dao.createItem(item, token: auth.getToken()!, user: auth.user!) { (item, error) in
             if let error = error {
                 print(error)
                 // An error was returned

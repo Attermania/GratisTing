@@ -84,6 +84,7 @@ class DAO: DAOProtocol {
             
             var items: [Item] = []
             let jsonData = JSON(data: response.data!)
+            var user: User?
             
             // API responded with failure
             if jsonData["success"].bool! == false {
@@ -91,6 +92,29 @@ class DAO: DAOProtocol {
                 completion(items: nil, error: error)
                 return
             }
+            
+            var users: [String : User] = [:]
+            
+            for (_, itemJson) in jsonData["relationships"]["users"] {
+                // User
+                let userId = itemJson["_id"].string!
+                let email = itemJson["email"].string!
+                let name = itemJson["name"].string
+                
+                // Address
+                let address = itemJson["address"]["address"].string
+                let cityName = itemJson["address"]["cityName"].string
+                let postalCode = itemJson["address"]["postalCode"].int
+                let long = itemJson["address"]["coordinates"][0].double!
+                let lat = itemJson["address"]["coordinates"][1].double!
+                let completeAddress = Address(address: address!, cityName: cityName!, postalCode: postalCode!, latitude: lat, longitude: long)
+                
+                user = User(id: userId, email: email, name: name!, address: completeAddress)
+                
+                users[userId] = user
+                
+            }
+
             
             // Parse json
             for (_, subJson) in jsonData["data"] {
@@ -105,20 +129,6 @@ class DAO: DAOProtocol {
                 let long = subJson["obj"]["address"]["coordinates"][0].double!
                 let distance = subJson["dis"].double!
                 
-                // Instantiate fake user - TODO: parse real user
-                let user = User(
-                    id: userId,
-                    email: "jsdad",
-                    name: "ole",
-                    address: Address(
-                        address: "lygten 7",
-                        cityName: "kbh",
-                        postalCode: 2670,
-                        latitude: 42,
-                        longitude: 213.2
-                    )
-                )
-                
                 // Instantiate fake category . TODO: parse real category
                 let cat = Category(id: catId, title: "", imageURL: "")
                 
@@ -129,7 +139,7 @@ class DAO: DAOProtocol {
                     description: description,
                     imageURL: "http://google.dk/logo.png",
                     createdAt: NSDate(),
-                    owner: user,
+                    owner: users[userId]!,
                     latitude: lat,
                     longitude: long,
                     category: cat,
@@ -165,6 +175,7 @@ class DAO: DAOProtocol {
             
             var items: [Item] = []
             let jsonData = JSON(data: response.data!)
+            var user: User?
             
             // API responded with failure
             if jsonData["success"].bool! == false {
@@ -173,31 +184,32 @@ class DAO: DAOProtocol {
                 return
             }
             
+            for (_, itemJson) in jsonData["relationships"]["users"] {
+                // User
+                let userId = itemJson["_id"].string!
+                let email = itemJson["email"].string!
+                let name = itemJson["name"].string
+                
+                // Address
+                let address = itemJson["address"]["address"].string
+                let cityName = itemJson["address"]["cityName"].string
+                let postalCode = itemJson["address"]["postalCode"].int
+                let long = itemJson["address"]["coordinates"][0].double!
+                let lat = itemJson["address"]["coordinates"][1].double!
+                let completeAddress = Address(address: address!, cityName: cityName!, postalCode: postalCode!, latitude: lat, longitude: long)
+                
+                user = User(id: userId, email: email, name: name!, address: completeAddress)
+
+            }
+            
             for (_, itemJson) in jsonData["data"] {
                 
                 let itemId = itemJson["_id"].string!
-                let ownerId = itemJson["owner"].string!
                 let categoryId = itemJson["category"].string!
-                let formattedAddress = itemJson["address"]["address"].string!
-                let cityName = itemJson["address"]["cityName"].string!
-                let postalCode = itemJson["address"]["postalCode"].int!
                 let lat = itemJson["address"]["coordinates"][1].double!
                 let long = itemJson["address"]["coordinates"][0].double!
                 let itemTitle = itemJson["title"].string!
                 let itemDescription = itemJson["description"].string!
-                
-                let user = User(
-                    id: ownerId,
-                    email: "jsdad",
-                    name: "ole",
-                    address: Address(
-                        address: formattedAddress,
-                        cityName: cityName,
-                        postalCode: postalCode,
-                        latitude: lat,
-                        longitude: long
-                    )
-                )
                 
                 let category = Category(id: categoryId, title: "min hest", imageURL: "http://placehold.it/350x150")
                 
@@ -207,7 +219,7 @@ class DAO: DAOProtocol {
                     description: itemDescription,
                     imageURL: "http://placehold.it/350x150",
                     createdAt: NSDate(),
-                    owner: user,
+                    owner: user!,
                     latitude: lat,
                     longitude: long,
                     category: category
@@ -277,7 +289,7 @@ class DAO: DAOProtocol {
     }
     
     // MARK: Create item
-    func createItem(item: Item, token: String, completion: (item: Item?, error: NSError?) -> Void) {
+    func createItem(item: Item, token: String, user: User, completion: (item: Item?, error: NSError?) -> Void) {
         
         let headers = [
             "Authorization": token,
@@ -318,11 +330,7 @@ class DAO: DAOProtocol {
             }
             let itemJson = jsonData["data"]
             let itemId = itemJson["_id"].string!
-            let ownerId = itemJson["owner"].string!
             let categoryId = itemJson["category"].string!
-            let formattedAddress = itemJson["address"]["address"].string!
-            let cityName = itemJson["address"]["cityName"].string!
-            let postalCode = itemJson["address"]["postalCode"].int!
             let lat = itemJson["address"]["coordinates"][1].double!
             let long = itemJson["address"]["coordinates"][0].double!
             let itemTitle = itemJson["title"].string!
@@ -331,19 +339,6 @@ class DAO: DAOProtocol {
             // Instantiate fake category. TODO: parse real category
             let category = Category(id: categoryId, title: "", imageURL: "")
             
-            // Instantiate fake user. TODO: parse real user
-            let user = User(
-                id: ownerId,
-                email: "jsdad",
-                name: "ole",
-                address: Address(
-                    address: formattedAddress,
-                    cityName: cityName,
-                    postalCode: postalCode,
-                    latitude: lat,
-                    longitude: long
-                )
-            )
             
             let item = Item(
                 id: itemId,

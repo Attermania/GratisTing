@@ -17,8 +17,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let clusteringManager = FBClusteringManager()
     let locationManager = CLLocationManager()
     var relocation = false
-    var lat: Double = 0
-    var long: Double = 0
+    var lat: Double = 10
+    var long: Double = 10
     
     var item: Item?
     
@@ -179,6 +179,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             // Try to get the coordinates for the users location
             if let userLocation = locationManager.location?.coordinate {
                 region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
+                lat = userLocation.latitude
+                long = userLocation.longitude
             }
 
         }

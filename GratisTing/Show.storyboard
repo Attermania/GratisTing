@@ -57,6 +57,12 @@
                                     <constraint firstItem="JVP-1d-nqq" firstAttribute="leading" secondItem="AxF-UV-rJY" secondAttribute="leading" id="vxY-S7-0ed"/>
                                 </constraints>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Ic-WW-WeV">
+                                <rect key="frame" x="80" y="392" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -74,6 +80,7 @@
                     <connections>
                         <outlet property="itemDescriptionText" destination="JVP-1d-nqq" id="0m2-Gj-Its"/>
                         <outlet property="itemImage" destination="erH-O5-1YG" id="b2u-qP-PVK"/>
+                        <outlet property="itemOwnerLabel" destination="5Ic-WW-WeV" id="0IK-r7-3sV"/>
                         <outlet property="itemTitleLabel" destination="73b-VP-RsE" id="Vsj-yr-tv6"/>
                     </connections>
                 </viewController>

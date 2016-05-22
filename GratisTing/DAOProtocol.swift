@@ -18,7 +18,7 @@ protocol DAOProtocol {
     
     func createUser(user: User, completion: (user: User?, error: NSError?) -> Void)
     
-    func createItem(item: Item, token: String, completion: (item: Item?, error: NSError?) -> Void)
+    func createItem(item: Item, token: String, user: User, completion: (item: Item?, error: NSError?) -> Void)
     
     func getUser(userId: String, completion: (user: User?, error: NSError?) -> ())
     

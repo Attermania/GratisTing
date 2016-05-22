@@ -58,7 +58,9 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         super.viewDidLoad()
         itemTableView.dataSource = self
         itemTableView.delegate = self
+        fetchItems()
         itemTableView.reloadData()
+
     }
     
     override func viewDidAppear(animated: Bool) {
