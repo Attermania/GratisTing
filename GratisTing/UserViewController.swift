@@ -29,6 +29,10 @@ class UserViewController: UIViewController {
         })
     }
     
+    override func viewDidAppear(animated: Bool) {
+        GratisTingNavItem.setupPresentation(true, vc: self)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         userNameLabel.text = (auth.user?.name)!
@@ -39,6 +43,10 @@ class UserViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        GratisTingNavItem.setupPresentation(false, vc: self)
+    }
+
 
     /*
     // MARK: - Navigation

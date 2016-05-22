@@ -22,32 +22,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    @IBAction func createItem(sender: AnyObject) {
-        // Check if token is set - present create view controler        
-        if auth.getToken() != nil {
-            let storyboard = UIStoryboard(name: "Create", bundle: nil)
-            let controller = storyboard.instantiateViewControllerWithIdentifier("Create") as! UINavigationController
-            self.presentViewController(controller, animated: true, completion: nil)
-            
-            return
-        }
         
-        
-        // If token is not set - show alert instructring user to create error.
-        let alertController = UIAlertController(title: "Bruger påkrævet", message: "Du skal være logget ind for at oprette en gratis ting.", preferredStyle: .Alert)
-        let defaultAction = UIAlertAction(title: "OK", style: .Default) { (action) in
-            print("ok")
-            let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
-            let controller = storyboard.instantiateViewControllerWithIdentifier("Login") as! UINavigationController
-            let loginController = controller.childViewControllers[0] as! LoginViewController
-            loginController.action = "LoginCreateItem"
-            self.presentViewController(controller, animated: true, completion: nil)
-            //self.performSegueWithIdentifier("goToLogin", sender: self)
-        }
-        alertController.addAction(defaultAction)
-        presentViewController(alertController, animated: true, completion: nil)
-    }
-    
     @IBOutlet weak var categoriesTableView: UITableView!
     
     /**
@@ -80,7 +55,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillAppear(animated: Bool) {
-        GratisTingNavItem.presenter = self
+        GratisTingNavItem.setupPresentation(true, vc: self)
     }
     
     override func viewDidLoad() {

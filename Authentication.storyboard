@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -70,7 +70,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Authentication" id="XVS-H3-038">
+                    <navigationItem key="navigationItem" title="Authentication" id="XVS-H3-038" customClass="GratisTingNavItem" customModule="GratisTing" customModuleProvider="target">
                         <barButtonItem key="backBarButtonItem" id="Mdu-Kl-CsI"/>
                         <barButtonItem key="leftBarButtonItem" image="back" id="uqp-I1-yDx">
                             <connections>
@@ -87,7 +87,7 @@
             </objects>
             <point key="canvasLocation" x="1175" y="392"/>
         </scene>
-        <!--Register View Controller-->
+        <!--Authentication-->
         <scene sceneID="exW-jX-t7W">
             <objects>
                 <viewController storyboardIdentifier="Register" id="1mY-Xp-5xW" customClass="RegisterViewController" customModule="GratisTing" customModuleProvider="target" sceneMemberID="viewController">
@@ -163,6 +163,9 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Authentication" id="Xbn-tu-hs8" customClass="GratisTingNavItem" customModule="GratisTing" customModuleProvider="target">
+                        <barButtonItem key="backBarButtonItem" id="nBt-FL-uw1"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="addressTextfield" destination="zMx-qZ-3Vt" id="bcL-Jc-gKk"/>
                         <outlet property="emailTextfield" destination="3H6-Qb-MAB" id="0n1-kt-GOO"/>
@@ -182,6 +185,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pX2-zt-8Eh">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.2156862745" green="0.22352941179999999" blue="0.2274509804" alpha="0.79905711209999997" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

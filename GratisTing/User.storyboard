@@ -33,7 +33,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="ryW-of-Lt1">
+                    <navigationItem key="navigationItem" id="ryW-of-Lt1" customClass="GratisTingNavItem" customModule="GratisTing" customModuleProvider="target">
                         <barButtonItem key="leftBarButtonItem" image="back" id="Qbe-kz-V5c">
                             <connections>
                                 <action selector="navigateBackButton:" destination="CI2-JR-un5" id="mjG-ER-smD"/>
@@ -56,6 +56,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="RAU-5b-tg5">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.2156862745" green="0.22352941179999999" blue="0.2274509804" alpha="0.79905711209999997" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>

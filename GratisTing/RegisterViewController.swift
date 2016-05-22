@@ -48,6 +48,10 @@ class RegisterViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        GratisTingNavItem.setupPresentation(false, vc: self)
+    }
+    
     // 2 - Configure a custom search text view
     private func configureCustomSearchTextField() {
         // Set theme - Default: light

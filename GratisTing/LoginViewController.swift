@@ -59,6 +59,10 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewWillAppear(animated: Bool) {
+        GratisTingNavItem.setupPresentation(true, vc: self)
+    }
+    
     override func viewDidAppear(animated: Bool) {
         if userCreatedInRegistration {
             let alertController = UIAlertController(title: "Bruger oprettet", message: "Du kan nu logge ind", preferredStyle: .Alert)

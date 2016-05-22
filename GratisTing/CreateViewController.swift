@@ -55,9 +55,13 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 return
             }
             
-            let mainVC = self.presentingViewController?.childViewControllers[0] as! MainViewController
+            
+            let vc = self.presentingViewController?.childViewControllers[0]
             self.dismissViewControllerAnimated(true, completion: {
-                mainVC.returnedWithAction("ItemCreated", object: item)
+//                let alertController = UIAlertController(title: "Fedt mand, spa!", message: "Din gratis ting er nu oprettet", preferredStyle: .Alert)
+//                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+//                alertController.addAction(defaultAction)
+//                self.presentViewController(alertController, animated: true, completion: nil)
             })
         }
 
@@ -100,6 +104,10 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 self.categories = categories
             }
         })
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        GratisTingNavItem.setupPresentation(true, vc: self)
     }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

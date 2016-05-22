@@ -58,6 +58,10 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         self.locationManager.requestAlwaysAuthorization()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        GratisTingNavItem.setupPresentation(false, vc: self)
+    }
+    
     func addItemsToMap(items: [Item]) {
         var annotations: [MKPointAnnotation] = []
         
