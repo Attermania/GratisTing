@@ -79,6 +79,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+        GratisTingNavItem.presenter = self
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // We need to set Authentication and DAO here because they are not set in AppDelegate when this class is instantiated
@@ -89,6 +93,21 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         categoriesTableView.dataSource = self
 
         loadCategories()
+        
+        // Set background
+        let backgroundImage = UIImageView(frame: UIScreen.mainScreen().bounds)
+        backgroundImage.image = UIImage(named: "bg")
+        self.view.insertSubview(backgroundImage, atIndex: 0)
+        
+        // Fjern linjer hvor der ikke er indohold
+        categoriesTableView.tableFooterView = UIView(frame: CGRectZero)
+        
+        // Make navigation bar transparent.
+        self.navigationController?.navigationBar.setBackgroundImage(UIImage(named: "transparent.png"), forBarMetrics: UIBarMetrics.Default)
+        self.navigationController?.navigationBar.shadowImage = UIImage(named: "transparent.png")
+        self.navigationController?.navigationBar.translucent = true
+        self.navigationController?.view.backgroundColor = UIColor.clearColor()
+
         // Do any additional setup after loading the view.
     }
 
@@ -130,11 +149,36 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         cell.textLabel?.text = categories[indexPath.row].title
+        
+        cell.backgroundColor = UIColor.grayColor()
+        
+        cell.textLabel?.textColor = UIColor.whiteColor()
+        
+        switch categories[indexPath.row].title {
+        case "Møbler":
+            cell.imageView?.image = UIImage(named: "puzzle")
+        case "Tøj & Sko":
+            cell.imageView?.image = UIImage(named: "handbag")
+        case "Fotoudstyr":
+            cell.imageView?.image = UIImage(named: "camera")
+        case "Dyr & Tilbehør":
+            cell.imageView?.image = UIImage(named: "ghost")
+        case "Bøger & Magasiner":
+            cell.imageView?.image = UIImage(named: "graduation")
+        default:
+            cell.imageView?.image = nil
+        }
+        
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         performSegueWithIdentifier("goToMap", sender: self)
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.backgroundColor = UIColor(white: 1, alpha: 0.2)
+
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
