@@ -195,10 +195,12 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func showItem(sender: UITapGestureRecognizer) {
-        let view = sender.view as! MKAnnotationView
-        let pin = view.annotation as! GratisTingAnnotation
-        item = pin.item
-        performSegueWithIdentifier("showItem", sender: self)
+        if sender.view is MKAnnotationView {
+            let view = sender.view as! MKAnnotationView
+            let pin = view.annotation as! GratisTingAnnotation
+            item = pin.item
+            performSegueWithIdentifier("showItem", sender: self)
+        }
         
     }
     
