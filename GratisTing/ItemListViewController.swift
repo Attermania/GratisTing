@@ -63,7 +63,6 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         itemTableView.delegate = self
         fetchItems()
         itemTableView.reloadData()
-
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -88,8 +87,16 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         //cell.textLabel?.text = items[indexPath.row].title
         cell.titleLabel.text = items[indexPath.row].title
         cell.descriptionLabel.text = items[indexPath.row].description
+        cell.cityLabel.text = items[indexPath.row].address!.cityName
         if hasLocation! {
-            cell.distanceLabel.text = String(items[indexPath.row].getDistanceInKm(long, destLatitude: lat)!)
+            let distance = items[indexPath.row].getDistanceInKm(long, destLatitude: lat)!
+            // format in kilometer if distance is 1 or more.
+            if distance >= 1 {
+                cell.distanceLabel.text = String(format:"%.1f", distance) + " km"
+            } else {
+                // format distance in meters if less than 1 km.
+                cell.distanceLabel.text = String(format:"%.0f", distance*1000) + " m"
+            }
         }
         
         return cell

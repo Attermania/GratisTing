@@ -67,7 +67,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         // Create annotations from items
         for item in items {
-            let itemCoordinate = CLLocationCoordinate2DMake(item.latitude, item.longitude)
+            let itemCoordinate = CLLocationCoordinate2DMake(item.address!.latitude, item.address!.longitude)
 
             let itemAnnotation = GratisTingAnnotation()
             itemAnnotation.title = item.title
@@ -168,7 +168,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 55.7, longitude: 12.5), span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
+        var region = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 55.7, longitude: 12.5), span: MKCoordinateSpan(latitudeDelta: 0.25, longitudeDelta: 0.25))
         
         if status == .AuthorizedAlways {
             // Set accuracy

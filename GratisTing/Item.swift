@@ -17,8 +17,6 @@ class Item {
     var imageURL: String = ""
     var createdAt: NSDate = NSDate()
     var owner: User?
-    var latitude: Double = 0
-    var longitude: Double = 0
     var category: Category?
     var address: Address?
     var distance: Double = 0
@@ -53,8 +51,7 @@ class Item {
         if destLongitude == nil || destLatitude == nil {
             return nil
         }
-        
-        let source = CLLocation(latitude: self.latitude, longitude: self.longitude)
+        let source = CLLocation(latitude: self.address!.latitude, longitude: self.address!.longitude)
         let dest = CLLocation(latitude: destLatitude!, longitude: destLongitude!)
         
         let distance = source.distanceFromLocation(dest) / 1000
