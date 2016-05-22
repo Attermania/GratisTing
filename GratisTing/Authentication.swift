@@ -59,8 +59,8 @@ class Authentication {
                     let address = jsonData["data"]["user"]["address"]["address"].string!
                     let cityName = jsonData["data"]["user"]["address"]["cityName"].string!
                     let postalCode = jsonData["data"]["user"]["address"]["postalCode"].int!
-                    let lat = jsonData["data"]["user"]["address"]["coordinates"][1].double!
-                    let long = jsonData["data"]["user"]["address"]["coordinates"][0].double!
+                    let lat = jsonData["data"]["user"]["address"]["location"]["coordinates"][1].double!
+                    let long = jsonData["data"]["user"]["address"]["location"]["coordinates"][0].double!
                     let completeAddress = Address(address: address, cityName: cityName, postalCode: postalCode, latitude: lat, longitude: long)
 
                     
