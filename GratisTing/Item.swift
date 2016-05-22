@@ -38,14 +38,13 @@ class Item {
     /**
      Constructor with id attribute. Used when parsing JSON to Item object.
      */
-    init (id: String, title: String, description: String, imageURL: String, createdAt: NSDate, owner: User, latitude: Double, longitude: Double, category: Category) {
+    init (id: String, title: String, description: String, imageURL: String, createdAt: NSDate, owner: User, address: Address, category: Category) {
         self.title = title
         self.description = description
         self.imageURL = imageURL
         self.createdAt = createdAt
         self.owner = owner
-        self.latitude = latitude
-        self.longitude = longitude
+        self.address = address
         self.category = category
     }
     

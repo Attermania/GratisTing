@@ -14,12 +14,13 @@ import SwiftyJSON
 class DAO: DAOProtocol {
     
     static let instance = DAO()
+    let jsonParser = JSONParser()
     
     // MARK: Get all categories
     func getAllCategories(completion: (categories: [Category]?, error: NSError?) -> Void) {
         
         Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/categories").responseJSON { (response) in
-
+            
             // Something went wrong, abort
             if response.result.isFailure {
                 completion(categories: nil, error: response.result.error)
@@ -39,17 +40,13 @@ class DAO: DAOProtocol {
             // Parse json
             for (_, subJson) in jsonData["data"] {
                 
-                // Get data
-                let id = subJson["_id"].string!
-                let title = subJson["title"].string!
-                let image = subJson["image"].string!
-                
-                // Instantiate category
-                let category = Category(id: id, title: title, imageURL: image)
+                // Parse category
+                let category = self.jsonParser.parseCategory(subJson);
                 
                 // Append to list of categories
-                categories.append(category)
-                
+                if category != nil {
+                    categories.append(category!);
+                }
             }
             
             // Call completion handler
@@ -82,7 +79,6 @@ class DAO: DAOProtocol {
                 return
             }
             
-            var items: [Item] = []
             let jsonData = JSON(data: response.data!)
             
             // API responded with failure
@@ -92,71 +88,8 @@ class DAO: DAOProtocol {
                 return
             }
             
-            var users: [String : User] = [:]
-            var categories: [String : Category] = [:]
-            
-            for (_, itemJson) in jsonData["relationships"]["users"] {
-                // User
-                let userId = itemJson["_id"].string!
-                let email = itemJson["email"].string!
-                let name = itemJson["name"].string
-                
-                // Address
-                let address = itemJson["address"]["address"].string
-                let cityName = itemJson["address"]["cityName"].string
-                let postalCode = itemJson["address"]["postalCode"].int
-                let long = itemJson["address"]["location"]["coordinates"][0].double!
-                let lat = itemJson["address"]["location"]["coordinates"][1].double!
-                let completeAddress = Address(address: address!, cityName: cityName!, postalCode: postalCode!, latitude: lat, longitude: long)
-                
-                let user = User(id: userId, email: email, name: name!, address: completeAddress)
-                
-                users[userId] = user
-                
-            }
-            
-            for (_, itemJson) in jsonData["relationships"]["categories"] {
-                // Parse categories
-                let id = itemJson["_id"].string!
-                let image = itemJson["image"].string!
-                let title = itemJson["title"].string!
-                
-                let category = Category(id: id, title: title, imageURL: image)
-                
-                categories[id] = category
-                
-            }
-
-            
-            // Parse json
-            for (_, subJson) in jsonData["data"] {
-                
-                // Get data
-                let id = subJson["_id"].string!
-                let title = subJson["title"].string!
-                let description = subJson["description"].string!
-                let userId = subJson["owner"].string!
-                let catId = subJson["category"].string!
-                let lat = subJson["address"]["location"]["coordinates"][1].double!
-                let long = subJson["address"]["location"]["coordinates"][0].double!
-                
-                // Instantiate item
-                let item = Item(
-                    id: id,
-                    title: title,
-                    description: description,
-                    imageURL: "http://google.dk/logo.png",
-                    createdAt: NSDate(),
-                    owner: users[userId]!,
-                    latitude: lat,
-                    longitude: long,
-                    category: categories[catId]!
-                )
-                
-                
-                // Append item to list of items
-                items.append(item)
-            }
+            // Parse items
+            let items = self.jsonParser.parseItems(jsonData)
             
             // Call the completion handler
             completion(items: items, error: nil)
@@ -172,7 +105,7 @@ class DAO: DAOProtocol {
         if category != nil {
             parameters["categoryId"] = category?.id
         }
-
+        
         Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/items", parameters: parameters, encoding: .URL).responseJSON { (response) in
             
             // Something went wrong, abort
@@ -181,10 +114,7 @@ class DAO: DAOProtocol {
                 return
             }
             
-            var items: [Item] = []
             let jsonData = JSON(data: response.data!)
-            var users: [String : User] = [:]
-            var categories: [String : Category] = [:]
             
             // API responded with failure
             if jsonData["success"].bool! == false {
@@ -193,68 +123,12 @@ class DAO: DAOProtocol {
                 return
             }
             
-            for (_, itemJson) in jsonData["relationships"]["users"] {
-                // User
-                let userId = itemJson["_id"].string!
-                let email = itemJson["email"].string!
-                let name = itemJson["name"].string
-                
-                // Address
-                let address = itemJson["address"]["address"].string
-                let cityName = itemJson["address"]["cityName"].string
-                let postalCode = itemJson["address"]["postalCode"].int
-                let long = itemJson["address"]["location"]["coordinates"][0].double!
-                let lat = itemJson["address"]["location"]["coordinates"][1].double!
-                let completeAddress = Address(address: address!, cityName: cityName!, postalCode: postalCode!, latitude: lat, longitude: long)
-                
-                let user = User(id: userId, email: email, name: name!, address: completeAddress)
-                
-                users[userId] = user
-
-            }
-            
-            for (_, itemJson) in jsonData["relationships"]["categories"] {
-                // User
-                let id = itemJson["_id"].string!
-                let image = itemJson["image"].string!
-                let title = itemJson["title"].string!
-                
-                let category = Category(id: id, title: title, imageURL: image)
-                
-                categories[id] = category
-                
-            }
-            
-            for (_, itemJson) in jsonData["data"] {
-                
-                let itemId = itemJson["_id"].string!
-                let categoryId = itemJson["category"].string!
-                let ownerId = itemJson["owner"].string!
-                let lat = itemJson["address"]["location"]["coordinates"][1].double!
-                let long = itemJson["address"]["location"]["coordinates"][0].double!
-                let itemTitle = itemJson["title"].string!
-                let itemDescription = itemJson["description"].string!
-                
-                
-                let item = Item(
-                    id: itemId,
-                    title: itemTitle,
-                    description: itemDescription,
-                    imageURL: "http://placehold.it/350x150",
-                    createdAt: NSDate(),
-                    owner: users[ownerId]!,
-                    latitude: lat,
-                    longitude: long,
-                    category: categories[categoryId]!
-                )
-                
-                items.append(item)
-            }
+            let items = self.jsonParser.parseItems(jsonData)
             
             completion(items: items, error: nil)
-
+            
         }
-
+        
     }
     
     // MARK: Create user
@@ -292,24 +166,12 @@ class DAO: DAOProtocol {
                 completion(user: nil, error: error)
                 return
             }
-
-            // User
-            let userId = jsonData["data"]["_id"].string!
-            let email = jsonData["data"]["email"].string!
-            let name = jsonData["data"]["name"].string
             
-            // Address
-            let address = jsonData["data"]["address"]["address"].string
-            let cityName = jsonData["data"]["address"]["cityName"].string
-            let postalCode = jsonData["data"]["address"]["postalCode"].int
-            let long = jsonData["data"]["address"]["location"]["coordinates"][0].double!
-            let lat = jsonData["data"]["address"]["location"]["coordinates"][1].double!
-            let completeAddress = Address(address: address!, cityName: cityName!, postalCode: postalCode!, latitude: lat, longitude: long)
-            
-            let user = User(id: userId, email: email, name: name!, address: completeAddress)
+            // Parse user
+            let user = self.jsonParser.parseUser(jsonData["data"])
             
             completion(user: user, error: nil)
-
+            
         }
     }
     
@@ -356,35 +218,11 @@ class DAO: DAOProtocol {
                 return
             }
             
-            // Parse item
-            let itemJson = jsonData["data"]
-            let itemId = itemJson["_id"].string!
-            let categoryId = itemJson["category"].string!
-            let lat = itemJson["address"]["location"]["coordinates"][1].double!
-            let long = itemJson["address"]["location"]["coordinates"][0].double!
-            let itemTitle = itemJson["title"].string!
-            let itemDescription = itemJson["description"].string!
-            
             // Parse category
-            let catJson  = jsonData["relationships"]["category"]
-            let catTitle = catJson["title"].string!
-            let catImage = catJson["image"].string!
+            let category = self.jsonParser.parseCategory(jsonData["relationships"]["category"])
             
-            // Instantiate category
-            let category = Category(id: categoryId, title: catTitle, imageURL: catImage)
-            
-            
-            let item = Item(
-                id: itemId,
-                title: itemTitle,
-                description: itemDescription,
-                imageURL: "http://placehold.it/350x150",
-                createdAt: NSDate(),
-                owner: user,
-                latitude: lat,
-                longitude: long,
-                category: category
-            )
+            // Parse item
+            let item     = self.jsonParser.parseItem(jsonData["data"], owner: user, category: category!)
             
             completion(item: item, error: nil)
         }
@@ -411,24 +249,12 @@ class DAO: DAOProtocol {
             }
             
             // User
-            let email = jsonData["data"]["email"].string!
-            let name = jsonData["data"]["name"].string
-            
-            // Address
-            let address = jsonData["data"]["address"]["address"].string
-            let cityName = jsonData["data"]["address"]["cityName"].string
-            let postalCode = jsonData["data"]["address"]["postalCode"].int
-            let long = jsonData["data"]["address"]["location"]["coordinates"][0].double!
-            let lat = jsonData["data"]["address"]["location"]["coordinates"][1].double!
-            let completeAddress = Address(address: address!, cityName: cityName!, postalCode: postalCode!, latitude: lat, longitude: long)
-            
-            let user = User(id: userId, email: email, name: name!, address: completeAddress)
+            let user = self.jsonParser.parseUser(jsonData["data"])
             
             completion(user: user, error: nil)
         }
         
     }
-    
     
 }
 

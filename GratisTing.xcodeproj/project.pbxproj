@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		392F388C52E0459B035372C0 /* Pods_GratisTing.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E605BCC98611F66EA577D6FF /* Pods_GratisTing.framework */; };
+		B4E45CF01CF20A70001D4F39 /* JSONParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4E45CEF1CF20A70001D4F39 /* JSONParser.swift */; };
 		F91250CA1CEC6D9B00FFFE75 /* Address.swift in Sources */ = {isa = PBXBuildFile; fileRef = F91250C91CEC6D9B00FFFE75 /* Address.swift */; };
 		F95E01071CEDD1A8007D0BE3 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = F95E01061CEDD1A8007D0BE3 /* Authentication.swift */; };
 		F974FCBD1CF0FFEE00433E7A /* GratisTingAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = F974FCBC1CF0FFEE00433E7A /* GratisTingAnnotation.swift */; };
@@ -43,6 +44,7 @@
 
 /* Begin PBXFileReference section */
 		09C362B687934E594391C86D /* Pods-GratisTing.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratisTing.release.xcconfig"; path = "Pods/Target Support Files/Pods-GratisTing/Pods-GratisTing.release.xcconfig"; sourceTree = "<group>"; };
+		B4E45CEF1CF20A70001D4F39 /* JSONParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONParser.swift; sourceTree = "<group>"; };
 		E605BCC98611F66EA577D6FF /* Pods_GratisTing.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_GratisTing.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		F0EAA90818B2E93437FFD350 /* Pods-GratisTing.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-GratisTing.debug.xcconfig"; path = "Pods/Target Support Files/Pods-GratisTing/Pods-GratisTing.debug.xcconfig"; sourceTree = "<group>"; };
 		F91250C91CEC6D9B00FFFE75 /* Address.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Address.swift; sourceTree = "<group>"; };
@@ -135,7 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				F975B17B1CE2214F00D29403 /* AppDelegate.swift */,
-				F975B1E21CE480E100D29403 /* DAO */,
+				F975B1E21CE480E100D29403 /* Services */,
 				F975B1A51CE22B2E00D29403 /* Models */,
 				F975B1941CE2281700D29403 /* Controllers */,
 				F975B1821CE2214F00D29403 /* Assets.xcassets */,
@@ -236,14 +238,15 @@
 			name = Misc;
 			sourceTree = "<group>";
 		};
-		F975B1E21CE480E100D29403 /* DAO */ = {
+		F975B1E21CE480E100D29403 /* Services */ = {
 			isa = PBXGroup;
 			children = (
 				F975B1E01CE480A400D29403 /* DAO.swift */,
 				F975B1E31CE4811E00D29403 /* DAOProtocol.swift */,
 				F95E01061CEDD1A8007D0BE3 /* Authentication.swift */,
+				B4E45CEF1CF20A70001D4F39 /* JSONParser.swift */,
 			);
-			name = DAO;
+			name = Services;
 			sourceTree = "<group>";
 		};
 		F9B538E71CF074D0009C10CB /* User */ = {
@@ -400,6 +403,7 @@
 				F975B17C1CE2214F00D29403 /* AppDelegate.swift in Sources */,
 				F9E5DDE51CE60C14005A2FB4 /* ShowViewController.swift in Sources */,
 				F974FCBF1CF1E7DA00433E7A /* GratisTingNavItem.swift in Sources */,
+				B4E45CF01CF20A70001D4F39 /* JSONParser.swift in Sources */,
 				F974FCBD1CF0FFEE00433E7A /* GratisTingAnnotation.swift in Sources */,
 				F974FCC11CF1E86400433E7A /* UIColorExtension.swift in Sources */,
 				F975B1961CE2294900D29403 /* RegisterViewController.swift in Sources */,
