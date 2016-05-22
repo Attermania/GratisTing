@@ -84,7 +84,6 @@ class DAO: DAOProtocol {
             
             var items: [Item] = []
             let jsonData = JSON(data: response.data!)
-            var user: User?
             
             // API responded with failure
             if jsonData["success"].bool! == false {
@@ -94,6 +93,7 @@ class DAO: DAOProtocol {
             }
             
             var users: [String : User] = [:]
+            var categories: [String : Category] = [:]
             
             for (_, itemJson) in jsonData["relationships"]["users"] {
                 // User
@@ -105,13 +105,25 @@ class DAO: DAOProtocol {
                 let address = itemJson["address"]["address"].string
                 let cityName = itemJson["address"]["cityName"].string
                 let postalCode = itemJson["address"]["postalCode"].int
-                let long = itemJson["address"]["coordinates"][0].double!
-                let lat = itemJson["address"]["coordinates"][1].double!
+                let long = itemJson["address"]["location"]["coordinates"][0].double!
+                let lat = itemJson["address"]["location"]["coordinates"][1].double!
                 let completeAddress = Address(address: address!, cityName: cityName!, postalCode: postalCode!, latitude: lat, longitude: long)
                 
-                user = User(id: userId, email: email, name: name!, address: completeAddress)
+                let user = User(id: userId, email: email, name: name!, address: completeAddress)
                 
                 users[userId] = user
+                
+            }
+            
+            for (_, itemJson) in jsonData["relationships"]["categories"] {
+                // User
+                let id = itemJson["_id"].string!
+                let image = itemJson["image"].string!
+                let title = itemJson["title"].string!
+                
+                let category = Category(id: id, title: title, imageURL: image)
+                
+                categories[id] = category
                 
             }
 
@@ -120,17 +132,14 @@ class DAO: DAOProtocol {
             for (_, subJson) in jsonData["data"] {
                 
                 // Get data
-                let id = subJson["obj"]["_id"].string!
-                let title = subJson["obj"]["title"].string!
-                let description = subJson["obj"]["description"].string!
-                let userId = subJson["obj"]["owner"].string!
-                let catId = subJson["obj"]["category"].string!
-                let lat = subJson["obj"]["address"]["coordinates"][1].double!
-                let long = subJson["obj"]["address"]["coordinates"][0].double!
-                let distance = subJson["dis"].double!
-                
-                // Instantiate fake category . TODO: parse real category
-                let cat = Category(id: catId, title: "", imageURL: "")
+                let id = subJson["_id"].string!
+                let title = subJson["title"].string!
+                let description = subJson["description"].string!
+                let userId = subJson["owner"].string!
+                let catId = subJson["category"].string!
+                let lat = subJson["address"]["location"]["coordinates"][1].double!
+                let long = subJson["address"]["location"]["coordinates"][0].double!
+                // TODO: calcuate distance
                 
                 // Instantiate item
                 let item = Item(
@@ -142,9 +151,11 @@ class DAO: DAOProtocol {
                     owner: users[userId]!,
                     latitude: lat,
                     longitude: long,
-                    category: cat,
-                    distance: distance
+                    category: categories[catId]!,
+                    distance: 0
                 )
+                
+                item.distance = item.getDistanceInKm(long, sourceLatitude: lat, destLongitude: longitude, destLatitude: latitude)
                 
                 // Append item to list of items
                 items.append(item)
@@ -175,7 +186,8 @@ class DAO: DAOProtocol {
             
             var items: [Item] = []
             let jsonData = JSON(data: response.data!)
-            var user: User?
+            var users: [String : User] = [:]
+            var categories: [String : Category] = [:]
             
             // API responded with failure
             if jsonData["success"].bool! == false {
@@ -194,24 +206,38 @@ class DAO: DAOProtocol {
                 let address = itemJson["address"]["address"].string
                 let cityName = itemJson["address"]["cityName"].string
                 let postalCode = itemJson["address"]["postalCode"].int
-                let long = itemJson["address"]["coordinates"][0].double!
-                let lat = itemJson["address"]["coordinates"][1].double!
+                let long = itemJson["address"]["location"]["coordinates"][0].double!
+                let lat = itemJson["address"]["location"]["coordinates"][1].double!
                 let completeAddress = Address(address: address!, cityName: cityName!, postalCode: postalCode!, latitude: lat, longitude: long)
                 
-                user = User(id: userId, email: email, name: name!, address: completeAddress)
+                let user = User(id: userId, email: email, name: name!, address: completeAddress)
+                
+                users[userId] = user
 
+            }
+            
+            for (_, itemJson) in jsonData["relationships"]["categories"] {
+                // User
+                let id = itemJson["_id"].string!
+                let image = itemJson["image"].string!
+                let title = itemJson["title"].string!
+                
+                let category = Category(id: id, title: title, imageURL: image)
+                
+                categories[id] = category
+                
             }
             
             for (_, itemJson) in jsonData["data"] {
                 
                 let itemId = itemJson["_id"].string!
                 let categoryId = itemJson["category"].string!
-                let lat = itemJson["address"]["coordinates"][1].double!
-                let long = itemJson["address"]["coordinates"][0].double!
+                let ownerId = itemJson["owner"].string!
+                let lat = itemJson["address"]["location"]["coordinates"][1].double!
+                let long = itemJson["address"]["location"]["coordinates"][0].double!
                 let itemTitle = itemJson["title"].string!
                 let itemDescription = itemJson["description"].string!
                 
-                let category = Category(id: categoryId, title: "min hest", imageURL: "http://placehold.it/350x150")
                 
                 let item = Item(
                     id: itemId,
@@ -219,10 +245,10 @@ class DAO: DAOProtocol {
                     description: itemDescription,
                     imageURL: "http://placehold.it/350x150",
                     createdAt: NSDate(),
-                    owner: user!,
+                    owner: users[ownerId]!,
                     latitude: lat,
                     longitude: long,
-                    category: category
+                    category: categories[categoryId]!
                 )
                 
                 items.append(item)
@@ -245,9 +271,11 @@ class DAO: DAOProtocol {
                 "address": user.address.address,
                 "cityName": user.address.cityName,
                 "postalCode": user.address.postalCode,
-                "coordinates": [
-                    user.address.longitude,
-                    user.address.latitude
+                "location": [
+                    "coordinates": [
+                        user.address.longitude,
+                        user.address.latitude
+                    ]
                 ]
             ]
         ]
@@ -277,8 +305,8 @@ class DAO: DAOProtocol {
             let address = jsonData["data"]["address"]["address"].string
             let cityName = jsonData["data"]["address"]["cityName"].string
             let postalCode = jsonData["data"]["address"]["postalCode"].int
-            let long = jsonData["data"]["address"]["coordinates"][0].double!
-            let lat = jsonData["data"]["address"]["coordinates"][1].double!
+            let long = jsonData["data"]["address"]["location"]["coordinates"][0].double!
+            let lat = jsonData["data"]["address"]["location"]["coordinates"][1].double!
             let completeAddress = Address(address: address!, cityName: cityName!, postalCode: postalCode!, latitude: lat, longitude: long)
             
             let user = User(id: userId, email: email, name: name!, address: completeAddress)
@@ -305,9 +333,11 @@ class DAO: DAOProtocol {
                 "address": item.address!.address,
                 "cityName": item.address!.cityName,
                 "postalCode": item.address!.postalCode,
-                "coordinates": [
-                    item.address!.longitude,
-                    item.address!.latitude
+                "location": [
+                    "coordinates": [
+                        item.address!.longitude,
+                        item.address!.latitude
+                    ]
                 ]
             ],
             "categoryId": (item.category!.id)!
@@ -331,8 +361,8 @@ class DAO: DAOProtocol {
             let itemJson = jsonData["data"]
             let itemId = itemJson["_id"].string!
             let categoryId = itemJson["category"].string!
-            let lat = itemJson["address"]["coordinates"][1].double!
-            let long = itemJson["address"]["coordinates"][0].double!
+            let lat = itemJson["address"]["location"]["coordinates"][1].double!
+            let long = itemJson["address"]["location"]["coordinates"][0].double!
             let itemTitle = itemJson["title"].string!
             let itemDescription = itemJson["description"].string!
             
@@ -383,8 +413,8 @@ class DAO: DAOProtocol {
             let address = jsonData["data"]["address"]["address"].string
             let cityName = jsonData["data"]["address"]["cityName"].string
             let postalCode = jsonData["data"]["address"]["postalCode"].int
-            let long = jsonData["data"]["address"]["coordinates"][0].double!
-            let lat = jsonData["data"]["address"]["coordinates"][1].double!
+            let long = jsonData["data"]["address"]["location"]["coordinates"][0].double!
+            let lat = jsonData["data"]["address"]["location"]["coordinates"][1].double!
             let completeAddress = Address(address: address!, cityName: cityName!, postalCode: postalCode!, latitude: lat, longitude: long)
             
             let user = User(id: userId, email: email, name: name!, address: completeAddress)

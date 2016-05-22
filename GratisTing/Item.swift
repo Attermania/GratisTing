@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import MapKit
 
 class Item {
     
@@ -61,6 +62,11 @@ class Item {
         self.longitude = longitude
         self.category = category
         self.distance = distance
+    }
+    
+    func getDistanceInKm(destLongitude: Double, destLatitude: Double) -> Double {
+        
+        return 0
     }
     
 }

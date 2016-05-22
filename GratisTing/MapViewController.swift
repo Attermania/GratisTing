@@ -127,8 +127,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             // Get the items - TODO: Find the radius visible on the map
             self.dao.getItemsFromLocation(
                 self.category?.id,
-                latitude: currentLocation.coordinate.latitude,
-                longitude: currentLocation.coordinate.longitude,
+                latitude: self.lat,
+                longitude: self.long,
                 radius: 1000,
                 completion: { (items: [Item]?, error: NSError?) in
                     if let _ = error {
@@ -197,9 +197,11 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     func showItem(sender: UITapGestureRecognizer) {
         if sender.view is MKAnnotationView {
             let view = sender.view as! MKAnnotationView
-            let pin = view.annotation as! GratisTingAnnotation
-            item = pin.item
-            performSegueWithIdentifier("showItem", sender: self)
+            if view.annotation is GratisTingAnnotation {
+                let pin = view.annotation as! GratisTingAnnotation
+                item = pin.item
+                performSegueWithIdentifier("showItem", sender: self)
+            }
         }
         
     }
@@ -217,7 +219,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
                 listViewItemController.hasLocation = true
                 listViewItemController.lat = self.lat
                 listViewItemController.long = self.long
-                print(locationManager.location?.coordinate.latitude)
                 return
             }
 
