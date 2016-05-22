@@ -151,11 +151,9 @@ class DAO: DAOProtocol {
                     owner: users[userId]!,
                     latitude: lat,
                     longitude: long,
-                    category: categories[catId]!,
-                    distance: 0
+                    category: categories[catId]!
                 )
                 
-                item.distance = item.getDistanceInKm(long, sourceLatitude: lat, destLongitude: longitude, destLatitude: latitude)
                 
                 // Append item to list of items
                 items.append(item)

@@ -49,24 +49,18 @@ class Item {
         self.category = category
     }
     
-    /**
-     Constructor with id attribute. Used when parsing JSON to Item object - with distance.
-     */
-    init (id: String, title: String, description: String, imageURL: String, createdAt: NSDate, owner: User, latitude: Double, longitude: Double, category: Category, distance: Double) {
-        self.title = title
-        self.description = description
-        self.imageURL = imageURL
-        self.createdAt = createdAt
-        self.owner = owner
-        self.latitude = latitude
-        self.longitude = longitude
-        self.category = category
-        self.distance = distance
-    }
-    
-    func getDistanceInKm(destLongitude: Double, destLatitude: Double) -> Double {
+    func getDistanceInKm(destLongitude: Double?, destLatitude: Double?) -> Double? {
         
-        return 0
+        if destLongitude == nil || destLatitude == nil {
+            return nil
+        }
+        
+        let source = CLLocation(latitude: self.latitude, longitude: self.longitude)
+        let dest = CLLocation(latitude: destLatitude!, longitude: destLongitude!)
+        
+        let distance = source.distanceFromLocation(dest) / 1000
+        
+        return distance
     }
     
 }

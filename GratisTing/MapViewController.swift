@@ -127,8 +127,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             // Get the items - TODO: Find the radius visible on the map
             self.dao.getItemsFromLocation(
                 self.category?.id,
-                latitude: self.lat,
-                longitude: self.long,
+                latitude: centerMap.latitude,
+                longitude: centerMap.longitude,
                 radius: 1000,
                 completion: { (items: [Item]?, error: NSError?) in
                     if let _ = error {

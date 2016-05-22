@@ -17,6 +17,7 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     @IBOutlet weak var itemTableView: UITableView!
     
     let dao = AppDelegate.dao
+    let auth = AppDelegate.authentication
     
     @IBAction func navigateToMapButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
@@ -86,7 +87,7 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.titleLabel.text = items[indexPath.row].title
         cell.descriptionLabel.text = items[indexPath.row].description
         if hasLocation! {
-            cell.distanceLabel.text = String(items[indexPath.row].distance)
+            cell.distanceLabel.text = String(items[indexPath.row].getDistanceInKm(auth.user?.address.latitude, destLatitude: auth.user?.address.longitude))
         }
         
         return cell
