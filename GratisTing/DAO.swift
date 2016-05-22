@@ -116,7 +116,7 @@ class DAO: DAOProtocol {
             }
             
             for (_, itemJson) in jsonData["relationships"]["categories"] {
-                // User
+                // Parse categories
                 let id = itemJson["_id"].string!
                 let image = itemJson["image"].string!
                 let title = itemJson["title"].string!
@@ -139,7 +139,6 @@ class DAO: DAOProtocol {
                 let catId = subJson["category"].string!
                 let lat = subJson["address"]["location"]["coordinates"][1].double!
                 let long = subJson["address"]["location"]["coordinates"][0].double!
-                // TODO: calcuate distance
                 
                 // Instantiate item
                 let item = Item(
@@ -356,6 +355,8 @@ class DAO: DAOProtocol {
                 completion(item: nil, error: error)
                 return
             }
+            
+            // Parse item
             let itemJson = jsonData["data"]
             let itemId = itemJson["_id"].string!
             let categoryId = itemJson["category"].string!
@@ -364,8 +365,13 @@ class DAO: DAOProtocol {
             let itemTitle = itemJson["title"].string!
             let itemDescription = itemJson["description"].string!
             
-            // Instantiate fake category. TODO: parse real category
-            let category = Category(id: categoryId, title: "", imageURL: "")
+            // Parse category
+            let catJson  = jsonData["relationships"]["category"]
+            let catTitle = catJson["title"].string!
+            let catImage = catJson["image"].string!
+            
+            // Instantiate category
+            let category = Category(id: categoryId, title: catTitle, imageURL: catImage)
             
             
             let item = Item(
@@ -384,6 +390,7 @@ class DAO: DAOProtocol {
         }
     }
     
+    // MARK: Get a user by id
     func getUser(userId: String, completion: (user: User?, error: NSError?) -> ()) {
         
         Alamofire.request(.GET, "http://gratisting.dev:3000/api/v1/users/" + userId).responseJSON { (response) in
