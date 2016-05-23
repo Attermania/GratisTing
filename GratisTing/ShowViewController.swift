@@ -20,6 +20,8 @@ class ShowViewController: UIViewController {
     @IBOutlet weak var itemTitleLabel: UILabel!
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var itemOwnerLabel: UILabel!
+    @IBOutlet weak var userImageView: UIImageView!
+    @IBOutlet weak var sendRequestButton: UIButton!
     
     override func viewDidLoad() {
 //        self.title = item?.title
@@ -30,18 +32,30 @@ class ShowViewController: UIViewController {
 //        itemDescriptionText.text = item?.description
 //        // Do any additional setup after loading the view.
 //        item = nil
+        //self.navigationController?.navigationBar.backgroundColor = UIColor(hexString: "#37383A")
+        
     }
     
     override func viewWillAppear(animated: Bool) {
-        self.title = item?.title
-        self.title = item?.title
         itemTitleLabel.text = item?.title
         itemDescriptionText.text = item?.description
         // Do any additional setup after loading the view.
         itemTitleLabel.text = item?.title
         itemDescriptionText.text = item?.description
         itemOwnerLabel.text = item?.owner?.name
+        
+        GratisTingNavItem.setupPresentation(false, vc: self)
+        
+        let image: UIImage = UIImage(named: "user-1")!
+        userImageView.layer.borderWidth = 1.0
+        userImageView.layer.masksToBounds = false
+        userImageView.layer.borderColor = UIColor.whiteColor().CGColor
+        userImageView.layer.cornerRadius = userImageView.frame.size.width/2
+        userImageView.clipsToBounds = true
+        userImageView.image = image
+        
         item = nil
+        
     }
     
     override func viewWillDisappear(animated: Bool) {

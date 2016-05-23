@@ -140,12 +140,14 @@ class GratisTingNavItem: UINavigationItem {
     }
     
     func backButtonPressed () {
-        if GratisTingNavItem.isPresenter {
+        let vcs = GratisTingNavItem.vc?.navigationController?.viewControllers
+        if vcs?.count <= 1 {
             GratisTingNavItem.vc?.navigationController?.dismissViewControllerAnimated(true, completion: nil)
-
-        } else {
-            GratisTingNavItem.vc?.navigationController?.popToRootViewControllerAnimated(true)
+            return
         }
+        let prev = (vcs?.count)! - 2
+        let previousVC = vcs![ prev >= 0 ? prev : 0]
+        GratisTingNavItem.vc?.navigationController?.popToViewController(previousVC, animated: true)
     }
     
     private func includeDaoAndAuth () {

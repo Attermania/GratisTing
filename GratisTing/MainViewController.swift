@@ -85,19 +85,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         // Do any additional setup after loading the view.
     }
-
-    @IBAction func goToLogin(sender: AnyObject) {
-        if auth.user == nil {
-            let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
-            let controller = storyboard.instantiateViewControllerWithIdentifier("Login") as! UINavigationController
-            self.presentViewController(controller, animated: true, completion: nil)
-            return
-        }
-        let storyboard = UIStoryboard(name: "User", bundle: nil)
-        let controller = storyboard.instantiateViewControllerWithIdentifier("User") as! UINavigationController
-        self.presentViewController(controller, animated: true, completion: nil)
-        
-    }
     
     func loadCategories() {
         dao.getAllCategories { (categories: [Category]?, error: NSError?) in
