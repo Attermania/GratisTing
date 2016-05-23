@@ -42,6 +42,10 @@
                             <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LSH-gm-zvC">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                             </mapView>
+                            <searchBar contentMode="redraw" placeholder="Søg efter..." translatesAutoresizingMaskIntoConstraints="NO" id="KeR-av-sD3">
+                                <rect key="frame" x="10" y="10" width="580" height="44"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -54,6 +58,7 @@
                             <constraint firstItem="iPW-zN-Sdj" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="DCz-fW-4RM"/>
                             <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="Lu1-pX-Mj2"/>
                             <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="MzS-8m-mqh"/>
+                            <constraint firstAttribute="trailing" secondItem="KeR-av-sD3" secondAttribute="trailing" constant="10" id="NXA-XW-0Yq"/>
                             <constraint firstAttribute="trailing" secondItem="ElO-yt-dl2" secondAttribute="trailing" constant="10" id="QOs-2q-QbE"/>
                             <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" id="TVw-Y4-D3v"/>
                             <constraint firstItem="LSH-gm-zvC" firstAttribute="leading" secondItem="eaL-68-HgG" secondAttribute="leading" id="XOl-fv-Qal"/>
@@ -62,8 +67,10 @@
                             <constraint firstItem="ElO-yt-dl2" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="f07-vu-44x"/>
                             <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="ElO-yt-dl2" secondAttribute="bottom" constant="10" id="lQF-0R-vuf"/>
                             <constraint firstItem="LSH-gm-zvC" firstAttribute="top" secondItem="WQh-ZY-PcT" secondAttribute="bottom" id="rIO-X9-7vI"/>
+                            <constraint firstItem="KeR-av-sD3" firstAttribute="top" secondItem="WQh-ZY-PcT" secondAttribute="bottom" constant="10" id="s9X-L5-gIn"/>
                             <constraint firstItem="ElO-yt-dl2" firstAttribute="leading" secondItem="iPW-zN-Sdj" secondAttribute="trailing" constant="10" id="vOf-oA-Zne"/>
                             <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="xfb-jw-RRs"/>
+                            <constraint firstItem="KeR-av-sD3" firstAttribute="leading" secondItem="eaL-68-HgG" secondAttribute="leading" constant="10" id="yay-ue-myG"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -86,6 +93,7 @@
                         <outlet property="itemMap" destination="LSH-gm-zvC" id="bb4-Ap-D96"/>
                         <outlet property="listViewIcon" destination="ElO-yt-dl2" id="EHs-XQ-3Cp"/>
                         <outlet property="relocate123" destination="iPW-zN-Sdj" id="HIZ-M3-Frt"/>
+                        <outlet property="search" destination="KeR-av-sD3" id="pwg-ps-TiJ"/>
                         <segue destination="LVO-Sz-naG" kind="show" identifier="showItem" id="LS7-Tz-eWt"/>
                     </connections>
                 </viewController>
@@ -131,6 +139,6 @@
     </scenes>
     <resources>
         <image name="listviewmap" width="26" height="26"/>
-        <image name="relocate" width="36" height="36"/>
+        <image name="relocate" width="26" height="26"/>
     </resources>
 </document>
