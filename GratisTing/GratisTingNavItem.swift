@@ -10,38 +10,39 @@ import UIKit
 
 class GratisTingNavItem: UINavigationItem {
     
+    // MARK: Dependencies
     var dao: DAOProtocol!
     var auth: Authentication!
     
-    static var isPresenter: Bool = false
-    
+    // MARK: Instance variables
     var buttons: [UIBarButtonItem] = []
     
-    static var vc: UIViewController? {
+    // MARK: Static variables
+    static var presenter: UIViewController? {
         didSet {
 
-            switch vc {
+            switch presenter {
                 
             case is UserViewController:
-                let userVC = vc as! UserViewController
+                let userVC = presenter as! UserViewController
                 userVC.navigationItem.rightBarButtonItems![0].enabled = false
                 
             case is MainViewController:
-                let mainVC = vc as! MainViewController
+                let mainVC = presenter as! MainViewController
                 let logo = UIBarButtonItem(image: UIImage(named: "logo1"), landscapeImagePhone: UIImage(named: "logo1"), style: .Plain, target: self, action: nil)
                 logo.tintColor = UIColor(hexString: "#FFCC26")
                 mainVC.navigationItem.leftBarButtonItem = logo
             
             case is LoginViewController:
-                let loginVC = vc as! LoginViewController
+                let loginVC = presenter as! LoginViewController
                 loginVC.navigationItem.rightBarButtonItems![0].enabled = false
                 
             case is RegisterViewController:
-                let regVC = vc as! RegisterViewController
+                let regVC = presenter as! RegisterViewController
                 regVC.navigationItem.rightBarButtonItems![0].enabled = false
                 
             case is CreateViewController:
-                let createVC = vc as! CreateViewController
+                let createVC = presenter as! CreateViewController
                 createVC.navigationItem.rightBarButtonItems![1].enabled = false
                 
             default:
@@ -50,6 +51,7 @@ class GratisTingNavItem: UINavigationItem {
         }
     }
     
+    // MARK: methods
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         
@@ -79,11 +81,10 @@ class GratisTingNavItem: UINavigationItem {
     func createItem() {
         includeDaoAndAuth()
         
-        if GratisTingNavItem.vc == nil {
+        // If there is no presenter, abort the ship
+        guard let presenter = GratisTingNavItem.presenter else {
             return
         }
-        
-        let presenter = GratisTingNavItem.vc!
         
         // If token is set, present create view controller
         if auth.token != nil {
@@ -104,7 +105,7 @@ class GratisTingNavItem: UINavigationItem {
             let loginController = controller.childViewControllers[0] as! LoginViewController
             
             loginController.action = "LoginCreateItem"
-            presenter.presentViewController(loginController, animated: true, completion: nil)
+            presenter.presentViewController(controller, animated: true, completion: nil)
             return
             
         }
@@ -115,38 +116,37 @@ class GratisTingNavItem: UINavigationItem {
     
     func goToUserScreen() {
         includeDaoAndAuth()
-        if GratisTingNavItem.vc == nil {
+        
+        guard let presenter = GratisTingNavItem.presenter else {
             return
         }
-        let presenter = GratisTingNavItem.vc!
         
+        // If user is not logged in, go to login screen
         if auth.user == nil {
             let storyboard = UIStoryboard(name: "Authentication", bundle: nil)
             let controller = storyboard.instantiateViewControllerWithIdentifier("Login") as! UINavigationController
+            
             presenter.presentViewController(controller, animated: true, completion: nil)
             return
         }
+        
+        // Else go to user screen
         let storyboard = UIStoryboard(name: "User", bundle: nil)
         let controller = storyboard.instantiateViewControllerWithIdentifier("User") as! UINavigationController
+        
         presenter.presentViewController(controller, animated: true, completion: nil)
         
     }
     
-    static func setupPresentation(isPresenter : Bool, vc : UIViewController) {
-        GratisTingNavItem.isPresenter = isPresenter
-        GratisTingNavItem.vc = vc
-        
-    }
-    
     func backButtonPressed () {
-        let vcs = GratisTingNavItem.vc?.navigationController?.viewControllers
+        let vcs = GratisTingNavItem.presenter?.navigationController?.viewControllers
         if vcs?.count <= 1 {
-            GratisTingNavItem.vc?.navigationController?.dismissViewControllerAnimated(true, completion: nil)
+            GratisTingNavItem.presenter?.navigationController?.dismissViewControllerAnimated(true, completion: nil)
             return
         }
         let prev = (vcs?.count)! - 2
         let previousVC = vcs![ prev >= 0 ? prev : 0]
-        GratisTingNavItem.vc?.navigationController?.popToViewController(previousVC, animated: true)
+        GratisTingNavItem.presenter?.navigationController?.popToViewController(previousVC, animated: true)
     }
     
     private func includeDaoAndAuth () {

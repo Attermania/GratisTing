@@ -107,7 +107,7 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     override func viewWillAppear(animated: Bool) {
-        GratisTingNavItem.setupPresentation(true, vc: self)
+        GratisTingNavItem.presenter = self
     }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

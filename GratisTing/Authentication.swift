@@ -52,6 +52,7 @@ class Authentication {
             
             self.user  = user
             self.token = token
+            completion(token: token, user: user, error: nil)
         }
         
     }

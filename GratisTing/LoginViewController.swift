@@ -23,10 +23,10 @@ class LoginViewController: UIViewController {
     
     // MARK: IB Actions
     @IBAction func loginButton(sender: AnyObject) {
+        
         auth.authenticate(emailTextfield.text!, password: passwordTextfield.text!) { (jwt, user, error) in
-            if let error = error {
-                // Error, abort the ship
-                print(error)
+            if let _ = error {
+                // Error, abort the ship - TODO: Show a message to user
                 return
             }
             
@@ -65,7 +65,7 @@ class LoginViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        GratisTingNavItem.setupPresentation(true, vc: self)
+        GratisTingNavItem.presenter = self
     }
     
     override func viewDidAppear(animated: Bool) {

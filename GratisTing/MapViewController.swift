@@ -59,7 +59,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     override func viewWillAppear(animated: Bool) {
-        GratisTingNavItem.setupPresentation(false, vc: self)
+        GratisTingNavItem.presenter = self
     }
     
     func addItemsToMap(items: [Item]) {

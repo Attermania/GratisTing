@@ -10,20 +10,21 @@ import UIKit
 
 class UserViewController: UIViewController {
     
+    // MARK: Dependencies
     let auth = AppDelegate.authentication
 
+    // MARK: Ib outlets
     @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var logoutButton: UIButton!
     @IBOutlet weak var userAvatarImageview: UIImageView!
     @IBOutlet weak var userAddressLabel: UILabel!
     @IBOutlet weak var postalCodeLabel: UILabel!
     
-    
+    // MARK: Ib actions
     @IBAction func navigateBackButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    // Logout button
     @IBAction func logoutButton(sender: AnyObject) {
         auth.logout()
         let mainVC = self.presentingViewController?.childViewControllers[0] as! MainViewController
@@ -32,10 +33,7 @@ class UserViewController: UIViewController {
         })
     }
     
-    override func viewDidAppear(animated: Bool) {
-        GratisTingNavItem.setupPresentation(true, vc: self)
-    }
-    
+    // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
                 
@@ -61,18 +59,7 @@ class UserViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        GratisTingNavItem.setupPresentation(false, vc: self)
+        GratisTingNavItem.presenter = self
     }
-
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

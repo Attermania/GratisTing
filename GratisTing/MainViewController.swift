@@ -54,7 +54,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     override func viewWillAppear(animated: Bool) {
-        GratisTingNavItem.setupPresentation(true, vc: self)
+        GratisTingNavItem.presenter = self
     }
     
     override func viewDidLoad() {

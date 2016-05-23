@@ -71,7 +71,7 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     override func viewWillAppear(animated: Bool) {
-        GratisTingNavItem.setupPresentation(false, vc: self)
+        GratisTingNavItem.presenter = self
     }
 
     

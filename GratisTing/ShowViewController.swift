@@ -29,16 +29,7 @@ class ShowViewController: UIViewController {
     @IBOutlet weak var distanceLabel: UILabel!
     
     override func viewDidLoad() {
-//        self.title = item?.title
         super.viewDidLoad()
-//        print("view did load")
-//        self.title = item?.title
-//        itemTitleLabel.text = item?.title
-//        itemDescriptionText.text = item?.description
-//        // Do any additional setup after loading the view.
-//        item = nil
-        //self.navigationController?.navigationBar.backgroundColor = UIColor(hexString: "#37383A")
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -52,7 +43,7 @@ class ShowViewController: UIViewController {
         userAddressLabel.text = "\((item?.address?.postalCode)!) \((item?.address?.cityName)!)"
         distanceLabel.text = "\(distanceFromPreviousView) væk"
         
-        GratisTingNavItem.setupPresentation(false, vc: self)
+        GratisTingNavItem.presenter = self
         
         let image: UIImage = UIImage(named: "user-1")!
         userImageView.layer.borderWidth = 1.0
