@@ -3,6 +3,7 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
         <!--User View Controller-->
@@ -17,21 +18,56 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCj-Wa-JHL">
-                                <rect key="frame" x="93" y="182" width="47" height="30"/>
-                                <state key="normal" title="Log ud"/>
-                                <connections>
-                                    <action selector="logoutButton:" destination="CI2-JR-un5" eventType="touchUpInside" id="Vf2-5K-6YQ"/>
-                                </connections>
-                            </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTX-fv-uIS">
-                                <rect key="frame" x="95" y="91" width="208" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wTX-fv-uIS">
+                                <rect key="frame" x="45" y="129" width="54" height="27"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wZ8-QV-3F2">
+                                <rect key="frame" x="455" y="89" width="100" height="100"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="100" id="cDY-4S-tvB"/>
+                                    <constraint firstAttribute="height" constant="100" id="hpA-yb-hQ9"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1MC-hr-WyS">
+                                <rect key="frame" x="45" y="176" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yAd-Ma-bB4">
+                                <rect key="frame" x="45" y="207" width="42" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BCj-Wa-JHL">
+                                <rect key="frame" x="243" y="524" width="114" height="36"/>
+                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="     Log ud     ">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="logoutButton:" destination="CI2-JR-un5" eventType="touchUpInside" id="Vf2-5K-6YQ"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="wZ8-QV-3F2" secondAttribute="trailing" constant="25" id="E0A-La-NXd"/>
+                            <constraint firstItem="1MC-hr-WyS" firstAttribute="leading" secondItem="8lR-Ls-fC7" secondAttribute="leadingMargin" constant="25" id="K5b-em-oQx"/>
+                            <constraint firstItem="wTX-fv-uIS" firstAttribute="leading" secondItem="8lR-Ls-fC7" secondAttribute="leadingMargin" constant="25" id="KHK-9E-nff"/>
+                            <constraint firstItem="1MC-hr-WyS" firstAttribute="top" secondItem="wTX-fv-uIS" secondAttribute="bottom" constant="20" id="MVR-lh-3rv"/>
+                            <constraint firstItem="312-FF-lv7" firstAttribute="top" secondItem="BCj-Wa-JHL" secondAttribute="bottom" constant="40" id="OiY-g2-wcP"/>
+                            <constraint firstItem="wZ8-QV-3F2" firstAttribute="top" secondItem="LQo-4k-2lW" secondAttribute="bottom" constant="25" id="ZvR-X5-EWv"/>
+                            <constraint firstItem="yAd-Ma-bB4" firstAttribute="top" secondItem="1MC-hr-WyS" secondAttribute="bottom" constant="10" id="dWJ-dL-x3F"/>
+                            <constraint firstItem="BCj-Wa-JHL" firstAttribute="centerX" secondItem="8lR-Ls-fC7" secondAttribute="centerX" id="hid-h7-EhP"/>
+                            <constraint firstItem="wTX-fv-uIS" firstAttribute="top" secondItem="LQo-4k-2lW" secondAttribute="bottom" constant="65" id="kJu-G0-zcP"/>
+                            <constraint firstItem="yAd-Ma-bB4" firstAttribute="leading" secondItem="8lR-Ls-fC7" secondAttribute="leadingMargin" constant="25" id="ucW-TX-hNy"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="ryW-of-Lt1" customClass="GratisTingNavItem" customModule="GratisTing" customModuleProvider="target">
                         <barButtonItem key="leftBarButtonItem" image="back" id="Qbe-kz-V5c">
@@ -41,6 +77,10 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="logoutButton" destination="BCj-Wa-JHL" id="HVN-Ae-8AT"/>
+                        <outlet property="postalCodeLabel" destination="yAd-Ma-bB4" id="8ss-qf-GWN"/>
+                        <outlet property="userAddressLabel" destination="1MC-hr-WyS" id="Po2-EH-JbJ"/>
+                        <outlet property="userAvatarImageview" destination="wZ8-QV-3F2" id="Dmj-1y-njO"/>
                         <outlet property="userNameLabel" destination="wTX-fv-uIS" id="epX-YY-Ejx"/>
                     </connections>
                 </viewController>

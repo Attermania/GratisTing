@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Authentication-->
+        <!--Login View Controller-->
         <scene sceneID="78e-Bf-8ZB">
             <objects>
                 <viewController storyboardIdentifier="LoginView" id="j24-Y2-fvL" customClass="LoginViewController" customModule="GratisTing" customModuleProvider="target" sceneMemberID="viewController">
@@ -70,7 +70,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Authentication" id="XVS-H3-038" customClass="GratisTingNavItem" customModule="GratisTing" customModuleProvider="target">
+                    <navigationItem key="navigationItem" id="XVS-H3-038" customClass="GratisTingNavItem" customModule="GratisTing" customModuleProvider="target">
                         <barButtonItem key="backBarButtonItem" id="Mdu-Kl-CsI"/>
                         <barButtonItem key="leftBarButtonItem" image="back" id="uqp-I1-yDx">
                             <connections>
@@ -87,7 +87,7 @@
             </objects>
             <point key="canvasLocation" x="1175" y="392"/>
         </scene>
-        <!--Authentication-->
+        <!--Register View Controller-->
         <scene sceneID="exW-jX-t7W">
             <objects>
                 <viewController storyboardIdentifier="Register" id="1mY-Xp-5xW" customClass="RegisterViewController" customModule="GratisTing" customModuleProvider="target" sceneMemberID="viewController">
@@ -163,7 +163,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Authentication" id="Xbn-tu-hs8" customClass="GratisTingNavItem" customModule="GratisTing" customModuleProvider="target">
+                    <navigationItem key="navigationItem" id="Xbn-tu-hs8" customClass="GratisTingNavItem" customModule="GratisTing" customModuleProvider="target">
                         <barButtonItem key="backBarButtonItem" id="nBt-FL-uw1"/>
                     </navigationItem>
                     <connections>
