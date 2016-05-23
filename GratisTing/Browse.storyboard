@@ -134,7 +134,7 @@ Den kan afhentes mellem klokken 14 og 16.</string>
                             <constraint firstItem="32Z-Ww-wek" firstAttribute="leading" secondItem="4sU-nN-csp" secondAttribute="leadingMargin" constant="-20" id="vCX-zw-mfs"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="RmD-be-4qH"/>
+                    <navigationItem key="navigationItem" id="RmD-be-4qH" customClass="GratisTingNavItem" customModule="GratisTing" customModuleProvider="target"/>
                     <connections>
                         <outlet property="itemTableView" destination="32Z-Ww-wek" id="rlg-Pe-X0I"/>
                     </connections>
