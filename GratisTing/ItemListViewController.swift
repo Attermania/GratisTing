@@ -14,6 +14,7 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     var hasLocation: Bool!
     var lat: Double?
     var long: Double?
+    var distanceToPass = ""
 
     @IBOutlet weak var itemTableView: UITableView!
     
@@ -97,10 +98,14 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
             let distance = items[indexPath.row].getDistanceInKm(long, destLatitude: lat)!
             // format in kilometer if distance is 1 or more.
             if distance >= 1 {
-                cell.distanceLabel.text = String(format:"%.1f", distance) + " km"
+                let dist = String(format:"%.1f", distance) + " km"
+                cell.distanceLabel.text = dist
+                distanceToPass = dist
             } else {
                 // format distance in meters if less than 1 km.
-                cell.distanceLabel.text = String(format:"%.0f", distance*1000) + " m"
+                let dist = String(format:"%.0f", distance*1000) + " m"
+                cell.distanceLabel.text = dist
+                distanceToPass = dist
             }
         }
         
@@ -116,6 +121,7 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         if segue.identifier == "showItem" {
             let showItemViewController = segue.destinationViewController as! ShowViewController
             showItemViewController.item = items[(itemTableView.indexPathForSelectedRow?.row)!]
+            showItemViewController.distanceFromPreviousView = distanceToPass
         }
     }
 }

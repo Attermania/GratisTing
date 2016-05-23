@@ -11,6 +11,8 @@ import UIKit
 class ShowViewController: UIViewController {
     
     var item: Item?
+    
+    var distanceFromPreviousView = ""
 
     @IBOutlet weak var itemDescriptionText: UITextView! {
         didSet {
@@ -21,7 +23,10 @@ class ShowViewController: UIViewController {
     @IBOutlet weak var itemImage: UIImageView!
     @IBOutlet weak var itemOwnerLabel: UILabel!
     @IBOutlet weak var userImageView: UIImageView!
-    @IBOutlet weak var sendRequestButton: UIButton!
+    @IBOutlet weak var userAddressLabel: UILabel!
+    @IBOutlet weak var contactButton: UIButton!
+    @IBOutlet weak var labelOwnerCity: UILabel!
+    @IBOutlet weak var distanceLabel: UILabel!
     
     override func viewDidLoad() {
 //        self.title = item?.title
@@ -37,12 +42,15 @@ class ShowViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
+        contactButton.layer.cornerRadius = 5
         itemTitleLabel.text = item?.title
         itemDescriptionText.text = item?.description
         // Do any additional setup after loading the view.
         itemTitleLabel.text = item?.title
         itemDescriptionText.text = item?.description
         itemOwnerLabel.text = item?.owner?.name
+        userAddressLabel.text = "\((item?.address?.postalCode)!) \((item?.address?.cityName)!)"
+        distanceLabel.text = "\(distanceFromPreviousView) væk"
         
         GratisTingNavItem.setupPresentation(false, vc: self)
         
