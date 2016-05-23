@@ -17,31 +17,45 @@
                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ElO-yt-dl2">
-                                <rect key="frame" x="560" y="496" width="30" height="30"/>
-                                <state key="normal" title="List"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ElO-yt-dl2" customClass="GratisTingMapButton" customModule="GratisTing" customModuleProvider="target">
+                                <rect key="frame" x="463" y="465" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="PUs-kZ-DSm"/>
+                                    <constraint firstAttribute="height" constant="56" id="kmH-RE-Z8s"/>
+                                </constraints>
+                                <state key="normal" image="listviewmap"/>
                                 <connections>
                                     <segue destination="ptu-nd-BKj" kind="show" identifier="goToListView" id="BHQ-e2-SJB"/>
                                 </connections>
                             </button>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LSH-gm-zvC">
-                                <rect key="frame" x="0.0" y="64" width="600" height="486"/>
-                            </mapView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPW-zN-Sdj">
-                                <rect key="frame" x="490" y="496" width="60" height="30"/>
-                                <state key="normal" title="Relocate"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPW-zN-Sdj" customClass="GratisTingMapButton" customModule="GratisTing" customModuleProvider="target">
+                                <rect key="frame" x="529" y="465" width="56" height="56"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="56" id="VC7-lo-okg"/>
+                                    <constraint firstAttribute="height" constant="56" id="uWm-JH-TDh"/>
+                                </constraints>
+                                <state key="normal" image="relocate"/>
                                 <connections>
                                     <action selector="getCurrentPosition:" destination="lUR-RT-RxV" eventType="touchUpInside" id="MRv-2M-tkJ"/>
                                 </connections>
                             </button>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LSH-gm-zvC">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
+                            </mapView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="iPW-zN-Sdj" secondAttribute="trailing" constant="15" id="07W-ud-lZ9"/>
+                            <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="iPW-zN-Sdj" secondAttribute="bottom" constant="15" id="24I-fV-UB3"/>
                             <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="iPW-zN-Sdj" secondAttribute="bottom" constant="10" id="7ls-X0-SpC"/>
+                            <constraint firstItem="iPW-zN-Sdj" firstAttribute="leading" secondItem="ElO-yt-dl2" secondAttribute="trailing" constant="10" id="8h0-ZA-6H1"/>
+                            <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="ElO-yt-dl2" secondAttribute="bottom" constant="15" id="9Tt-dh-P2n"/>
+                            <constraint firstItem="iPW-zN-Sdj" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" id="AJM-3Q-lq2"/>
                             <constraint firstItem="iPW-zN-Sdj" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="DCz-fW-4RM"/>
                             <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="Lu1-pX-Mj2"/>
                             <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="MzS-8m-mqh"/>
                             <constraint firstAttribute="trailing" secondItem="ElO-yt-dl2" secondAttribute="trailing" constant="10" id="QOs-2q-QbE"/>
+                            <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" id="TVw-Y4-D3v"/>
                             <constraint firstItem="LSH-gm-zvC" firstAttribute="leading" secondItem="eaL-68-HgG" secondAttribute="leading" id="XOl-fv-Qal"/>
                             <constraint firstItem="o6T-en-TC4" firstAttribute="top" secondItem="LSH-gm-zvC" secondAttribute="bottom" constant="10" id="dBI-DU-sHc"/>
                             <constraint firstAttribute="trailing" secondItem="LSH-gm-zvC" secondAttribute="trailing" id="dvZ-l0-rie"/>
@@ -53,16 +67,25 @@
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
+                                <exclude reference="7ls-X0-SpC"/>
                                 <exclude reference="Lu1-pX-Mj2"/>
                                 <exclude reference="MzS-8m-mqh"/>
                                 <exclude reference="dBI-DU-sHc"/>
+                                <exclude reference="lQF-0R-vuf"/>
                                 <exclude reference="xfb-jw-RRs"/>
+                                <exclude reference="QOs-2q-QbE"/>
+                                <exclude reference="f07-vu-44x"/>
+                                <exclude reference="vOf-oA-Zne"/>
+                                <exclude reference="AJM-3Q-lq2"/>
+                                <exclude reference="DCz-fW-4RM"/>
                             </mask>
                         </variation>
                     </view>
                     <navigationItem key="navigationItem" id="b1G-gn-arP" customClass="GratisTingNavItem" customModule="GratisTing" customModuleProvider="target"/>
                     <connections>
                         <outlet property="itemMap" destination="LSH-gm-zvC" id="bb4-Ap-D96"/>
+                        <outlet property="listViewIcon" destination="ElO-yt-dl2" id="EHs-XQ-3Cp"/>
+                        <outlet property="relocate123" destination="iPW-zN-Sdj" id="HIZ-M3-Frt"/>
                         <segue destination="LVO-Sz-naG" kind="show" identifier="showItem" id="LS7-Tz-eWt"/>
                     </connections>
                 </viewController>
@@ -106,4 +129,8 @@
             <point key="canvasLocation" x="483" y="407"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="listviewmap" width="26" height="26"/>
+        <image name="relocate" width="36" height="36"/>
+    </resources>
 </document>

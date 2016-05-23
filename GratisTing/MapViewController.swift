@@ -19,7 +19,9 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     var relocation = false
     var lat: Double = 10
     var long: Double = 10
+    @IBOutlet weak var relocate123: GratisTingMapButton!
     
+    @IBOutlet weak var listViewIcon: GratisTingMapButton!
     var item: Item?
     
     var items = [Item]() {
@@ -54,6 +56,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         super.viewDidLoad()
         itemMap.delegate = self
         locationManager.delegate = self
+        self.view.bringSubviewToFront(relocate123)
+        self.view.bringSubviewToFront(listViewIcon)
         
         self.locationManager.requestAlwaysAuthorization()
     }
