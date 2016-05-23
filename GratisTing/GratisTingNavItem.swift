@@ -26,6 +26,7 @@ class GratisTingNavItem: UINavigationItem {
             case is UserViewController:
                 let userVC = presenter as! UserViewController
                 userVC.navigationItem.rightBarButtonItems![0].enabled = false
+                userVC.navigationItem.rightBarButtonItems![1].enabled = false
                 
             case is MainViewController:
                 let mainVC = presenter as! MainViewController
@@ -36,10 +37,14 @@ class GratisTingNavItem: UINavigationItem {
             case is LoginViewController:
                 let loginVC = presenter as! LoginViewController
                 loginVC.navigationItem.rightBarButtonItems![0].enabled = false
+                loginVC.navigationItem.rightBarButtonItems![1].enabled = false
+
                 
             case is RegisterViewController:
                 let regVC = presenter as! RegisterViewController
                 regVC.navigationItem.rightBarButtonItems![0].enabled = false
+                regVC.navigationItem.rightBarButtonItems![1].enabled = false
+
                 
             case is CreateViewController:
                 let createVC = presenter as! CreateViewController

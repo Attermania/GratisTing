@@ -20,6 +20,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
+    @IBOutlet weak var registerButton: UIButton!
 
     @IBAction func createUserPressed(sender: AnyObject) {
         let selectedAddress = addressTextfield.address
@@ -44,6 +45,8 @@ class RegisterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCustomSearchTextField()
+        registerButton.layer.cornerRadius = 5
+        registerButton.backgroundColor = UIColor(hexString: "#FFCC26")
         
         // Do any additional setup after loading the view.
     }
