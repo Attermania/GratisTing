@@ -72,7 +72,7 @@ class Authentication {
             return nil
         }
         
-        let decodedData = NSData(base64EncodedString: components![1], options:NSDataBase64DecodingOptions(rawValue: 0))
+        let decodedData = base64decode(components![1])
         
         if decodedData == nil {
             return nil
@@ -86,6 +86,22 @@ class Authentication {
         }
         
         return String(id!)
+    }
+    
+    /// URI Safe base64 decode
+    private func base64decode(input:String) -> NSData? {
+        let rem = input.characters.count % 4
+        
+        var ending = ""
+        if rem > 0 {
+            let amount = 4 - rem
+            ending = String(count: amount, repeatedValue: Character("="))
+        }
+        
+        let base64 = input.stringByReplacingOccurrencesOfString("-", withString: "+", options: NSStringCompareOptions(rawValue: 0), range: nil)
+            .stringByReplacingOccurrencesOfString("_", withString: "/", options: NSStringCompareOptions(rawValue: 0), range: nil) + ending
+        
+        return NSData(base64EncodedString: base64, options: NSDataBase64DecodingOptions(rawValue: 0))
     }
 
 }
