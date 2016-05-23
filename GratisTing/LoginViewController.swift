@@ -20,6 +20,8 @@ class LoginViewController: UIViewController {
     // MARK: IB Outlets
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
+    @IBOutlet weak var loginButton: UIButton!
+    @IBOutlet weak var createUserButton: UIButton!
     
     // MARK: IB Actions
     @IBAction func loginButton(sender: AnyObject) {
@@ -60,6 +62,12 @@ class LoginViewController: UIViewController {
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        loginButton.layer.cornerRadius = 5
+        loginButton.backgroundColor = UIColor(hexString: "#FFCC26")
+        
+        createUserButton.layer.cornerRadius = 5
+        createUserButton.backgroundColor = UIColor(hexString: "#FFCC26")
 
         // Do any additional setup after loading the view.
     }
