@@ -134,6 +134,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
         performSegueWithIdentifier("goToMap", sender: self)
     }
     
@@ -144,7 +145,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "goToMap" {
-            let mapVC = segue.destinationViewController as! MapViewController
+            let mapNav = segue.destinationViewController as! UINavigationController
+            let mapVC = mapNav.viewControllers.first as! MapViewController
             mapVC.category = self.categories[(categoriesTableView.indexPathForSelectedRow?.row)!]
         } else if segue.identifier == "goToItem" {
             let showItemVC = segue.destinationViewController as! ShowViewController
