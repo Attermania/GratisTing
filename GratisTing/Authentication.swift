@@ -17,12 +17,22 @@ class Authentication {
     let dao = AppDelegate.dao
     
     var user: User?
+    var token: String? {
+        didSet {
+            NSUserDefaults.standardUserDefaults().setObject(token, forKey: "token")
+        }
+    }
     
     private init() {
-        if let userId = decodeTokenToUserId() {
+        self.token = NSUserDefaults.standardUserDefaults().objectForKey("token") as? String
+        
+        if let userId = getUserIdFromToken() {
             dao.getUser(userId) { (user: User?, error: NSError?) in
                 if let _ = error {
-                    // An error was returned
+                    // An error occured, abort ship
+                    self.user = nil
+                    self.token = nil
+                    return
                 }
                 
                 self.user = user
@@ -30,88 +40,51 @@ class Authentication {
         }
     }
     
-    // Authentication of user credentials
-    func authenticate(email: String, password: String, completion: (error: NSError?, jwt: String?) -> () ) {
+    // MARK: Authenticate
+    func authenticate(email: String, password: String, completion: (token: String?, user: User?, error: NSError?) -> () ) {
         
-        let parameters = [
-            "email": email,
-            "password": password
-        ]
-        
-        Alamofire.request(.POST, "http://gratisting.dev:3000/api/v1/authenticate", parameters: parameters, encoding: .JSON).responseJSON { (response) in
-            switch response.result {
-                
-            case .Success:
-                var jsonData = JSON(data: response.data!)
-                if let token = jsonData["data"]["token"].string {
-                    // Token
-                    self.setToken(token)
-                    print("Set token" + token)
-                    
-                    // User
-                    let id = jsonData["data"]["user"]["_id"].string!
-                    let email = jsonData["data"]["user"]["email"].string!
-                    let name = jsonData["data"]["user"]["name"].string!
-                    
-                    print(jsonData["data"]["user"]["address"]["coordinates"])
-                    
-                    // Address
-                    let address = jsonData["data"]["user"]["address"]["address"].string!
-                    let cityName = jsonData["data"]["user"]["address"]["cityName"].string!
-                    let postalCode = jsonData["data"]["user"]["address"]["postalCode"].int!
-                    let lat = jsonData["data"]["user"]["address"]["location"]["coordinates"][1].double!
-                    let long = jsonData["data"]["user"]["address"]["location"]["coordinates"][0].double!
-                    let completeAddress = Address(address: address, cityName: cityName, postalCode: postalCode, latitude: lat, longitude: long)
-
-                    
-                    
-                    self.user = User(id: id, email: email, name: name, address: completeAddress)
-                    
-                    completion(error: nil, jwt: token)
-                } else {
-                    let testError = NSError(domain: "Invalid credentials", code: 400, userInfo: [:])
-                    
-                    completion(error: testError, jwt: "")
-                }
-                
-            case .Failure(let error):
-                print(error)
+        dao.authenticate(email, password: password) { (token, user, error) in
+            if let _ = error {
+                // there was an error, abort the ship
+                completion(token: nil, user: nil, error: error)
+                return
             }
-        }
-    }
-    
-    /**
-    Method for logging a user out. Set User object and NSUserdefault token as nil.
-    */
-    func logout() {
-        NSUserDefaults.standardUserDefaults().setObject(nil, forKey: "token")
-        self.user = nil
-    }
-    
-    // Method for decoding token to resolve user ID
-    func decodeTokenToUserId() -> String? {
-        if let token = getToken() {
-        
-            let stringToDecode = token.substringWithRange(Range<String.Index>(start: getToken()!.startIndex.advancedBy(4), end: getToken()!.endIndex.advancedBy(0)))
             
-            do {
-                let payload = try JWT.decode(stringToDecode, algorithm: .HS256("secret"))
-                let json = JSON(payload)
-                
-                return json["_id"].string!
-            } catch {
-                print("Failed to decode JWT: \(error)")
-            }
+            self.user  = user
+            self.token = token
         }
         
-        return nil
     }
     
-    func setToken(token: String) {
-        NSUserDefaults.standardUserDefaults().setObject(token, forKey: "token")
+    // MARK: Logout
+    func logout() {
+        self.user  = nil
+        self.token = nil
     }
     
-    func getToken() -> String? {
-        return NSUserDefaults.standardUserDefaults().objectForKey("token") as? String
+    // MARK: Get the authenticated users id from the token, stored in user defaults
+    private func getUserIdFromToken() -> String? {
+        
+        let components = token?.componentsSeparatedByString(".")
+        
+        if components == nil || components!.count != 3 {
+            return nil
+        }
+        
+        let decodedData = NSData(base64EncodedString: components![1], options:NSDataBase64DecodingOptions(rawValue: 0))
+        
+        if decodedData == nil {
+            return nil
+        }
+        
+        let json = JSON(data: decodedData!)
+        let id = json["_id"].string
+        
+        if(id == nil) {
+            return nil
+        }
+        
+        return String(id!)
     }
+
 }

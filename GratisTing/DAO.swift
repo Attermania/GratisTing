@@ -13,6 +13,7 @@ import SwiftyJSON
 
 class DAO: DAOProtocol {
     
+    // MARK: Instance variables
     static let instance = DAO()
     let jsonParser = JSONParser()
     
@@ -131,50 +132,6 @@ class DAO: DAOProtocol {
         
     }
     
-    // MARK: Create user
-    func createUser(user: User, completion: (user: User?, error: NSError?) -> Void) {
-        
-        let parameters = [
-            "email": user.email,
-            "password": user.password,
-            "name": user.name,
-            "address": [
-                "address": user.address.address,
-                "cityName": user.address.cityName,
-                "postalCode": user.address.postalCode,
-                "location": [
-                    "coordinates": [
-                        user.address.longitude,
-                        user.address.latitude
-                    ]
-                ]
-            ]
-        ]
-        
-        Alamofire.request(.POST, "http://gratisting.dev:3000/api/v1/users", parameters: (parameters as! [String : AnyObject]), encoding: .JSON).responseJSON { (response) in
-            // Something went wrong, abort
-            if response.result.isFailure {
-                completion(user: nil, error: response.result.error)
-                return
-            }
-            
-            let jsonData = JSON(data: response.data!)
-            
-            // API responded with failure
-            if jsonData["success"].bool! == false {
-                let error = NSError(domain: jsonData["error"].string!, code: 0, userInfo: nil)
-                completion(user: nil, error: error)
-                return
-            }
-            
-            // Parse user
-            let user = self.jsonParser.parseUser(jsonData["data"])
-            
-            completion(user: user, error: nil)
-            
-        }
-    }
-    
     // MARK: Create item
     func createItem(item: Item, token: String, user: User, completion: (item: Item?, error: NSError?) -> Void) {
         
@@ -228,6 +185,50 @@ class DAO: DAOProtocol {
         }
     }
     
+    // MARK: Create user
+    func createUser(user: User, completion: (user: User?, error: NSError?) -> Void) {
+        
+        let parameters = [
+            "email": user.email,
+            "password": user.password,
+            "name": user.name,
+            "address": [
+                "address": user.address.address,
+                "cityName": user.address.cityName,
+                "postalCode": user.address.postalCode,
+                "location": [
+                    "coordinates": [
+                        user.address.longitude,
+                        user.address.latitude
+                    ]
+                ]
+            ]
+        ]
+        
+        Alamofire.request(.POST, "http://gratisting.dev:3000/api/v1/users", parameters: (parameters as! [String : AnyObject]), encoding: .JSON).responseJSON { (response) in
+            // Something went wrong, abort
+            if response.result.isFailure {
+                completion(user: nil, error: response.result.error)
+                return
+            }
+            
+            let jsonData = JSON(data: response.data!)
+            
+            // API responded with failure
+            if jsonData["success"].bool! == false {
+                let error = NSError(domain: jsonData["error"].string!, code: 0, userInfo: nil)
+                completion(user: nil, error: error)
+                return
+            }
+            
+            // Parse user
+            let user = self.jsonParser.parseUser(jsonData["data"])
+            
+            completion(user: user, error: nil)
+            
+        }
+    }
+    
     // MARK: Get a user by id
     func getUser(userId: String, completion: (user: User?, error: NSError?) -> ()) {
         
@@ -256,5 +257,44 @@ class DAO: DAOProtocol {
         
     }
     
+    // MARK: Authenticate
+    func authenticate(email: String, password: String, completion: (token: String?, user: User?, error: NSError?) -> ()) {
+        
+        let parameters = [
+            "email": email,
+            "password": password
+        ]
+        
+        Alamofire.request(.POST, "http://gratisting.dev:3000/api/v1/authenticate", parameters: parameters, encoding: .JSON).responseJSON { (response) in
+            
+            // Something went wrong, abort
+            if response.result.isFailure {
+                completion(token: nil, user: nil, error: response.result.error)
+                return
+            }
+            
+            var jsonData = JSON(data: response.data!)
+            
+            // API responded with failure
+            if jsonData["success"].bool! == false {
+                let error = NSError(domain: jsonData["error"].string!, code: 0, userInfo: nil)
+                completion(token: nil, user: nil, error: error)
+                return
+            }
+            
+            let user            = self.jsonParser.parseUser(jsonData["data"]["user"])
+            let authHeaderToken = jsonData["data"]["token"].string
+            let jwtStringIndex  = authHeaderToken?.startIndex.advancedBy(4)
+            
+            if authHeaderToken == nil || user == nil || jwtStringIndex == nil {
+                completion(token: nil, user: nil, error: NSError(domain: "Invalid auth header or no user", code: 0, userInfo: nil))
+            }
+            
+            let index = jwtStringIndex!
+            let token = authHeaderToken?.substringFromIndex(index)
+            
+            completion(token: token, user: user!, error: nil)
+        }
+    }
+    
 }
-

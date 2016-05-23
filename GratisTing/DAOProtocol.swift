@@ -22,4 +22,6 @@ protocol DAOProtocol {
     
     func getUser(userId: String, completion: (user: User?, error: NSError?) -> ())
     
+    func authenticate(email: String, password: String, completion: (token: String?, user: User?, error: NSError?) -> ())
+    
 }

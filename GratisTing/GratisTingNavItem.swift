@@ -86,13 +86,12 @@ class GratisTingNavItem: UINavigationItem {
         let presenter = GratisTingNavItem.vc!
         
         // If token is set, present create view controller
-        if auth.getToken() != nil {
+        if auth.token != nil {
             let storyboard = UIStoryboard(name: "Create", bundle: nil)
             let controller = storyboard.instantiateViewControllerWithIdentifier("Create") as! UINavigationController
             presenter.presentViewController(controller, animated: true, completion: nil)
             return
         }
-        
         
         // If token is not set - show alert instructring user to login and present login view
         let alertController = UIAlertController(title: "Bruger påkrævet", message: "Du skal være logget ind for at oprette en gratis ting.", preferredStyle: .Alert)

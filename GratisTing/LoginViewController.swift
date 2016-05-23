@@ -10,34 +10,37 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    // MARK: Dependencies
     let auth = AppDelegate.authentication
     
+    // MARK: Instance variables
     var userCreatedInRegistration = false
     var action: String?
     
+    // MARK: IB Outlets
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     
-    // Define authentication logic
+    // MARK: IB Actions
     @IBAction func loginButton(sender: AnyObject) {
-        auth.authenticate(emailTextfield.text!, password: passwordTextfield.text!) { (error, jwt) in
-            if jwt != nil {
-                self.auth.setToken(jwt!)
-                let mainVC = self.presentingViewController?.childViewControllers[0] as! MainViewController
-                self.dismissViewControllerAnimated(true, completion: {
-                    
-                    if self.action == "LoginCreateItem" {
-                        mainVC.returnedWithAction("OpenCreateItem", object: nil)
-                        return
-                    }
-                    
-                    mainVC.returnedWithAction("LoggedIn", object: nil)
-                })
-
+        auth.authenticate(emailTextfield.text!, password: passwordTextfield.text!) { (jwt, user, error) in
+            if let error = error {
+                // Error, abort the ship
+                print(error)
+                return
             }
-            if (error != nil) {
-                print(error?.localizedDescription)
-            }
+            
+            let mainVC = self.presentingViewController?.childViewControllers[0] as! MainViewController
+            
+            self.dismissViewControllerAnimated(true, completion: {
+                
+                if self.action == "LoginCreateItem" {
+                    mainVC.returnedWithAction("OpenCreateItem", object: nil)
+                    return
+                }
+                
+                mainVC.returnedWithAction("LoggedIn", object: nil)
+            })
         }
     }
     
@@ -53,6 +56,8 @@ class LoginViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
         
     }
+    
+    // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
 

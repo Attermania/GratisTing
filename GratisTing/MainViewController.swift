@@ -21,7 +21,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             categoriesTableView.reloadData()
         }
     }
-    
         
     @IBOutlet weak var categoriesTableView: UITableView!
     
