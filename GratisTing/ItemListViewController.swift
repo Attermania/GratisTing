@@ -69,6 +69,11 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         fetchItems()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        GratisTingNavItem.setupPresentation(false, vc: self)
+    }
+
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
