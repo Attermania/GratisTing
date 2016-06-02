@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10116" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -118,9 +118,8 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="XVS-H3-038" customClass="GratisTingNavItem" customModule="GratisTing" customModuleProvider="target">
-                        <barButtonItem key="backBarButtonItem" id="Mdu-Kl-CsI"/>
-                        <barButtonItem key="leftBarButtonItem" image="back" id="uqp-I1-yDx">
+                    <navigationItem key="navigationItem" id="XVS-H3-038">
+                        <barButtonItem key="leftBarButtonItem" image="close" id="uqp-I1-yDx">
                             <connections>
                                 <action selector="backButtonNavigation:" destination="j24-Y2-fvL" id="40J-tW-vTr"/>
                             </connections>
@@ -236,7 +235,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="Xbn-tu-hs8" customClass="GratisTingNavItem" customModule="GratisTing" customModuleProvider="target">
+                    <navigationItem key="navigationItem" id="Xbn-tu-hs8">
                         <barButtonItem key="backBarButtonItem" id="nBt-FL-uw1"/>
                     </navigationItem>
                     <connections>
@@ -254,6 +253,7 @@
         <!--Navigation Controller-->
         <scene sceneID="acQ-Ii-Gca">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AaN-kJ-0DK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="Login" automaticallyAdjustsScrollViewInsets="NO" id="P6c-Rr-dDW" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pX2-zt-8Eh">
@@ -266,12 +266,11 @@
                         <segue destination="j24-Y2-fvL" kind="relationship" relationship="rootViewController" id="ehi-xx-gGq"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AaN-kJ-0DK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="363" y="392"/>
         </scene>
     </scenes>
     <resources>
-        <image name="back" width="21" height="21"/>
+        <image name="close" width="22" height="22"/>
     </resources>
 </document>

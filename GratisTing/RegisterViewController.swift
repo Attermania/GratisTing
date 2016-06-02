@@ -52,7 +52,7 @@ class RegisterViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        GratisTingNavItem.presenter = self
+//        GratisTingNavItem.presenter = self
     }
     
     // 2 - Configure a custom search text view

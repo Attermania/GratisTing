@@ -28,22 +28,22 @@ class ShowViewController: UIViewController {
     @IBOutlet weak var labelOwnerCity: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
+    override func loadView() {
+        super.loadView()
+        
+        contactButton.layer.cornerRadius = 5
     }
     
     override func viewWillAppear(animated: Bool) {
-        contactButton.layer.cornerRadius = 5
+        GratisTingNavItem.currentVC = self
+        
         itemTitleLabel.text = item?.title
         itemDescriptionText.text = item?.description
-        // Do any additional setup after loading the view.
         itemTitleLabel.text = item?.title
         itemDescriptionText.text = item?.description
         itemOwnerLabel.text = item?.owner?.name
         userAddressLabel.text = "\((item?.address?.postalCode)!) \((item?.address?.cityName)!)"
         distanceLabel.text = "\(distanceFromPreviousView) væk"
-        
-        GratisTingNavItem.presenter = self
         
         let image: UIImage = UIImage(named: "user-1")!
         userImageView.layer.borderWidth = 1.0
@@ -54,7 +54,6 @@ class ShowViewController: UIViewController {
         userImageView.image = image
         
         item = nil
-        
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -67,16 +66,5 @@ class ShowViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -28,7 +28,7 @@
                                         <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="M1W-Yo-UZW" id="eYO-hG-Oo0">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -73,10 +73,10 @@
             </objects>
             <point key="canvasLocation" x="1346" y="392"/>
         </scene>
-        <!--MapNavi-->
+        <!--Map-->
         <scene sceneID="r5s-9G-NMf">
             <objects>
-                <viewControllerPlaceholder storyboardName="Map" referencedIdentifier="MapNavi" id="Nvh-MR-aOM" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Map" referencedIdentifier="Map" id="Nvh-MR-aOM" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VYU-eg-r3N" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1976" y="392"/>
@@ -86,7 +86,7 @@
             <objects>
                 <navigationController storyboardIdentifier="Main" automaticallyAdjustsScrollViewInsets="NO" id="XA2-gF-7bD" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="bg" id="SRt-La-NF5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" backIndicatorImage="bg" id="SRt-La-NF5" customClass="GratisTingNavigationBar" customModule="GratisTing" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>

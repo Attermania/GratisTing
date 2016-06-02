@@ -32,6 +32,7 @@
 		F975B1B61CE36D7A00D29403 /* GratisTingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B1B51CE36D7A00D29403 /* GratisTingCell.swift */; };
 		F975B1E11CE480A400D29403 /* DAO.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B1E01CE480A400D29403 /* DAO.swift */; };
 		F975B1E41CE4811E00D29403 /* DAOProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = F975B1E31CE4811E00D29403 /* DAOProtocol.swift */; };
+		F9A438D21D0072450078796F /* GratisTingNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9A438D11D0072450078796F /* GratisTingNavigationBar.swift */; };
 		F9B538E91CF074E9009C10CB /* User.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F9B538E81CF074E9009C10CB /* User.storyboard */; };
 		F9B538EB1CF07525009C10CB /* UserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9B538EA1CF07525009C10CB /* UserViewController.swift */; };
 		F9BD02EC1CE316E70057309B /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F9BD02EB1CE316E70057309B /* MainViewController.swift */; };
@@ -74,6 +75,7 @@
 		F975B1B51CE36D7A00D29403 /* GratisTingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratisTingCell.swift; sourceTree = "<group>"; };
 		F975B1E01CE480A400D29403 /* DAO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAO.swift; sourceTree = "<group>"; };
 		F975B1E31CE4811E00D29403 /* DAOProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DAOProtocol.swift; sourceTree = "<group>"; };
+		F9A438D11D0072450078796F /* GratisTingNavigationBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GratisTingNavigationBar.swift; sourceTree = "<group>"; };
 		F9B538E81CF074E9009C10CB /* User.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = User.storyboard; sourceTree = "<group>"; };
 		F9B538EA1CF07525009C10CB /* UserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserViewController.swift; sourceTree = "<group>"; };
 		F9BD02EB1CE316E70057309B /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
@@ -236,6 +238,7 @@
 				F975B1B51CE36D7A00D29403 /* GratisTingCell.swift */,
 				F974FCBE1CF1E7DA00433E7A /* GratisTingNavItem.swift */,
 				F974FCC01CF1E86400433E7A /* UIColorExtension.swift */,
+				F9A438D11D0072450078796F /* GratisTingNavigationBar.swift */,
 			);
 			name = Misc;
 			sourceTree = "<group>";
@@ -400,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				F9BD02F31CE343660057309B /* CreateViewController.swift in Sources */,
+				F9A438D21D0072450078796F /* GratisTingNavigationBar.swift in Sources */,
 				F9B538EB1CF07525009C10CB /* UserViewController.swift in Sources */,
 				F975B1AF1CE34C5400D29403 /* Item.swift in Sources */,
 				F915DF461CF2BECA00708AD3 /* GratisTingMapButton.swift in Sources */,

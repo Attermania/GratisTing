@@ -25,6 +25,7 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     @IBOutlet weak var descriptionTextfield: UITextField!
     @IBOutlet weak var categoryTextField: UITextField!
     var categoryPicker: UIPickerView!
+    @IBOutlet weak var createItemButton: UIButton!
     
     // MARK: - Actions
     @IBAction func selectImagePressed(sender: AnyObject) {
@@ -69,7 +70,7 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         return true
     }
     
-    @IBAction func backButton(sender: AnyObject) {
+    @IBAction func dismissViewButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
@@ -78,11 +79,11 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     
     // MARK: - Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Setup image picker
         imagePicker.delegate = self
-        itemImageView.hidden = true
         // Setup category picker
         categoryPicker = UIPickerView()
         categoryPicker.delegate = self
@@ -91,6 +92,12 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         categoryTextField.delegate = self
         categoryTextField.inputView = categoryPicker
         categoryTextField.tintColor = UIColor.clearColor()
+        
+        // Set color of button in top left corner.
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(hexString: "FFCC26")
+        
+        // Set button rounded corners
+        createItemButton.layer.cornerRadius = 5
         
         // Load categories
         dao.getAllCategories({ (categories: [Category]?, error: NSError?) in
@@ -101,7 +108,7 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     override func viewWillAppear(animated: Bool) {
-        GratisTingNavItem.presenter = self
+        GratisTingNavItem.currentVC = self
     }
 
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {

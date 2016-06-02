@@ -12,6 +12,9 @@ class UserViewController: UIViewController {
     
     // MARK: Dependencies
     let auth = AppDelegate.authentication
+    
+    // MARK: Instance variables
+    var presenter: UIViewController?
 
     // MARK: Ib outlets
     @IBOutlet weak var userNameLabel: UILabel!
@@ -25,11 +28,23 @@ class UserViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    @IBAction func dismissViewButton(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     @IBAction func logoutButton(sender: AnyObject) {
         auth.logout()
-        let mainVC = self.presentingViewController?.childViewControllers[0] as! MainViewController
+        
+        
         self.dismissViewControllerAnimated(true, completion: {
-            mainVC.returnedWithAction("LoggedOut", object: nil)
+            
+            if let presenter = self.presenter {
+                let alertController = UIAlertController(title: "På gensyn", message: "Du er nu logget ud", preferredStyle: .Alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(defaultAction)
+                presenter.presentViewController(alertController, animated: true, completion: nil)
+            }
+            
         })
     }
     
@@ -59,7 +74,7 @@ class UserViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        GratisTingNavItem.presenter = self
+//        GratisTingNavItem.presenter = self
     }
 
 }

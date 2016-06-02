@@ -14,11 +14,11 @@
                         <viewControllerLayoutGuide type="bottom" id="o6T-en-TC4"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="eaL-68-HgG">
-                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ElO-yt-dl2" customClass="GratisTingMapButton" customModule="GratisTing" customModuleProvider="target">
-                                <rect key="frame" x="463" y="465" width="56" height="56"/>
+                                <rect key="frame" x="463" y="529" width="56" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="56" id="PUs-kZ-DSm"/>
                                     <constraint firstAttribute="height" constant="56" id="kmH-RE-Z8s"/>
@@ -29,7 +29,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iPW-zN-Sdj" customClass="GratisTingMapButton" customModule="GratisTing" customModuleProvider="target">
-                                <rect key="frame" x="529" y="465" width="56" height="56"/>
+                                <rect key="frame" x="529" y="529" width="56" height="56"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="56" id="VC7-lo-okg"/>
                                     <constraint firstAttribute="height" constant="56" id="uWm-JH-TDh"/>
@@ -39,10 +39,10 @@
                                     <action selector="getCurrentPosition:" destination="lUR-RT-RxV" eventType="touchUpInside" id="MRv-2M-tkJ"/>
                                 </connections>
                             </button>
-                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LSH-gm-zvC">
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="LSH-gm-zvC">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="536"/>
                             </mapView>
-                            <searchBar contentMode="redraw" placeholder="Søg efter..." translatesAutoresizingMaskIntoConstraints="NO" id="KeR-av-sD3">
+                            <searchBar contentMode="redraw" misplaced="YES" placeholder="Søg efter..." translatesAutoresizingMaskIntoConstraints="NO" id="KeR-av-sD3">
                                 <rect key="frame" x="10" y="10" width="580" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
@@ -88,7 +88,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" id="b1G-gn-arP" customClass="GratisTingNavItem" customModule="GratisTing" customModuleProvider="target"/>
+                    <navigationItem key="navigationItem" id="Yy8-fM-AuQ" customClass="GratisTingNavItem" customModule="GratisTing" customModuleProvider="target"/>
                     <connections>
                         <outlet property="itemMap" destination="LSH-gm-zvC" id="bb4-Ap-D96"/>
                         <outlet property="listViewIcon" destination="ElO-yt-dl2" id="EHs-XQ-3Cp"/>
@@ -116,25 +116,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OWf-2q-xQ0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1790.5" y="462"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="96T-k1-icE">
-            <objects>
-                <navigationController storyboardIdentifier="MapNavi" automaticallyAdjustsScrollViewInsets="NO" id="djB-uw-ZbW" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" translucent="NO" id="Xnp-Cx-qZK">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <color key="barTintColor" red="0.50453717461069447" green="0.52244094255591988" blue="0.53265931373333331" alpha="0.79905711209999997" colorSpace="calibratedRGB"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="lUR-RT-RxV" kind="relationship" relationship="rootViewController" id="R9V-1U-GTh"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="nzP-cc-yjR" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="483" y="407"/>
         </scene>
     </scenes>
     <resources>

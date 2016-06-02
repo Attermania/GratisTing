@@ -14,6 +14,7 @@ class LoginViewController: UIViewController {
     let auth = AppDelegate.authentication
     
     // MARK: Instance variables
+    var presenter: UIViewController?
     var userCreatedInRegistration = false
     var action: String?
     
@@ -32,16 +33,24 @@ class LoginViewController: UIViewController {
                 return
             }
             
-            let mainVC = self.presentingViewController?.childViewControllers[0] as! MainViewController
-            
             self.dismissViewControllerAnimated(true, completion: {
                 
+                // If user was trying to create an item, and was redirected here, to log in first, we redirect them to the create item view
                 if self.action == "LoginCreateItem" {
-                    mainVC.returnedWithAction("OpenCreateItem", object: nil)
+                    let storyboard = UIStoryboard(name: "Create", bundle: nil)
+                    let controller = storyboard.instantiateViewControllerWithIdentifier("CreateView")
+                    
+                    self.presenter?.presentViewController(controller, animated: true, completion: nil)
+                    
                     return
                 }
                 
-                mainVC.returnedWithAction("LoggedIn", object: nil)
+                // Show user a welome alert
+                let alertController = UIAlertController(title: "Velkommen", message: "Du er nu logget ind", preferredStyle: .Alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(defaultAction)
+                
+                self.presenter?.presentViewController(alertController, animated: true, completion: nil)
             })
         }
     }
@@ -69,11 +78,12 @@ class LoginViewController: UIViewController {
         createUserButton.layer.cornerRadius = 5
         createUserButton.backgroundColor = UIColor(hexString: "#FFCC26")
 
-        // Do any additional setup after loading the view.
+        // Set color of button in top left corner.
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(hexString: "FFCC26")
     }
     
     override func viewWillAppear(animated: Bool) {
-        GratisTingNavItem.presenter = self
+//        GratisTingNavItem.presenter = self
     }
     
     override func viewDidAppear(animated: Bool) {
