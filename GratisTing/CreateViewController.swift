@@ -51,17 +51,11 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         self.dao.createItem(item, token: auth.token!, user: auth.user!) { (item, error) in
             if let error = error {
                 print(error)
-                // An error was returned
                 return
             }
             
-            
-            let vc = self.presentingViewController?.childViewControllers[0]
             self.dismissViewControllerAnimated(true, completion: {
-//                let alertController = UIAlertController(title: "Fedt mand, spa!", message: "Din gratis ting er nu oprettet", preferredStyle: .Alert)
-//                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
-//                alertController.addAction(defaultAction)
-//                self.presentViewController(alertController, animated: true, completion: nil)
+                
             })
         }
 

@@ -136,7 +136,7 @@ class DAO: DAOProtocol {
     func createItem(item: Item, token: String, user: User, completion: (item: Item?, error: NSError?) -> Void) {
         
         let headers = [
-            "Authorization": token,
+            "Authorization": "JWT " + token,
             "Content-Type": "application/json"
         ]
         
