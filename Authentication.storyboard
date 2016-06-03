@@ -49,7 +49,7 @@
                                     <constraint firstAttribute="width" constant="122.5" id="O3C-Bp-cVO"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                 <variation key="default">
                                     <mask key="constraints">
                                         <exclude reference="4HU-WB-0wb"/>
@@ -158,10 +158,10 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" keyboardType="emailAddress"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wbp-9I-7I9">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Kodeord" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="wbp-9I-7I9">
                                 <rect key="frame" x="10" y="187" width="580" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                             </textField>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Navn" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="WMl-hz-hB3">
                                 <rect key="frame" x="10" y="107" width="580" height="30"/>
@@ -253,7 +253,6 @@
         <!--Navigation Controller-->
         <scene sceneID="acQ-Ii-Gca">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="AaN-kJ-0DK" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController storyboardIdentifier="Login" automaticallyAdjustsScrollViewInsets="NO" id="P6c-Rr-dDW" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="pX2-zt-8Eh">
@@ -266,6 +265,7 @@
                         <segue destination="j24-Y2-fvL" kind="relationship" relationship="rootViewController" id="ehi-xx-gGq"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="AaN-kJ-0DK" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="363" y="392"/>
         </scene>
