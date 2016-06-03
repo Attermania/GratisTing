@@ -40,11 +40,9 @@ class RegisterViewController: UIViewController {
         registerButton.layer.cornerRadius = 5
         registerButton.backgroundColor = UIColor(hexString: "#FFCC26")
         
-        // Do any additional setup after loading the view.
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-//        GratisTingNavItem.presenter = self
+        // Set color of button in top left corner.
+        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(hexString: "FFCC26")
+        self.navigationItem.backBarButtonItem?.tintColor = UIColor(hexString: "FFCC26")
     }
     
     // 2 - Configure a custom search text view
