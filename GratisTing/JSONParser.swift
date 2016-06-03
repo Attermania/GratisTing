@@ -1,11 +1,3 @@
-//
-//  JSONParser.swift
-//  GratisTing
-//
-//  Created by Jens Herlevsen on 22/05/2016.
-//  Copyright © 2016 SJT. All rights reserved.
-//
-
 import Foundation
 import SwiftyJSON
 

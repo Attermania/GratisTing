@@ -1,11 +1,3 @@
-//
-//  UIColorExtension.swift
-//  Budgetto
-//
-//  Created by Jens Herlevsen on 04/04/2016.
-//  Copyright © 2016 SJT. All rights reserved.
-//
-
 import UIKit
 
 extension UIColor {

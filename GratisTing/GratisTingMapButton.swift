@@ -1,11 +1,3 @@
-//
-//  GratisTingMapButton.swift
-//  GratisTing
-//
-//  Created by Steffen on 23/05/16.
-//  Copyright © 2016 SJT. All rights reserved.
-//
-
 import UIKit
 
 class GratisTingMapButton: UIButton {

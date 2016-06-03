@@ -1,11 +1,3 @@
-//
-//  GratisTingNavigationBar.swift
-//  GratisTing
-//
-//  Created by Steffen on 02/06/16.
-//  Copyright © 2016 SJT. All rights reserved.
-//
-
 import UIKit
 
 class GratisTingNavigationBar: UINavigationBar {
