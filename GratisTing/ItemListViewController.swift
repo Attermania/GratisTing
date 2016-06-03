@@ -9,7 +9,7 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     let locationManager = CLLocationManager()
     
     // MARK: Instance variables
-    var hasLocation: Bool!
+    var hasLocation: Bool = false
     var lat: Double?
     var long: Double?
     var distanceToPass = ""
@@ -47,8 +47,8 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     }
     
     func fetchItems() {
-        // user has allowed to use his/her location
-        if hasLocation! {
+        // user has allowed to use his/her location - Do an item search based on location
+        if hasLocation {
             dao.getItemsFromLocation(category?.id, latitude: lat!, longitude: long!, radius: 1000, completion: { (items: [Item]?, error: NSError?) in
                 if let _ = error {
                     // An error was returned
@@ -59,7 +59,8 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
             })
             return
         }
-        // user has not allowed to use his/her location
+        
+        // user has not allowed to use his/her location - Do an item search based on newest
         dao.getItems(category) { (items: [Item]?, error: NSError?) in
             if let _ = error {
                 // An error was returned
@@ -87,7 +88,7 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.descriptionLabel.text = items[indexPath.row].description
         cell.cityLabel.text = items[indexPath.row].address!.cityName
         
-        if hasLocation! {
+        if hasLocation {
             let distance = items[indexPath.row].getDistanceInKm(long, destLatitude: lat)!
             // format in kilometer if distance is 1 or more.
             if distance >= 1 {
@@ -110,7 +111,9 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         if segue.identifier == "showItem" {
             let showItemViewController = segue.destinationViewController as! ShowViewController
             showItemViewController.item = items[(itemTableView.indexPathForSelectedRow?.row)!]
-            showItemViewController.distanceFromPreviousView = distanceToPass
+            showItemViewController.lat = self.lat
+            showItemViewController.long = self.long
+            showItemViewController.hasLocation = true
         }
     }
 }
