@@ -108,8 +108,8 @@ class RegisterViewController: UIViewController {
                 let jsonData = JSON(data: response.data!)
                 
                 if jsonData.isEmpty {
-                    // TODO: haandle empty results
-                    completion([SearchTextFieldItem(title: "hello")])
+                    // TODO: handle empty results
+                    completion([SearchTextFieldItem(title: "Could not find that address")])
                 }
             
                 // For each address returned by the aws API - http://dawa.aws.dk
@@ -120,12 +120,23 @@ class RegisterViewController: UIViewController {
                 for (_, subJson) in jsonData {
                     if let formattedAddress = subJson["adressebetegnelse"].string {
                         
+                        let etage = subJson["etage"].string
+                        let houseNumber = subJson["adgangsadresse"]["husnr"].string!
+                        let street = subJson["adgangsadresse"]["vejstykke"]["adresseringsnavn"].string!
+                        var address = ""
+                        
+                        if etage != nil {
+                            address = street + " " + houseNumber + ", \(etage!)"
+                        } else {
+                            address = street + " " + houseNumber
+                        }
+                        
                         let city = subJson["adgangsadresse"]["postnummer"]["navn"].string!
                         let postalCode = Int(subJson["adgangsadresse"]["postnummer"]["nr"].string!)!
                         let latitude = subJson["adgangsadresse"]["adgangspunkt"]["koordinater"][1].double!
                         let longitude = subJson["adgangsadresse"]["adgangspunkt"]["koordinater"][0].double!
                         
-                        let userAddress = Address(address: formattedAddress, cityName: city, postalCode: postalCode, latitude: latitude, longitude: longitude)
+                        let userAddress = Address(address: address, cityName: city, postalCode: postalCode, latitude: latitude, longitude: longitude)
                         
                         results.append(SearchTextFieldItem(title: formattedAddress, address: userAddress))
                     }
