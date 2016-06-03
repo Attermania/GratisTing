@@ -5,16 +5,14 @@ import Alamofire
 
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
 
+    // MARK: - Instance variables
     let dao = DAO.instance
     let clusteringManager = FBClusteringManager()
     let locationManager = CLLocationManager()
     var relocation = false
     var lat: Double = 10
     var long: Double = 10
-    @IBOutlet weak var relocate123: GratisTingMapButton!
     
-    @IBOutlet weak var search: UISearchBar!
-    @IBOutlet weak var listViewIcon: GratisTingMapButton!
     var item: Item?
     
     var items = [Item]() {
@@ -25,7 +23,13 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     var category: Category?
     
+    // MARK: - IB Outlets
+    @IBOutlet weak var relocate123: GratisTingMapButton!
+    @IBOutlet weak var search: UISearchBar!
+    @IBOutlet weak var listViewIcon: GratisTingMapButton!
     @IBOutlet weak var itemMap: MKMapView!
+    
+    // MARK: - IB Actions
     @IBAction func listViewButton(sender: AnyObject) {
         let storyboard = UIStoryboard(name: "Browse", bundle: nil)
         let controller = storyboard.instantiateViewControllerWithIdentifier("BrowseNavigator") as! UINavigationController
@@ -45,6 +49,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    // MARK: - Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         itemMap.delegate = self
@@ -84,12 +89,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
         // Add annotations to clustering manager
         clusteringManager.setAnnotations(annotations)
-    }
-
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
     func mapView(mapView: MKMapView, viewForAnnotation annotation: MKAnnotation) -> MKAnnotationView? {
@@ -159,7 +158,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     }
     
     func mapView(mapView: MKMapView, didSelectAnnotationView view: MKAnnotationView) {
-        
         // if a clusterview is selected, zoom in on its pins
         if view is FBAnnotationClusterView {
             let itemLocation = view.annotation?.coordinate
@@ -225,10 +223,20 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         
     }
     
+    // Pass along data to desired viewcontroller
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showItem" {
+            
             let showItemViewController = segue.destinationViewController as! ShowViewController
             showItemViewController.item = item
+            
+            if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
+                showItemViewController.hasLocation = true
+                showItemViewController.lat = self.lat
+                showItemViewController.long = self.long
+                return
+            }
+            
         }
         if segue.identifier == "goToListView" {
             let listViewItemController = segue.destinationViewController as! ItemListViewController
@@ -253,17 +261,5 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
     }
-    
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

@@ -2,10 +2,14 @@ import UIKit
 
 class ShowViewController: UIViewController {
     
+    // MARK: - Instance variables
     var item: Item?
-    
+    var hasLocation: Bool?
+    var lat: Double?
+    var long: Double?
     var distanceFromPreviousView = ""
 
+    // MARK: - IB Outlets
     @IBOutlet weak var itemDescriptionText: UITextView! {
         didSet {
             itemDescriptionText.textContainer.lineFragmentPadding = 0
@@ -20,23 +24,36 @@ class ShowViewController: UIViewController {
     @IBOutlet weak var labelOwnerCity: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     
+    // MARK: - Methods
     override func loadView() {
         super.loadView()
-        
         contactButton.layer.cornerRadius = 5
     }
     
     override func viewWillAppear(animated: Bool) {
         GratisTingNavItem.currentVC = self
         
+        // Setup UI
         itemTitleLabel.text = item?.title
         itemDescriptionText.text = item?.description
         itemTitleLabel.text = item?.title
         itemDescriptionText.text = item?.description
         itemOwnerLabel.text = item?.owner?.name
         userAddressLabel.text = "\((item?.address?.postalCode)!) \((item?.address?.cityName)!)"
-        distanceLabel.text = "\(distanceFromPreviousView) væk"
+        if hasLocation! {
+            let distance = item!.getDistanceInKm(long, destLatitude: lat)!
+            // format in kilometer if distance is 1 or more.
+            if distance >= 1 {
+                let dist = String(format:"%.1f", distance) + " km"
+                distanceLabel.text = dist
+            } else {
+                // format distance in meters if less than 1 km.
+                let dist = String(format:"%.0f", distance*1000) + " m"
+                distanceLabel.text = dist
+            }
+        }
         
+        // Setup image
         let image: UIImage = UIImage(named: "user-1")!
         userImageView.layer.borderWidth = 1.0
         userImageView.layer.masksToBounds = false
@@ -44,19 +61,12 @@ class ShowViewController: UIViewController {
         userImageView.layer.cornerRadius = userImageView.frame.size.width/2
         userImageView.clipsToBounds = true
         userImageView.image = image
-        
         item = nil
     }
     
     override func viewWillDisappear(animated: Bool) {
         itemTitleLabel.text = ""
         itemDescriptionText.text = ""
-    }
-    
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
 
 }
