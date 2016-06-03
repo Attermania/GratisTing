@@ -3,29 +3,30 @@ import MobileCoreServices
 
 class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
-    // MARK: - Dependencies
+    // MARK: Dependencies
     let dao = AppDelegate.dao
     let auth = AppDelegate.authentication
-    let imagePicker = UIImagePickerController()
     
-    // NYT
-    //let auth = AppDelegate.authentication
+    // MARK: Instance variables
+    var categories: [Category] = []
+    let imagePicker = UIImagePickerController()
+    var categoryPicker: UIPickerView!
 
-    // MARK: - Components
+    // MARK: Components
     @IBOutlet weak var itemImageView: UIImageView!
     @IBOutlet weak var titleTextfield: UITextField!
     @IBOutlet weak var descriptionTextfield: UITextField!
     @IBOutlet weak var categoryTextField: UITextField!
-    var categoryPicker: UIPickerView!
     @IBOutlet weak var createItemButton: UIButton!
     
-    // MARK: - Actions
+    // MARK: IB Actions
     @IBAction func selectImagePressed(sender: AnyObject) {
         imagePicker.allowsEditing = true
         imagePicker.sourceType = .Camera
         
         presentViewController(imagePicker, animated: true, completion: nil)
     }
+    
     @IBAction func createItemButton(sender: AnyObject) {
         
         let title = titleTextfield.text!
@@ -54,28 +55,17 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
 
     }
     
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        print(textField)
-        if textField == categoryTextField {
-            self.pickerView(self.categoryPicker, didSelectRow: 0, inComponent: 0)
-        }
-        return true
-    }
-    
     @IBAction func dismissViewButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
-    // MARK: - Instance variables
-    var categories: [Category] = []
-    
-    
-    // MARK: - Methods
-    
+    // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Setup image picker
         imagePicker.delegate = self
+        
         // Setup category picker
         categoryPicker = UIPickerView()
         categoryPicker.delegate = self
@@ -85,7 +75,7 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         categoryTextField.inputView = categoryPicker
         categoryTextField.tintColor = UIColor.clearColor()
         
-        // Set color of button in top left corner.
+        // Set color of button in top left corner
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor(hexString: "FFCC26")
         
         // Set button rounded corners
@@ -99,10 +89,16 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         })
     }
     
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        // Handle the dismission of the current displayed view, when clicked outside
+        self.view.endEditing(true)
+    }
+    
     override func viewWillAppear(animated: Bool) {
         GratisTingNavItem.currentVC = self
     }
 
+    // MARK: Picker view delegate methods
     func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
         return 1
     }
@@ -119,10 +115,20 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
         categoryTextField.text = categories[row].title
     }
     
+    // MARK: Text field delegate methods
     func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         return false
     }
     
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        print(textField)
+        if textField == categoryTextField {
+            self.pickerView(self.categoryPicker, didSelectRow: 0, inComponent: 0)
+        }
+        return true
+    }
+    
+    // MARK: Image picker delegate methods
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
             itemImageView.image = pickedImage
@@ -134,10 +140,6 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     
     func imagePickerControllerDidCancel(picker: UIImagePickerController) {
         dismissViewControllerAnimated(true, completion: nil)
-    }
-    
-    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
-        self.view.endEditing(true)
     }
     
 }

@@ -3,9 +3,11 @@ import UIKit
 
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
+    // MARK: Dependencies
     var dao: DAOProtocol = AppDelegate.dao
     var auth: Authentication = AppDelegate.authentication
     
+    // MARK: Instance variables
     var itemToPassOn: Item?
     
     var categories: [Category] = [] {
@@ -13,9 +15,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             categoriesTableView.reloadData()
         }
     }
-        
+    
+    // MARK: IB Outlets
     @IBOutlet weak var categoriesTableView: UITableView!
     
+    
+    // MARK: Methods
     override func viewWillAppear(animated: Bool) {
         GratisTingNavItem.currentVC = self
     }
@@ -23,9 +28,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // Set delegate
         categoriesTableView.delegate = self
         categoriesTableView.dataSource = self
 
+        // Load the categories from the api
         loadCategories()
         
         // Set background
@@ -33,15 +40,18 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         backgroundImage.image = UIImage(named: "bg")
         self.view.insertSubview(backgroundImage, atIndex: 0)
         
+        // Show the logo in upper left corner - TODO: Should not be a UIBarButton
         let logo = UIBarButtonItem(image: UIImage(named: "logo1"), landscapeImagePhone: UIImage(named: "logo1"), style: .Plain, target: self, action:nil)
         self.navigationItem.leftBarButtonItem = logo
         
-        // Fjern linjer hvor der ikke er indohold
+        // Remove the border in table view cells, on the empty cells
         categoriesTableView.tableFooterView = UIView(frame: CGRectZero)
     }
     
+    // Get the categories from the DAO
     func loadCategories() {
         dao.getAllCategories { (categories: [Category]?, error: NSError?) in
+            // If errors, we return early
             if let _ = error {
                 return
             }
@@ -49,11 +59,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             self.categories = categories!
         }
     }
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    // MARK: Category table view delegate methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -64,13 +71,17 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
-        cell.textLabel?.text = categories[indexPath.row].title
         
+        // Get the category
+        let category = categories[indexPath.row]
+        
+        // Prettify the cell
+        cell.textLabel?.text = category.title
         cell.backgroundColor = UIColor.grayColor()
-        
         cell.textLabel?.textColor = UIColor.whiteColor()
         
-        switch categories[indexPath.row].title {
+        // For now, the images are hardcoded, since the api does not return images yet
+        switch category.title {
         case "Møbler":
             cell.imageView?.image = UIImage(named: "puzzle")
         case "Tøj & Sko":
@@ -85,11 +96,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell.imageView?.image = nil
         }
         
+        // Return the pretty cell
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        
         performSegueWithIdentifier("goToMap", sender: self)
     }
     
@@ -97,6 +108,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         cell.backgroundColor = UIColor(white: 1, alpha: 0.2)
     }
     
+    // MARK: Prepare for segue
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "goToMap" {
             let mapVC = segue.destinationViewController as! MapViewController
@@ -107,9 +119,5 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             itemToPassOn = nil
         }
     }
-    
-
-
-    
 
 }
