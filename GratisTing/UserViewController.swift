@@ -20,14 +20,16 @@ class UserViewController: UIViewController {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    // Button for dismissing user screen
     @IBAction func dismissViewButton(sender: AnyObject) {
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     
+    // Button for logging out user
     @IBAction func logoutButton(sender: AnyObject) {
         auth.logout()
         
-        
+        // Dismiss viewcontroller with completion handler - show UIAlertController
         self.dismissViewControllerAnimated(true, completion: {
             
             if let presenter = self.presenter {
@@ -43,10 +45,12 @@ class UserViewController: UIViewController {
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        
+        // Button layout
         logoutButton.layer.cornerRadius = 5
         logoutButton.backgroundColor = UIColor(hexString: "#d9534f")
         
+        // Image setup
         let image: UIImage = UIImage(named: "user-1")!
         userAvatarImageview.layer.borderWidth = 1.0
         userAvatarImageview.layer.masksToBounds = false
@@ -55,18 +59,10 @@ class UserViewController: UIViewController {
         userAvatarImageview.clipsToBounds = true
         userAvatarImageview.image = image
         
+        // Label setup
         userNameLabel.text = (auth.user?.name)!
         userAddressLabel.text = auth.user?.address.address
         postalCodeLabel.text = "\(String((auth.user?.address.postalCode)!)) \(String((auth.user?.address.cityName)!))"
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-//        GratisTingNavItem.presenter = self
     }
 
 }

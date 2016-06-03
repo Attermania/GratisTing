@@ -36,9 +36,10 @@ class GratisTingNavItem: UINavigationItem {
         
     }
 
-    
+    // Method for instantiating viewController and displaying UIAlert if needed
     func createItem() {
         
+        // Variable to reference what VC is launching the createItem screen.
         let currentVC = GratisTingNavItem.currentVC
         
         // If token is set, present create view controller
@@ -61,6 +62,7 @@ class GratisTingNavItem: UINavigationItem {
             let navController = storyboard.instantiateViewControllerWithIdentifier("Login") as! UINavigationController
             let loginController = navController.topViewController as! LoginViewController
             
+            // Set action and VCreference to LoginViewController
             loginController.action = "LoginCreateItem"
             loginController.presenter = currentVC
             
@@ -73,8 +75,10 @@ class GratisTingNavItem: UINavigationItem {
         currentVC?.presentViewController(alertController, animated: true, completion: nil)
     }
     
+    // Method for launching user screen if user is logged in - else show login screen.
     func goToUserScreen() {
         
+        // Variable to reference what VC is launching the createItem screen.
         let currentVC = GratisTingNavItem.currentVC
         
         // If user is not logged in, go to login screen
@@ -83,6 +87,7 @@ class GratisTingNavItem: UINavigationItem {
             let controller = storyboard.instantiateViewControllerWithIdentifier("Login") as! UINavigationController
             let loginController = controller.topViewController as! LoginViewController
             
+            // Set VCreference to LoginViewController
             loginController.presenter = currentVC
             
             currentVC?.presentViewController(controller, animated: true, completion: nil)

@@ -1,5 +1,6 @@
 import UIKit
 
+// Extension for UIColor so colors can be defined by hex value
 extension UIColor {
     
     convenience init(hexString:String) {
