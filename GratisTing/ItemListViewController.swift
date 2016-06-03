@@ -3,28 +3,48 @@ import MapKit
 
 class ItemListViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     
-    var hasLocation: Bool!
-    var lat: Double?
-    var long: Double?
-    var distanceToPass = ""
-
-    @IBOutlet weak var itemTableView: UITableView!
-    
+    // MARK: Dependencies
     let dao = AppDelegate.dao
     let auth = AppDelegate.authentication
     let locationManager = CLLocationManager()
     
-    @IBAction func navigateToMapButton(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
-    }
+    // MARK: Instance variables
+    var hasLocation: Bool!
+    var lat: Double?
+    var long: Double?
+    var distanceToPass = ""
+    var category: Category?
     
     var items: [Item] = [] {
         didSet {
             itemTableView.reloadData()
         }
     }
+
+    // MARK: IB Outlets
+    @IBOutlet weak var itemTableView: UITableView!
     
-    var category: Category?
+    // MARK: IB Actions
+    @IBAction func navigateToMapButton(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    // MARK: Methods
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        itemTableView.dataSource = self
+        itemTableView.delegate = self
+        fetchItems()
+        itemTableView.reloadData()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        fetchItems()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        GratisTingNavItem.currentVC = self
+    }
     
     func fetchItems() {
         // user has allowed to use his/her location
@@ -50,28 +70,9 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         }
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        itemTableView.dataSource = self
-        itemTableView.delegate = self
-        fetchItems()
-        itemTableView.reloadData()
-    }
     
-    override func viewDidAppear(animated: Bool) {
-        fetchItems()
-    }
     
-    override func viewWillAppear(animated: Bool) {
-        GratisTingNavItem.currentVC = self
-    }
-
-    
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+    // MARK: Delegate Methods
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         return 1
     }
@@ -82,10 +83,10 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("itemcell", forIndexPath: indexPath) as! GratisTingCell
-        //cell.textLabel?.text = items[indexPath.row].title
         cell.titleLabel.text = items[indexPath.row].title
         cell.descriptionLabel.text = items[indexPath.row].description
         cell.cityLabel.text = items[indexPath.row].address!.cityName
+        
         if hasLocation! {
             let distance = items[indexPath.row].getDistanceInKm(long, destLatitude: lat)!
             // format in kilometer if distance is 1 or more.
@@ -103,11 +104,7 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         
         return cell
 
-    }
-    
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    }
-    
+    }    
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "showItem" {

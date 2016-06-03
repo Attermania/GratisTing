@@ -47,11 +47,6 @@ class LoginViewController: UIViewController {
         }
     }
     
-    // Define logic when returned from Registration.
-    @IBAction func returnedFromRegistration(sender: UIStoryboardSegue) {
-        
-    }
-    
     @IBAction func backButtonNavigation(sender: AnyObject) {
         // reset the action when returning
         action = nil
@@ -69,13 +64,6 @@ class LoginViewController: UIViewController {
         
         createUserButton.layer.cornerRadius = 5
         createUserButton.backgroundColor = UIColor(hexString: "#FFCC26")
-
-        // Set color of button in top left corner.
-        self.navigationItem.leftBarButtonItem?.tintColor = UIColor(hexString: "FFCC26")
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-//        GratisTingNavItem.presenter = self
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -86,19 +74,10 @@ class LoginViewController: UIViewController {
             presentViewController(alertController, animated: true, completion: nil)
         }
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        // handle the dismission of the current displayed view when clicked outside
         self.view.endEditing(true)
-    }
-
-
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Pass the selected object to the new view controller.
     }
 
 }

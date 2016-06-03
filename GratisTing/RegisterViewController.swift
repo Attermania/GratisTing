@@ -4,36 +4,42 @@ import SwiftyJSON
 
 class RegisterViewController: UIViewController {
     
+    // MARK: Dependencies
     let dao = AppDelegate.dao
     
+    // MARK: Instance variables
     var userCreated = false
     
+    // MARK: IB Outlets
     @IBOutlet weak var addressTextfield: AddressSearchTextField!
     @IBOutlet weak var nameTextfield: UITextField!
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet weak var registerButton: UIButton!
 
+    // MARK: IB Actions
     @IBAction func createUserPressed(sender: AnyObject) {
+        
         let selectedAddress = addressTextfield.address
+        // check if a address has been selected
         if selectedAddress == nil || addressTextfield.text == nil || addressTextfield.text == "" {
-            print("nil")
             return
         }
-        // Add validation -------- !!!
+        // TODO: Add validation
         let user = User(email: emailTextfield.text!, password: passwordTextfield.text!, name: nameTextfield.text!, address: selectedAddress!)
         
+        // Send the user object above, dao will then send a request to our API with this object's information
         dao.createUser(user) { (user, error) in
             if let error = error {
                 print(error)
             }
-            // TODO: Use this user
-            // Sæt denne til true hvis validering godkender den nye bruger.
+            // If no error was present, the user was created and we pop to the navigationcontroller's rootviewcontroller(LoginViewController)
             let navigationController = self.parentViewController as! UINavigationController
             navigationController.popToRootViewControllerAnimated(true)
         }
     }
     
+    // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
         configureCustomSearchTextField()
@@ -45,7 +51,6 @@ class RegisterViewController: UIViewController {
         self.navigationItem.backBarButtonItem?.tintColor = UIColor(hexString: "FFCC26")
     }
     
-    // 2 - Configure a custom search text view
     private func configureCustomSearchTextField() {
         // Set theme - Default: light
         addressTextfield.theme = SearchTextFieldTheme.lightTheme()
@@ -88,10 +93,14 @@ class RegisterViewController: UIViewController {
         }
     }
     
+    // Method to get the address suggestions, when typing into the address textfield
     func getAddressSuggestion(criteria: String, completion: [SearchTextFieldItem] -> Void) {
 
+        // Array of type SearchTextFieldItem, holds items that we present for the address suggestion
         var results = [SearchTextFieldItem]()
         
+        // Here we create a HTTP request to get address suggestions based on what the user has typed into the textfield
+        // We set the parameter (q) to what the user has typed into the textfield
         Alamofire.request(.GET, "https://dawa.aws.dk/adresser", parameters: ["q" : criteria, "per_side" : "5"], encoding: .URL).responseJSON { (response) in
             switch response.result {
                 
@@ -102,6 +111,12 @@ class RegisterViewController: UIViewController {
                     // TODO: haandle empty results
                     completion([SearchTextFieldItem(title: "hello")])
                 }
+            
+                // For each address returned by the aws API - http://dawa.aws.dk
+                // we loop over the different addresses and take what we need (city, postalcode, lat, long)
+                // then we create a Address object with that information and finally we use that Address object to create
+                // a SearchTextFieldItem object that uses that Address object
+                // last but not least we append that SearchTextFieldItem into our results array that we declare in the beginning of this method
                 for (_, subJson) in jsonData {
                     if let formattedAddress = subJson["adressebetegnelse"].string {
                         
@@ -116,6 +131,7 @@ class RegisterViewController: UIViewController {
                     }
                 }
                 
+                // All address suggetions has now been added to the results array, we can then return the results
                 completion(results)
                 
             case .Failure(let error):
@@ -124,12 +140,8 @@ class RegisterViewController: UIViewController {
         }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        // handle the dismission of the current displayed view when clicked outside
         self.view.endEditing(true)
     }
     
