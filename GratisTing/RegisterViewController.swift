@@ -59,15 +59,23 @@ class RegisterViewController: UIViewController {
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"keyboardWillAppear:", name: UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector:"keyboardWillDisappear:", name: UIKeyboardWillHideNotification, object: nil)
         configureCustomSearchTextField()
         registerButton.layer.cornerRadius = 5
-        registerButton.backgroundColor = UIColor(hexString: "#FFCC26")
         
         // Set color of button in top left corner.
         self.navigationItem.leftBarButtonItem?.tintColor = UIColor(hexString: "FFCC26")
         self.navigationItem.backBarButtonItem?.tintColor = UIColor(hexString: "FFCC26")
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        // Remove observers for keyboard notifications again, because of iOS bug
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: UIKeyboardWillHideNotification, object: nil)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(RegisterViewController.keyboardWillAppear(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:#selector(RegisterViewController.keyboardWillDisappear(_:)), name: UIKeyboardWillHideNotification, object: nil)
     }
     
     private func configureCustomSearchTextField() {
@@ -176,6 +184,7 @@ class RegisterViewController: UIViewController {
     }
     
     func keyboardWillAppear(notification: NSNotification){
+        // move the view up when addresstextfield is highlighted
         if addressTextfield.highlighted {
             let space = viewTitleLabel.frame.size.height + nameTextfield.frame.size.height + emailTextfield.frame.size.height + passwordTextfield.frame.size.height + 40
             UIView.animateWithDuration(0.2, animations: {
@@ -185,6 +194,7 @@ class RegisterViewController: UIViewController {
     }
     
     func keyboardWillDisappear(notification: NSNotification){
+        // move the view to its default position when addresstextfield is not highlighted anymore
         if addressTextfield.highlighted {
             UIView.animateWithDuration(0.2, animations: {
                 self.view.frame.origin.y = 0

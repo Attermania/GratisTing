@@ -20,6 +20,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="G2R-Rj-HsL">
                                 <rect key="frame" x="10" y="227" width="580" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="OPRET BRUGER">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -59,6 +60,7 @@
                             </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Lj8-ew-le2">
                                 <rect key="frame" x="10" y="187" width="580" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.14901960780000001" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="LOG IND">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -175,7 +177,8 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="koG-VR-lr6">
-                                <rect key="frame" x="15" y="267" width="570" height="30"/>
+                                <rect key="frame" x="10" y="267" width="580" height="30"/>
+                                <color key="backgroundColor" red="1" green="0.80000000000000004" blue="0.14901960784313725" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="30" id="FdS-Oj-lcQ"/>
                                     <constraint firstAttribute="width" constant="250" id="KIV-xc-Idy"/>
@@ -202,13 +205,15 @@
                             <constraint firstItem="koG-VR-lr6" firstAttribute="centerX" secondItem="j7C-ae-App" secondAttribute="centerX" id="Hzq-xu-Zic"/>
                             <constraint firstItem="koG-VR-lr6" firstAttribute="top" secondItem="zMx-qZ-3Vt" secondAttribute="bottom" constant="10" id="Jgq-sn-es3"/>
                             <constraint firstItem="6Ji-XV-dge" firstAttribute="top" secondItem="xOP-2i-oCR" secondAttribute="bottom" constant="10" id="Jlo-NU-ppG"/>
+                            <constraint firstItem="koG-VR-lr6" firstAttribute="leading" secondItem="j7C-ae-App" secondAttribute="leading" constant="10" id="KEC-nR-2Ju"/>
                             <constraint firstAttribute="trailing" secondItem="WMl-hz-hB3" secondAttribute="trailing" constant="10" id="KLB-01-xyB"/>
                             <constraint firstItem="wbp-9I-7I9" firstAttribute="top" secondItem="3H6-Qb-MAB" secondAttribute="bottom" constant="10" id="SrG-XM-0Sb"/>
+                            <constraint firstAttribute="trailing" secondItem="koG-VR-lr6" secondAttribute="trailing" constant="10" id="W3S-T4-nIP"/>
                             <constraint firstItem="WMl-hz-hB3" firstAttribute="leading" secondItem="j7C-ae-App" secondAttribute="leading" constant="10" id="WBI-lO-eBp"/>
                             <constraint firstItem="3H6-Qb-MAB" firstAttribute="top" secondItem="WMl-hz-hB3" secondAttribute="bottom" constant="10" id="Wkv-wq-ELp"/>
                             <constraint firstItem="koG-VR-lr6" firstAttribute="top" secondItem="zMx-qZ-3Vt" secondAttribute="bottom" constant="155" id="XvJ-se-cWq"/>
                             <constraint firstItem="3H6-Qb-MAB" firstAttribute="leading" secondItem="j7C-ae-App" secondAttribute="leading" constant="10" id="Y5w-Ti-WoT"/>
-                            <constraint firstItem="koG-VR-lr6" firstAttribute="leading" secondItem="j7C-ae-App" secondAttribute="leadingMargin" constant="-5" id="bFn-QZ-YN1"/>
+                            <constraint firstItem="koG-VR-lr6" firstAttribute="leading" secondItem="j7C-ae-App" secondAttribute="leadingMargin" constant="10" id="bFn-QZ-YN1"/>
                             <constraint firstItem="zMx-qZ-3Vt" firstAttribute="top" secondItem="wbp-9I-7I9" secondAttribute="bottom" constant="10" id="dD8-cr-drw"/>
                             <constraint firstAttribute="trailing" secondItem="wbp-9I-7I9" secondAttribute="trailing" constant="10" id="dJE-kz-vcA"/>
                             <constraint firstItem="zMx-qZ-3Vt" firstAttribute="top" secondItem="xOP-2i-oCR" secondAttribute="bottom" constant="10" id="da3-14-ngq"/>
@@ -220,7 +225,7 @@
                             <constraint firstItem="zMx-qZ-3Vt" firstAttribute="top" secondItem="3H6-Qb-MAB" secondAttribute="bottom" constant="10" id="kRm-xf-HVK"/>
                             <constraint firstItem="wbp-9I-7I9" firstAttribute="leading" secondItem="j7C-ae-App" secondAttribute="leading" constant="10" id="pla-PA-DnC"/>
                             <constraint firstItem="koG-VR-lr6" firstAttribute="top" secondItem="zMx-qZ-3Vt" secondAttribute="bottom" constant="10" id="sWW-MK-oGe"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="koG-VR-lr6" secondAttribute="trailing" constant="-5" id="vlx-bl-e8x"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="koG-VR-lr6" secondAttribute="trailing" constant="10" id="vlx-bl-e8x"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
@@ -232,6 +237,8 @@
                                 <exclude reference="Hzq-xu-Zic"/>
                                 <exclude reference="Jgq-sn-es3"/>
                                 <exclude reference="XvJ-se-cWq"/>
+                                <exclude reference="bFn-QZ-YN1"/>
+                                <exclude reference="vlx-bl-e8x"/>
                             </mask>
                         </variation>
                     </view>

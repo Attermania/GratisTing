@@ -66,12 +66,8 @@ class LoginViewController: UIViewController {
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         loginButton.layer.cornerRadius = 5
-        loginButton.backgroundColor = UIColor(hexString: "#FFCC26")
-        
         createUserButton.layer.cornerRadius = 5
-        createUserButton.backgroundColor = UIColor(hexString: "#FFCC26")
     }
     
     override func viewDidAppear(animated: Bool) {
