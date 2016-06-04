@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="80" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="32Z-Ww-wek">
-                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <edgeInsets key="layoutMargins" top="0.0" left="0.0" bottom="8" right="0.0"/>
                                 <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
@@ -28,20 +28,20 @@
                                         <rect key="frame" x="0.0" y="28" width="600" height="150"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="6E7-k3-U2V" id="5Py-Fv-xEg">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="149.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="kdy-HZ-xcD">
-                                                    <rect key="frame" x="111" y="5" width="484" height="114"/>
+                                                    <rect key="frame" x="111" y="5" width="484" height="113"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="En lækker sofa" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G7s-fk-Q4t">
-                                                            <rect key="frame" x="0.0" y="0.0" width="484" height="85"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="484" height="84"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kpd-re-XV5">
-                                                            <rect key="frame" x="0.0" y="85" width="484" height="29"/>
+                                                            <rect key="frame" x="0.0" y="84" width="484" height="29"/>
                                                             <string key="text">Super dejlig sofa som er i god stand. 
 Den kan afhentes mellem klokken 14 og 16.</string>
                                                             <fontDescription key="fontDescription" type="system" pointSize="12"/>
@@ -57,7 +57,7 @@ Den kan afhentes mellem klokken 14 og 16.</string>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="København NV" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0C-ZG-sri">
-                                                    <rect key="frame" x="111" y="124" width="114" height="20.5"/>
+                                                    <rect key="frame" x="111" y="123" width="114" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
@@ -74,7 +74,7 @@ Den kan afhentes mellem klokken 14 og 16.</string>
                                                     </constraints>
                                                 </stackView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin" translatesAutoresizingMaskIntoConstraints="NO" id="bQ8-xn-NCA">
-                                                    <rect key="frame" x="496" y="124" width="22" height="22"/>
+                                                    <rect key="frame" x="496" y="123" width="22" height="23"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -111,11 +111,41 @@ Den kan afhentes mellem klokken 14 og 16.</string>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="32Z-Ww-wek" firstAttribute="top" secondItem="5kl-rY-zVN" secondAttribute="bottom" id="5SI-gZ-gdV"/>
+                            <constraint firstItem="32Z-Ww-wek" firstAttribute="leading" secondItem="4sU-nN-csp" secondAttribute="leading" id="Fxu-EA-hXR"/>
+                            <constraint firstItem="mjc-eN-jAT" firstAttribute="top" secondItem="32Z-Ww-wek" secondAttribute="bottom" id="G6B-Mo-5M9"/>
                             <constraint firstAttribute="trailingMargin" secondItem="32Z-Ww-wek" secondAttribute="trailing" constant="-20" id="Ii6-4x-L57"/>
+                            <constraint firstAttribute="trailing" secondItem="32Z-Ww-wek" secondAttribute="trailing" id="NY9-k5-Jld"/>
                             <constraint firstItem="32Z-Ww-wek" firstAttribute="top" secondItem="5kl-rY-zVN" secondAttribute="bottom" id="Qy1-YT-jBN"/>
+                            <constraint firstItem="32Z-Ww-wek" firstAttribute="top" secondItem="5kl-rY-zVN" secondAttribute="bottom" id="Rv6-Ie-mXn"/>
+                            <constraint firstItem="mjc-eN-jAT" firstAttribute="top" secondItem="32Z-Ww-wek" secondAttribute="bottom" id="WNv-Zl-yQn"/>
+                            <constraint firstItem="32Z-Ww-wek" firstAttribute="leading" secondItem="4sU-nN-csp" secondAttribute="leading" id="XVg-xX-8Af"/>
+                            <constraint firstAttribute="trailing" secondItem="32Z-Ww-wek" secondAttribute="trailing" id="YlE-28-vdS"/>
+                            <constraint firstItem="32Z-Ww-wek" firstAttribute="top" secondItem="5kl-rY-zVN" secondAttribute="bottom" id="c4n-4A-np7"/>
+                            <constraint firstItem="32Z-Ww-wek" firstAttribute="top" secondItem="4sU-nN-csp" secondAttribute="top" id="cKn-08-5Kd"/>
+                            <constraint firstItem="32Z-Ww-wek" firstAttribute="top" secondItem="5kl-rY-zVN" secondAttribute="bottom" id="cvi-l3-IJt"/>
                             <constraint firstItem="mjc-eN-jAT" firstAttribute="top" secondItem="32Z-Ww-wek" secondAttribute="bottom" id="dZm-Pi-dGv"/>
+                            <constraint firstItem="mjc-eN-jAT" firstAttribute="top" secondItem="32Z-Ww-wek" secondAttribute="bottom" id="t8g-9Z-L2J"/>
+                            <constraint firstItem="32Z-Ww-wek" firstAttribute="top" secondItem="5kl-rY-zVN" secondAttribute="bottom" id="tGx-ko-Mxf"/>
                             <constraint firstItem="32Z-Ww-wek" firstAttribute="leading" secondItem="4sU-nN-csp" secondAttribute="leadingMargin" constant="-20" id="vCX-zw-mfs"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="5SI-gZ-gdV"/>
+                                <exclude reference="Fxu-EA-hXR"/>
+                                <exclude reference="Ii6-4x-L57"/>
+                                <exclude reference="NY9-k5-Jld"/>
+                                <exclude reference="Qy1-YT-jBN"/>
+                                <exclude reference="Rv6-Ie-mXn"/>
+                                <exclude reference="c4n-4A-np7"/>
+                                <exclude reference="cvi-l3-IJt"/>
+                                <exclude reference="tGx-ko-Mxf"/>
+                                <exclude reference="vCX-zw-mfs"/>
+                                <exclude reference="G6B-Mo-5M9"/>
+                                <exclude reference="WNv-Zl-yQn"/>
+                                <exclude reference="dZm-Pi-dGv"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="RmD-be-4qH" customClass="GratisTingNavItem" customModule="GratisTing" customModuleProvider="target"/>
                     <connections>
