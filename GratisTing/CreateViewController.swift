@@ -126,11 +126,14 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     }
     
     func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        print(textField)
-        if textField == categoryTextField {
+        
+        // If first time the category picker is showed, we explicitly select the first row
+        if textField == categoryTextField && self.categoryPicker.selectedRowInComponent(0) == 0 {
             self.pickerView(self.categoryPicker, didSelectRow: 0, inComponent: 0)
         }
+        
         return true
+        
     }
     
     // MARK: Image picker delegate methods
