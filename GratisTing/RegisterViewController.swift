@@ -30,9 +30,17 @@ class RegisterViewController: UIViewController {
         
         // Send the user object above, dao will then send a request to our API with this object's information
         dao.createUser(user) { (user, error) in
-            if let error = error {
-                print(error)
+            if error != nil {
+                // Something went wrong, show an error to the user
+                let alertController = UIAlertController(title: "Fejl", message: "Udfyld venligst alle felter", preferredStyle: .Alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(defaultAction)
+                
+                self.presentViewController(alertController, animated: true, completion: nil)
+                
+                return
             }
+            
             // If no error was present, the user was created and we pop to the navigationcontroller's rootviewcontroller(LoginViewController)
             let navigationController = self.parentViewController as! UINavigationController
             navigationController.popToRootViewControllerAnimated(true)

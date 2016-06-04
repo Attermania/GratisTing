@@ -23,7 +23,7 @@ class LoginViewController: UIViewController {
             if let _ = error {
                 
                 // Error, wrong credentials, show error and abort mission
-                let alertController = UIAlertController(title: "Fejl", message: "Brugernavn eller adgangskode forkert", preferredStyle: .Alert)
+                let alertController = UIAlertController(title: "Fejl", message: "Forkert brugernavn eller adgangskode", preferredStyle: .Alert)
                 let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
                 alertController.addAction(defaultAction)
                 
