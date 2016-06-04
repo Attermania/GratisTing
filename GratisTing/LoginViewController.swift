@@ -30,7 +30,8 @@ class LoginViewController: UIViewController {
                 // If user was trying to create an item, and was redirected here, to log in first, we redirect them to the create item view
                 if self.action == "LoginCreateItem" {
                     let storyboard = UIStoryboard(name: "Create", bundle: nil)
-                    let controller = storyboard.instantiateViewControllerWithIdentifier("CreateView")
+                    let controller = storyboard.instantiateViewControllerWithIdentifier("CreateView") as! CreateViewController
+                    controller.presenter = self.presenter
                     
                     self.presenter?.presentViewController(controller, animated: true, completion: nil)
                     

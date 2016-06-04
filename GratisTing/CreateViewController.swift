@@ -53,7 +53,6 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
                 let storyboard = UIStoryboard(name: "Show", bundle: nil)
                 let controller = storyboard.instantiateViewControllerWithIdentifier("ShowItem") as! ShowViewController
                 controller.item = item
-                
                 self.presenter.navigationController?.pushViewController(controller, animated: true)
             })
         }
