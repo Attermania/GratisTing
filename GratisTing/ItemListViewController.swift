@@ -9,9 +9,6 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     let locationManager = CLLocationManager()
     
     // MARK: Instance variables
-    var hasLocation: Bool = false
-    var lat: Double?
-    var long: Double?
     var distanceToPass = ""
     var category: Category?
     
@@ -48,8 +45,12 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
     
     func fetchItems() {
         // user has allowed to use his/her location - Do an item search based on location
-        if hasLocation {
-            dao.getItemsFromLocation(category?.id, latitude: lat!, longitude: long!, radius: 1000, completion: { (items: [Item]?, error: NSError?) in
+        if CLLocationManager.locationServicesEnabled() && locationManager.location != nil {
+            
+            let lat = locationManager.location!.coordinate.latitude
+            let long = locationManager.location!.coordinate.longitude
+            
+            dao.getItemsFromLocation(category?.id, latitude: lat, longitude: long, radius: 1000, completion: { (items: [Item]?, error: NSError?) in
                 if let _ = error {
                     // An error was returned
                     return
@@ -88,8 +89,15 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         cell.descriptionLabel.text = items[indexPath.row].description
         cell.cityLabel.text = items[indexPath.row].address!.cityName
         
-        if hasLocation {
+        if CLLocationManager.locationServicesEnabled() && locationManager.location != nil {
+            
+            let lat = locationManager.location!.coordinate.latitude
+            let long = locationManager.location!.coordinate.longitude
             let distance = items[indexPath.row].getDistanceInKm(long, destLatitude: lat)!
+            
+            // Show distance pin
+            cell.distancePinIcon.hidden = false
+            
             // format in kilometer if distance is 1 or more.
             if distance >= 1 {
                 let dist = String(format:"%.1f", distance) + " km"
@@ -101,6 +109,10 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
                 cell.distanceLabel.text = dist
                 distanceToPass = dist
             }
+            
+        } else {
+            cell.distancePinIcon.hidden = true
+            cell.distanceLabel.text = ""
         }
         
         return cell
@@ -111,9 +123,6 @@ class ItemListViewController: UIViewController, UITableViewDataSource, UITableVi
         if segue.identifier == "showItem" {
             let showItemViewController = segue.destinationViewController as! ShowViewController
             showItemViewController.item = items[(itemTableView.indexPathForSelectedRow?.row)!]
-            showItemViewController.lat = self.lat
-            showItemViewController.long = self.long
-            showItemViewController.hasLocation = true
         }
     }
 }

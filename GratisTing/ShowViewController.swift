@@ -8,9 +8,6 @@ class ShowViewController: UIViewController {
     
     // MARK: Instance variables
     var item: Item!
-    var hasLocation: Bool?
-    var lat: Double?
-    var long: Double?
     var distanceFromPreviousView = ""
 
     // MARK: IB Outlets
@@ -62,6 +59,8 @@ class ShowViewController: UIViewController {
                 let dist = String(format:"%.0f", distance*1000) + " m"
                 distanceLabel.text = dist
             }
+        } else {
+            distanceLabel.text = ""
         }
         
         // Setup image

@@ -10,8 +10,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     let clusteringManager = FBClusteringManager()
     let locationManager = CLLocationManager()
     var relocation = false
-    var lat: Double = 10
-    var long: Double = 10
     
     var item: Item?
     
@@ -122,12 +120,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         }
     }
     
-    // update lat and long for the user
-    func mapView(mapView: MKMapView, didUpdateUserLocation userLocation: MKUserLocation) {
-        lat = (userLocation.location?.coordinate.latitude)!
-        long = (userLocation.location?.coordinate.longitude)!
-    }
-    
     // fetch new items based on the visible map
     func mapView(mapView: MKMapView, regionDidChangeAnimated animated: Bool) {
         NSOperationQueue().addOperationWithBlock({
@@ -193,8 +185,6 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
             // Try to get the coordinates for the users location
             if let userLocation = locationManager.location?.coordinate {
                 region = MKCoordinateRegion(center: userLocation, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
-                lat = userLocation.latitude
-                long = userLocation.longitude
             }
 
         }
@@ -225,36 +215,15 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     
     // Pass along data to desired viewcontroller
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
         if segue.identifier == "showItem" {
-            
             let showItemViewController = segue.destinationViewController as! ShowViewController
             showItemViewController.item = item
-            
-            if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
-                showItemViewController.hasLocation = true
-                showItemViewController.lat = self.lat
-                showItemViewController.long = self.long
-                return
-            }
-            
         }
+        
         if segue.identifier == "goToListView" {
             let listViewItemController = segue.destinationViewController as! ItemListViewController
             listViewItemController.category = self.category
-            
-            // we send the users lat & long to the listview if the user has allowed location.
-            // to fetch items based on the users location
-            if CLLocationManager.authorizationStatus() == .AuthorizedAlways {
-                listViewItemController.hasLocation = true
-                listViewItemController.lat = self.lat
-                listViewItemController.long = self.long
-                return
-            }
-            
-            // if the user has not allowed location we tell the listviewitemcontroller
-            // it will then fetch the newest items
-            listViewItemController.hasLocation = false
-
         }
     }
     

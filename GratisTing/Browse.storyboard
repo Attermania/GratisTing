@@ -51,9 +51,9 @@ Den kan afhentes mellem klokken 14 og 16.</string>
                                                     </subviews>
                                                 </stackView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="20 km væk" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7V-K1-wtG">
-                                                    <rect key="frame" x="505" y="123" width="85" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <rect key="frame" x="523" y="128" width="67" height="16"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="scrollViewTexturedBackgroundColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="København NV" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="U0C-ZG-sri">
@@ -74,7 +74,7 @@ Den kan afhentes mellem klokken 14 og 16.</string>
                                                     </constraints>
                                                 </stackView>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="pin" translatesAutoresizingMaskIntoConstraints="NO" id="bQ8-xn-NCA">
-                                                    <rect key="frame" x="478" y="124" width="22" height="22"/>
+                                                    <rect key="frame" x="496" y="124" width="22" height="22"/>
                                                 </imageView>
                                             </subviews>
                                             <constraints>
@@ -100,6 +100,7 @@ Den kan afhentes mellem klokken 14 og 16.</string>
                                             <outlet property="cityLabel" destination="U0C-ZG-sri" id="Qqv-bv-t3N"/>
                                             <outlet property="descriptionLabel" destination="Kpd-re-XV5" id="sqp-R9-l0P"/>
                                             <outlet property="distanceLabel" destination="O7V-K1-wtG" id="7R0-Zg-oRI"/>
+                                            <outlet property="distancePinIcon" destination="bQ8-xn-NCA" id="wCQ-ta-M8A"/>
                                             <outlet property="itemImage" destination="LZa-3s-kH8" id="QXK-l1-KxF"/>
                                             <outlet property="titleLabel" destination="G7s-fk-Q4t" id="iSH-Ap-j6l"/>
                                             <segue destination="fPy-ih-FaC" kind="show" identifier="showItem" id="i0N-WK-isV"/>
