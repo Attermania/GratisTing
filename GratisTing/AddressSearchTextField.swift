@@ -102,7 +102,7 @@ public class AddressSearchTextField: UITextField {
         rightFrame.origin.x -= 5
         return rightFrame
     }
-    
+        
     // Create the filter table and shadow view
     private func buildSearchTableView() {
         if let tableView = tableView, let shadowView = shadowView {
@@ -170,7 +170,7 @@ public class AddressSearchTextField: UITextField {
             newFrame.size.height += theme.cellHeight
             
             if CGRectIntersectsRect(keyboardFrame, newFrame) {
-                direction = .Up
+                direction = .Down
             } else {
                 direction = .Down
             }

@@ -244,6 +244,7 @@
                         <outlet property="nameTextfield" destination="WMl-hz-hB3" id="KRp-CN-uhO"/>
                         <outlet property="passwordTextfield" destination="wbp-9I-7I9" id="GRC-uD-Gvn"/>
                         <outlet property="registerButton" destination="koG-VR-lr6" id="Hss-Dm-t8N"/>
+                        <outlet property="viewTitleLabel" destination="6Ji-XV-dge" id="FaB-if-voW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="zO9-Lv-HiB" userLabel="First Responder" sceneMemberID="firstResponder"/>

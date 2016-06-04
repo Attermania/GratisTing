@@ -16,6 +16,7 @@ class RegisterViewController: UIViewController {
     @IBOutlet weak var emailTextfield: UITextField!
     @IBOutlet weak var passwordTextfield: UITextField!
     @IBOutlet weak var registerButton: UIButton!
+    @IBOutlet weak var viewTitleLabel: UILabel!
 
     // MARK: IB Actions
     @IBAction func createUserPressed(sender: AnyObject) {
@@ -58,6 +59,8 @@ class RegisterViewController: UIViewController {
     // MARK: Methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"keyboardWillAppear:", name: UIKeyboardWillShowNotification, object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector:"keyboardWillDisappear:", name: UIKeyboardWillHideNotification, object: nil)
         configureCustomSearchTextField()
         registerButton.layer.cornerRadius = 5
         registerButton.backgroundColor = UIColor(hexString: "#FFCC26")
@@ -170,6 +173,23 @@ class RegisterViewController: UIViewController {
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         // handle the dismission of the current displayed view when clicked outside
         self.view.endEditing(true)
+    }
+    
+    func keyboardWillAppear(notification: NSNotification){
+        if addressTextfield.highlighted {
+            let space = viewTitleLabel.frame.size.height + nameTextfield.frame.size.height + emailTextfield.frame.size.height + passwordTextfield.frame.size.height + 40
+            UIView.animateWithDuration(0.2, animations: {
+                self.view.frame.origin.y -= space
+            })
+        }
+    }
+    
+    func keyboardWillDisappear(notification: NSNotification){
+        if addressTextfield.highlighted {
+            UIView.animateWithDuration(0.2, animations: {
+                self.view.frame.origin.y = 0
+            })
+        }
     }
     
 
