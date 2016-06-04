@@ -43,7 +43,15 @@ class RegisterViewController: UIViewController {
             
             // If no error was present, the user was created and we pop to the navigationcontroller's rootviewcontroller(LoginViewController)
             let navigationController = self.parentViewController as! UINavigationController
-            navigationController.popToRootViewControllerAnimated(true)
+            
+            let alertController = UIAlertController(title: "Tillykke", message: "Din bruger er nu oprettet", preferredStyle: .Alert)
+            let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: { (action) in
+                navigationController.popToRootViewControllerAnimated(true)
+            })
+            
+            alertController.addAction(defaultAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
         }
     }
     
