@@ -21,7 +21,14 @@ class LoginViewController: UIViewController {
         
         auth.authenticate(emailTextfield.text!, password: passwordTextfield.text!) { (jwt, user, error) in
             if let _ = error {
-                // Error, abort the ship - TODO: Show a message to user
+                
+                // Error, wrong credentials, show error and abort mission
+                let alertController = UIAlertController(title: "Fejl", message: "Brugernavn eller adgangskode forkert", preferredStyle: .Alert)
+                let defaultAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+                alertController.addAction(defaultAction)
+                
+                self.presentViewController(alertController, animated: true, completion: nil)
+                
                 return
             }
             
