@@ -32,7 +32,9 @@ class ShowViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         GratisTingNavItem.currentVC = self
-        
+    }
+    
+    override func viewDidLoad() {
         // Setup UI
         itemTitleLabel.text = item?.title
         itemDescriptionText.text = item?.description
@@ -61,12 +63,6 @@ class ShowViewController: UIViewController {
         userImageView.layer.cornerRadius = userImageView.frame.size.width/2
         userImageView.clipsToBounds = true
         userImageView.image = image
-        item = nil
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        itemTitleLabel.text = ""
-        itemDescriptionText.text = ""
     }
 
 }
