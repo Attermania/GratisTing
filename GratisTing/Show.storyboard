@@ -38,7 +38,7 @@
                                     </mask>
                                 </variation>
                             </stackView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Textview hehe" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9SW-Hq-Ueo">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="Textview hehe" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="9SW-Hq-Ueo">
                                 <rect key="frame" x="10" y="272" width="580" height="144"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
