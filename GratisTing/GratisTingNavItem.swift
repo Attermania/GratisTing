@@ -45,7 +45,8 @@ class GratisTingNavItem: UINavigationItem {
         // If token is set, present create view controller
         if auth.token != nil {
             let storyboard = UIStoryboard(name: "Create", bundle: nil)
-            let controller = storyboard.instantiateViewControllerWithIdentifier("CreateView")
+            let controller = storyboard.instantiateViewControllerWithIdentifier("CreateView") as! CreateViewController
+            controller.presenter = currentVC
             
             currentVC?.presentViewController(controller, animated: true, completion: nil)
             

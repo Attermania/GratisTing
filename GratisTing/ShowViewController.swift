@@ -1,15 +1,19 @@
 import UIKit
+import CoreLocation
 
 class ShowViewController: UIViewController {
     
-    // MARK: - Instance variables
-    var item: Item?
+    // MARK: Dependencies
+    let locationManager = CLLocationManager()
+    
+    // MARK: Instance variables
+    var item: Item!
     var hasLocation: Bool?
     var lat: Double?
     var long: Double?
     var distanceFromPreviousView = ""
 
-    // MARK: - IB Outlets
+    // MARK: IB Outlets
     @IBOutlet weak var itemDescriptionText: UITextView! {
         didSet {
             itemDescriptionText.textContainer.lineFragmentPadding = 0
@@ -24,7 +28,7 @@ class ShowViewController: UIViewController {
     @IBOutlet weak var labelOwnerCity: UILabel!
     @IBOutlet weak var distanceLabel: UILabel!
     
-    // MARK: - Methods
+    // MARK: Methods
     override func loadView() {
         super.loadView()
         contactButton.layer.cornerRadius = 5
@@ -36,14 +40,19 @@ class ShowViewController: UIViewController {
     
     override func viewDidLoad() {
         // Setup UI
-        itemTitleLabel.text = item?.title
-        itemDescriptionText.text = item?.description
-        itemTitleLabel.text = item?.title
-        itemDescriptionText.text = item?.description
-        itemOwnerLabel.text = item?.owner?.name
-        userAddressLabel.text = "\((item?.address?.postalCode)!) \((item?.address?.cityName)!)"
-        if hasLocation! {
-            let distance = item!.getDistanceInKm(long, destLatitude: lat)!
+        itemTitleLabel.text = item.title
+        itemDescriptionText.text = item.description
+        itemTitleLabel.text = item.title
+        itemDescriptionText.text = item.description
+        itemOwnerLabel.text = item.owner?.name
+        userAddressLabel.text = "\((item.address?.postalCode)!) \((item.address?.cityName)!)"
+        
+        if CLLocationManager.locationServicesEnabled() && locationManager.location != nil {
+            let lat  = locationManager.location!.coordinate.latitude
+            let long = locationManager.location!.coordinate.longitude
+            
+            let distance = item.getDistanceInKm(long, destLatitude: lat)!
+            
             // format in kilometer if distance is 1 or more.
             if distance >= 1 {
                 let dist = String(format:"%.1f", distance) + " km"

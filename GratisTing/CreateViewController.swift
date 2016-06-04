@@ -11,6 +11,7 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
     var categories: [Category] = []
     let imagePicker = UIImagePickerController()
     var categoryPicker: UIPickerView!
+    var presenter: UIViewController!
 
     // MARK: Components
     @IBOutlet weak var itemImageView: UIImageView!
@@ -49,7 +50,11 @@ class CreateViewController: UIViewController, UIPickerViewDelegate, UIPickerView
             }
             
             self.dismissViewControllerAnimated(true, completion: {
+                let storyboard = UIStoryboard(name: "Show", bundle: nil)
+                let controller = storyboard.instantiateViewControllerWithIdentifier("ShowItem") as! ShowViewController
+                controller.item = item
                 
+                self.presenter.navigationController?.pushViewController(controller, animated: true)
             })
         }
 
