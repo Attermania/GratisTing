@@ -26,7 +26,7 @@ class RegisterViewController: UIViewController {
         if selectedAddress == nil || addressTextfield.text == nil || addressTextfield.text == "" {
             return
         }
-        // TODO: Add validation
+        
         let user = User(email: emailTextfield.text!, password: passwordTextfield.text!, name: nameTextfield.text!, address: selectedAddress!)
         
         // Send the user object above, dao will then send a request to our API with this object's information
@@ -185,7 +185,7 @@ class RegisterViewController: UIViewController {
     
     func keyboardWillAppear(notification: NSNotification){
         // move the view up when addresstextfield is highlighted
-        if addressTextfield.highlighted {
+        if addressTextfield.isFirstResponder() {
             let space = viewTitleLabel.frame.size.height + nameTextfield.frame.size.height + emailTextfield.frame.size.height + passwordTextfield.frame.size.height + 40
             UIView.animateWithDuration(0.2, animations: {
                 self.view.frame.origin.y -= space
@@ -195,7 +195,7 @@ class RegisterViewController: UIViewController {
     
     func keyboardWillDisappear(notification: NSNotification){
         // move the view to its default position when addresstextfield is not highlighted anymore
-        if addressTextfield.highlighted {
+        if addressTextfield.isFirstResponder() {
             UIView.animateWithDuration(0.2, animations: {
                 self.view.frame.origin.y = 0
             })

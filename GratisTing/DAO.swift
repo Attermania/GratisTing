@@ -9,6 +9,9 @@ class DAO: DAOProtocol {
     static let instance = DAO()
     let jsonParser = JSONParser()
     
+    // MARK: Private initializer
+    private init() {}
+    
     // MARK: Get all categories
     func getAllCategories(completion: (categories: [Category]?, error: NSError?) -> Void) {
         
