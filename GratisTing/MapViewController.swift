@@ -6,7 +6,7 @@ import Alamofire
 class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerDelegate, UIGestureRecognizerDelegate {
 
     // MARK: - Instance variables
-    let dao = DAO.instance
+    let dao = AppDelegate.dao
     let clusteringManager = FBClusteringManager()
     let locationManager = CLLocationManager()
     var relocation = false
